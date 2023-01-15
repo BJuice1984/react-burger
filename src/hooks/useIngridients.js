@@ -2,13 +2,21 @@ import { useState, useEffect } from "react";
 import { getIngridients } from "../utils/IngridientsApi";
 
 export default function useIngridients() {
-  const [initialIngridients, setInitialIngridients] = useState([]);
+  const [bunIngridients, setBunIngridients] = useState([]);
+  const [mainIngridients, setMainIngridients] = useState([]);
+  const [sauceIngridients, setSauseIngridients] = useState([]);
 
   useEffect(() => {
     const getInitialIngridients = async () => {
       await getIngridients()
       .then((ingridients) => {
-        setInitialIngridients(ingridients.data)
+        const groupedIngridients = groupBy(ingridients.data, "type");
+        return groupedIngridients
+      })
+      .then((groupedIngridients) => {
+        setBunIngridients(groupedIngridients.bun);
+        setSauseIngridients(groupedIngridients.sauce);
+        setMainIngridients(groupedIngridients.main);
       })
       .catch(err => {
         console.log(err)
@@ -19,7 +27,18 @@ export default function useIngridients() {
 
   }, []);
 
+  function groupBy(objectArray, property) {
+    return objectArray.reduce((acc, obj) => {
+      const key = obj[property];
+      const curGroup = acc[key] ?? [];
+  
+      return { ...acc, [key]: [...curGroup, obj] };
+    }, {});
+  }
+
   return {
-    initialIngridients,
+    bunIngridients,
+    sauceIngridients,
+    mainIngridients,
   }
 }

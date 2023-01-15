@@ -6,7 +6,9 @@ import styles from './app.module.css';
 function App() {
 
   const {
-    initialIngridients,
+    bunIngridients,
+    sauceIngridients,
+    mainIngridients,
   } = useIngridients();
 
   return (
@@ -15,7 +17,9 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Main
-            initialIngridients={initialIngridients}/>} />
+            bunIngridients={bunIngridients}
+            sauceIngridients={sauceIngridients}
+            mainIngridients={mainIngridients}/>} />
         </Routes>
 
       </div>

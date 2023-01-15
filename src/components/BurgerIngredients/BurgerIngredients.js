@@ -2,7 +2,7 @@ import styles from './burgerIngridients.module.css';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
 import PropTypes from 'prop-types';
 
-export default function BurgerIngredients({ initialIngridients }) {
+export default function BurgerIngredients({ bunIngridients, sauceIngridients, mainIngridients }) {
 
   return(
     <section className={ styles.ingridients }>
@@ -15,11 +15,26 @@ export default function BurgerIngredients({ initialIngridients }) {
       <ul className={ styles.ingridientsListContainer }>
         <li className={ styles.ingridientsListHeader }>Булки
           <ul className={ styles.ingridientsList }>
-            {initialIngridients.map(ingridient => 
+            {bunIngridients.map(ingridient => 
               <BurgerIngredientsCard
-                ingridient={ingridient} />
-            )}
-
+                ingridient={ingridient}
+                key={ingridient._id} />)}
+          </ul>
+        </li>
+        <li className={ styles.ingridientsListHeader }>Соусы
+          <ul className={ styles.ingridientsList }>
+            {sauceIngridients.map(ingridient => 
+              <BurgerIngredientsCard
+                ingridient={ingridient}
+                key={ingridient._id} />)}
+          </ul>
+        </li>
+        <li className={ styles.ingridientsListHeader }>Начинки
+          <ul className={ styles.ingridientsList }>
+            {mainIngridients.map(ingridient => 
+              <BurgerIngredientsCard
+                ingridient={ingridient}
+                key={ingridient._id} />)}
           </ul>
         </li>
       </ul>
@@ -28,19 +43,24 @@ export default function BurgerIngredients({ initialIngridients }) {
   )
 }
 
+// BurgerIngredients.propTypes = {
+//   initialIngridients: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//     type: PropTypes.string.isRequired,
+//     proteins: PropTypes.number.isRequired,
+//     fat: PropTypes.number.isRequired,
+//     carbohydrates: PropTypes.number.isRequired,
+//     calories: PropTypes.number.isRequired,
+//     price: PropTypes.number.isRequired,
+//     image: PropTypes.string.isRequired,
+//     image_mobile: PropTypes.string.isRequired,
+//     image_large: PropTypes.string.isRequired,
+//     __v: PropTypes.number
+//   }),
+// }
 BurgerIngredients.propTypes = {
-  initialIngridients: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    calories: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    __v: PropTypes.number
-  }),
+  bunIngridients: PropTypes.array.isRequired,
+  sauceIngridients: PropTypes.array.isRequired,
+  mainIngridients: PropTypes.array.isRequired,
 }

@@ -2,13 +2,15 @@ import Header from "../Header/Header";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import styles from './main.module.css';
 
-export default function Main({ initialIngridients }) {
+export default function Main({ bunIngridients, sauceIngridients, mainIngridients }) {
   return (
     <>
     <Header />
     <main className={ styles.main }>
-      <BurgerIngredients 
-        initialIngridients={initialIngridients}/>
+      <BurgerIngredients
+        bunIngridients={bunIngridients}
+        sauceIngridients={sauceIngridients}
+        mainIngridients={mainIngridients}/>
       
     </main>
     </>
