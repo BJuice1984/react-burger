@@ -1,7 +1,7 @@
 import Header from "../Header/Header";
 import styles from './main.module.css';
 
-export default function Main() {
+export default function Main({ initialIngridients, getInitialIngridients }) {
   return (
     <>
     <Header />

@@ -8,11 +8,11 @@ export default function Header() {
       <div className={ styles.container }>
         <nav className={ styles.links }>
           <Link to='/' className={`${ styles.link } p-2`}>{<BurgerIcon type="primary" />}Конструктор</Link>
-          <Link to='/' className={`${ styles.link } p-2`}>{<ListIcon  type="secondary" />}Лента заказов</Link>
+          <Link to='/' className={`${ styles.link } p-2`}>{<ListIcon type="secondary" />}Лента заказов</Link>
         </nav>
         <Logo />
         <button className={ styles.btn }>
-          <Link to='/' className={`${ styles.link } p-2`}>{<ProfileIcon  type="secondary" />}Личный кабинет</Link>
+          <Link to='/' className={`${ styles.link } p-2`}>{<ProfileIcon type="secondary" />}Личный кабинет</Link>
         </button>
       </div>
     </header>
