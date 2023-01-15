@@ -1,0 +1,29 @@
+.ingridients {
+  margin: 0;
+}
+
+.header {
+  margin: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  border: none;
+}
+
+.ingridientsListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingridientsListHeader {
+  margin: 0;  
+}
+
+.ingridientsList {
+  display: flex;
+}

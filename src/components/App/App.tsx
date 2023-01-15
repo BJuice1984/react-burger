@@ -7,7 +7,6 @@ function App() {
 
   const {
     initialIngridients,
-    getInitialIngridients
   } = useIngridients();
 
   return (
@@ -16,8 +15,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Main
-          initialIngridients={initialIngridients}
-          getInitialIngridients={getInitialIngridients}/>} />
+            initialIngridients={initialIngridients}/>} />
         </Routes>
 
       </div>

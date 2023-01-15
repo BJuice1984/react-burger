@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getIngridients } from "../utils/IngridientsApi";
 
 export default function useIngridients() {
   const [initialIngridients, setInitialIngridients] = useState([]);
 
-  async function getInitialIngridients() {
-    await getIngridients()
+  useEffect(() => {
+    const getInitialIngridients = async () => {
+      await getIngridients()
       .then((ingridients) => {
-        setInitialIngridients(ingridients)
+        setInitialIngridients(ingridients.data)
       })
       .catch(err => {
         console.log(err)
       })
-  }
+    }
+
+    getInitialIngridients();
+
+  }, []);
 
   return {
     initialIngridients,
-    getInitialIngridients
   }
 }
