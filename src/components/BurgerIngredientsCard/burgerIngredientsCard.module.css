@@ -1,13 +1,14 @@
 .element {
   margin: 0;
-  display: flex;
+  display: grid;
+  justify-items: center;
   flex-direction: column;
   position: relative;
 }
 
 .pic {
-  width: 100%;
-  height: calc(88vw / 1.78);
+  width: 240px;
+  height: 120px;
   object-fit: contain;
 }
 

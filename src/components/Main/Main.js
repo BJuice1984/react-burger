@@ -9,14 +9,16 @@ export default function Main({ bunIngridients, sauceIngridients, mainIngridients
     <>
     <Header />
     <main className={ styles.main }>
-      <BurgerIngredients
-        bunIngridients={bunIngridients}
-        sauceIngridients={sauceIngridients}
-        mainIngridients={mainIngridients} />
-      <BurgerConstructor
-        bunIngridients={bunIngridients}
-        sauceIngridients={sauceIngridients}
-        mainIngridients={mainIngridients} />
+      <div className={ styles.container }>
+        <BurgerIngredients
+          bunIngridients={bunIngridients}
+          sauceIngridients={sauceIngridients}
+          mainIngridients={mainIngridients} />
+        <BurgerConstructor
+          bunIngridients={bunIngridients}
+          sauceIngridients={sauceIngridients}
+          mainIngridients={mainIngridients} />
+      </div>
     </main>
     </>
   )

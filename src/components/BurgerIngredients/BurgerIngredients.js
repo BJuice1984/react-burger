@@ -13,24 +13,27 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
         <button className={ styles.button }>Начинки</button>
       </div>
       <ul className={ styles.ingridientsListContainer }>
-        <li className={ styles.ingridientsListHeader }>Булки
-          <ul className={ styles.ingridientsList }>
+        <li className={ styles.ingridientsListHeader }>
+          Булки
+          <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
             {bunIngridients.map(ingridient => 
               <BurgerIngredientsCard
                 ingridient={ingridient}
                 key={ingridient._id} />)}
           </ul>
         </li>
-        <li className={ styles.ingridientsListHeader }>Соусы
-          <ul className={ styles.ingridientsList }>
+        <li className={ styles.ingridientsListHeader }>
+          Соусы
+          <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
             {sauceIngridients.map(ingridient => 
               <BurgerIngredientsCard
                 ingridient={ingridient}
                 key={ingridient._id} />)}
           </ul>
         </li>
-        <li className={ styles.ingridientsListHeader }>Начинки
-          <ul className={ styles.ingridientsList }>
+        <li className={ styles.ingridientsListHeader }>
+          Начинки
+          <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
             {mainIngridients.map(ingridient => 
               <BurgerIngredientsCard
                 ingridient={ingridient}

@@ -30,7 +30,7 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
           price={200}
           thumbnail={bunIngridients[0].image}
         />}
-    </div>
+      </div>
     </section>
   )
 }
