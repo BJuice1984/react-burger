@@ -2,10 +2,19 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .pic {
   width: 100%;
   height: calc(88vw / 1.78);
   object-fit: contain;
+}
+
+.price {
+  margin: 0;
+}
+
+.name {
+  margin: 0;
 }
