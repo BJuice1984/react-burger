@@ -1,5 +1,6 @@
 import styles from './burgerIngridients.module.css';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
+import BurgerTab from '../BurgerTab/BurgerTab';
 import PropTypes from 'prop-types';
 
 export default function BurgerIngredients({ bunIngridients, sauceIngridients, mainIngridients }) {
@@ -7,11 +8,7 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
   return(
     <section className={ styles.ingridients }>
       <h2 className={ styles.header }>Соберите бургер</h2>
-      <div className={ styles.buttonContainer }>
-        <button className={ styles.button }>Булки</button>
-        <button className={ styles.button }>Соусы</button>
-        <button className={ styles.button }>Начинки</button>
-      </div>
+      <BurgerTab />
       <ul className={ styles.ingridientsListContainer }>
         <li className={ styles.ingridientsListHeader }>
           Булки

@@ -1,6 +1,6 @@
 .page {
-  background-color: #202020;
-  font-family: "Inter", "Arial", sans-serif;
+  background-color: var(--background-alt);
+  font-family: "JetBrainsMono", "Arial", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;

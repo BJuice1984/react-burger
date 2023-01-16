@@ -7,15 +7,6 @@
   margin: 0;
 }
 
-.buttonContainer {
-  display: flex;
-  flex-direction: row;
-}
-
-.button {
-  border: none;
-}
-
 .ingridientsListContainer {
   margin: 0;
   padding: 0;
