@@ -9,10 +9,10 @@ export default function BurgerIngredientsCard({ ingridient }) {
         src={ingridient.image}
         alt="Картинка. Вид ингридиента">
       </img>
-      <p className={ styles.price }>
+      <p className={`${ styles.price } pt-1 pb-1 text text_type_digits-default`}>
         {ingridient.price}<CurrencyIcon type="primary"/>
       </p>
-      <span className={ styles.name }>
+      <span className={`${ styles.name } text text_type_main-default`}>
         {ingridient.name}
       </span>
     </article>

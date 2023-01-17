@@ -7,10 +7,10 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
 
   return(
     <section className={ styles.ingridients }>
-      <h2 className={ styles.header }>Соберите бургер</h2>
+      <h2 className={`${ styles.header } text text_type_main-large pt-10`}>Соберите бургер</h2>
       <BurgerTab />
       <ul className={ styles.ingridientsListContainer }>
-        <li className={ styles.ingridientsListHeader }>
+        <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
           Булки
           <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
             {bunIngridients.map(ingridient => 
@@ -19,7 +19,7 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
                 key={ingridient._id} />)}
           </ul>
         </li>
-        <li className={ styles.ingridientsListHeader }>
+        <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
           Соусы
           <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
             {sauceIngridients.map(ingridient => 
@@ -28,7 +28,7 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
                 key={ingridient._id} />)}
           </ul>
         </li>
-        <li className={ styles.ingridientsListHeader }>
+        <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
           Начинки
           <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
             {mainIngridients.map(ingridient => 

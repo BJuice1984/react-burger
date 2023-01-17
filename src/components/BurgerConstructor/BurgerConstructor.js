@@ -14,47 +14,57 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
           thumbnail={bunIngridients[0].image}
         />}
         {mainIngridients.length && <ConstructorElement
-          text={`${mainIngridients[0].name}(верх)`}
+          text={`${mainIngridients[0].name}`}
           price={50}
           thumbnail={mainIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
         {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}(верх)`}
+          text={`${sauceIngridients[0].name}`}
+          price={50}
+          thumbnail={sauceIngridients[0].image}
+        />}
+        {sauceIngridients.length && <ConstructorElement
+          text={`${sauceIngridients[0].name}`}
+          price={50}
+          thumbnail={sauceIngridients[0].image}
+        />}
+        {sauceIngridients.length && <ConstructorElement
+          text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
@@ -68,7 +78,7 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
       </div>
       <div className={`${ styles.burgerContainer } pt-10`}>
         <span className={`${ styles.burgerElementPrice } text text_type_digits-medium pr-10`}>
-          610<CurrencyIcon />
+          610<CurrencyIcon  type="primary"/>
         </span>
         <Button htmlType="button" type="primary" size="medium">
           Оформить заказ
