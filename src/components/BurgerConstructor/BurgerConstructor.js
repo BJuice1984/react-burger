@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
 
-export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients }) {
+export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
+  const [isOrderPrice, SetIsOrderPrice] = useState('610');
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`}>
@@ -78,9 +80,13 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
       </div>
       <div className={`${ styles.burgerContainer } pt-10`}>
         <span className={`${ styles.burgerElementPrice } text text_type_digits-medium pr-10`}>
-          610<CurrencyIcon  type="primary"/>
+          {isOrderPrice}<CurrencyIcon type="primary"/>
         </span>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={handleOpenModal}>
           Оформить заказ
         </Button>
       </div>

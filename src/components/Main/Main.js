@@ -3,7 +3,7 @@ import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import styles from './main.module.css';
 
-export default function Main({ bunIngridients, sauceIngridients, mainIngridients }) {
+export default function Main({ bunIngridients, sauceIngridients, mainIngridients, openModal }) {
 
   return (
     <>
@@ -17,7 +17,8 @@ export default function Main({ bunIngridients, sauceIngridients, mainIngridients
         <BurgerConstructor
           bunIngridients={bunIngridients}
           sauceIngridients={sauceIngridients}
-          mainIngridients={mainIngridients} />
+          mainIngridients={mainIngridients}
+          handleOpenModal={openModal} />
       </div>
     </main>
     </>

@@ -38,7 +38,6 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
           </ul>
         </li>
       </ul>
-
     </section>
   )
 }

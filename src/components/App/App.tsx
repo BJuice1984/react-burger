@@ -1,6 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import Main from '../Main/Main';
+import Modal from '../Modal/Modal';
+import ModalOrder from '../ModalOrder/ModalOrder';
 import useIngridients from '../../hooks/useIngridients';
+import useModal from '../../hooks/useModal';
 import styles from './app.module.css';
 
 function App() {
@@ -11,15 +14,27 @@ function App() {
     mainIngridients,
   } = useIngridients();
 
+  const {
+    isModalOpen,
+    openModal,
+    closeModal
+  } = useModal();
+
   return (
     <div className={ styles.page }>
+      <Modal 
+        component={<ModalOrder />}
+        handleCloseModal={closeModal}
+        isModalOpen={isModalOpen} />
+
       <div className={ styles.container }>
 
         <Routes>
           <Route path='/' element={<Main
             bunIngridients={bunIngridients}
             sauceIngridients={sauceIngridients}
-            mainIngridients={mainIngridients}/>} />
+            mainIngridients={mainIngridients}
+            openModal={openModal} />}/>
         </Routes>
 
       </div>

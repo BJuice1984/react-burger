@@ -1,0 +1,70 @@
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #000000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s, opacity 0.1s linear;
+}
+
+.window {
+  position: relative;
+  background-color: #2F2F2F;
+  margin: 0;
+  border-radius: 10px;
+  min-width: 282px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+}
+
+.modalOpened {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.1s, opacity 0.1s linear;
+}
+
+.closeButton {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: -36px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  height: 20px;
+  width: 20px;
+  transition: all 0.5s ease;
+}
+
+.closeButton:hover {
+  opacity: 0.6;
+  transition: 0.2s ease-in-out;
+}
+
+.closeButton:before {
+  position: absolute;
+  content: '';
+  height: 25px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.closeButton:after {
+  position: absolute;
+  content: '';
+  height: 25px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  top: 0;
+  transform: rotate(-45deg);
+}
