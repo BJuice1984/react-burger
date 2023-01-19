@@ -13,7 +13,8 @@ export default function Main({ bunIngridients, sauceIngridients, mainIngridients
         <BurgerIngredients
           bunIngridients={bunIngridients}
           sauceIngridients={sauceIngridients}
-          mainIngridients={mainIngridients} />
+          mainIngridients={mainIngridients}
+          handleOpenModal={openModal} />
         <BurgerConstructor
           bunIngridients={bunIngridients}
           sauceIngridients={sauceIngridients}

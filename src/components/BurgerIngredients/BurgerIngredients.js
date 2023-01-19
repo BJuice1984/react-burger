@@ -3,7 +3,7 @@ import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCar
 import BurgerTab from '../BurgerTab/BurgerTab';
 import PropTypes from 'prop-types';
 
-export default function BurgerIngredients({ bunIngridients, sauceIngridients, mainIngridients }) {
+export default function BurgerIngredients({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
 
   return(
     <section className={ styles.ingridients }>
@@ -16,7 +16,8 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
             {bunIngridients.map(ingridient => 
               <BurgerIngredientsCard
                 ingridient={ingridient}
-                key={ingridient._id} />)}
+                key={ingridient._id}
+                handleOpenModal={handleOpenModal} />)}
           </ul>
         </li>
         <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
@@ -25,7 +26,8 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
             {sauceIngridients.map(ingridient => 
               <BurgerIngredientsCard
                 ingridient={ingridient}
-                key={ingridient._id} />)}
+                key={ingridient._id}
+                handleOpenModal={handleOpenModal} />)}
           </ul>
         </li>
         <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
@@ -34,7 +36,8 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
             {mainIngridients.map(ingridient => 
               <BurgerIngredientsCard
                 ingridient={ingridient}
-                key={ingridient._id} />)}
+                key={ingridient._id}
+                handleOpenModal={handleOpenModal} />)}
           </ul>
         </li>
       </ul>

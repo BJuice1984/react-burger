@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
+import ModalOrder from "../ModalOrder/ModalOrder";
 
 export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
   const [isOrderPrice, SetIsOrderPrice] = useState('610');
+
+  const openModal = () => {
+    handleOpenModal(isOrderPrice, <ModalOrder />)
+    SetIsOrderPrice(isOrderPrice)
+  }
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`}>
@@ -86,7 +92,7 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={handleOpenModal}>
+          onClick={openModal}>
           Оформить заказ
         </Button>
       </div>

@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function useModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOrderPrice, setIsOrderPrice] = useState('')
+  const [isComponent, setIsComponent] = useState('')
 
-  const openModal = () => {
-    setIsModalOpen(true)
+
+  const openModal = (item, component) => {
+    setIsModalOpen(true);
+    setIsOrderPrice(item)
+    setIsComponent(component)
   }
 
   const closeModal = () => {
@@ -14,6 +19,8 @@ export default function useModal() {
   return {
     isModalOpen,
     openModal,
-    closeModal
+    closeModal,
+    isOrderPrice,
+    isComponent
   }
 }

@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
-import ModalOrder from '../ModalOrder/ModalOrder';
 import useIngridients from '../../hooks/useIngridients';
 import useModal from '../../hooks/useModal';
 import styles from './app.module.css';
@@ -17,15 +16,18 @@ function App() {
   const {
     isModalOpen,
     openModal,
-    closeModal
+    closeModal,
+    isOrderPrice,
+    isComponent
   } = useModal();
 
   return (
     <div className={ styles.page }>
       <Modal 
-        component={<ModalOrder />}
+        component={isComponent}
         handleCloseModal={closeModal}
-        isModalOpen={isModalOpen} />
+        isModalOpen={isModalOpen}
+        isOrderPrice={isOrderPrice} />
 
       <div className={ styles.container }>
 
