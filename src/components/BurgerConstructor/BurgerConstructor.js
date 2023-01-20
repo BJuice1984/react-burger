@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
 import ModalOrder from "../ModalOrder/ModalOrder";
 
@@ -15,68 +15,105 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
     <section className={`${ styles.burgerConstructor } pt-25`}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={ styles.burgerConstructorContainer }>
         {bunIngridients.length !== 0 && <ConstructorElement
+          extraClass="ml-8"
           type="top"
           isLocked={true}
           text={`${bunIngridients[0].name}(верх)`}
           price={200}
           thumbnail={bunIngridients[0].image}
         />}
-        {mainIngridients.length && <ConstructorElement
+        <div>
+        <DragIcon type="primary"/>
+        {mainIngridients.length && 
+          <ConstructorElement
           text={`${mainIngridients[0].name}`}
           price={50}
           thumbnail={mainIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
+        {sauceIngridients.length && <ConstructorElement
+          text={`${sauceIngridients[0].name}`}
+          price={50}
+          thumbn
+          ail={sauceIngridients[0].image}
+        />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
+        </div>
+        <div>
+        <DragIcon type="primary"/>
         {sauceIngridients.length && <ConstructorElement
           text={`${sauceIngridients[0].name}`}
           price={50}
           thumbnail={sauceIngridients[0].image}
         />}
-        {sauceIngridients.length && <ConstructorElement
-          text={`${sauceIngridients[0].name}`}
-          price={50}
-          thumbnail={sauceIngridients[0].image}
-        />}
+        </div>
         {bunIngridients.length && <ConstructorElement
+          extraClass="ml-8"
           type="bottom"
           isLocked={true}
           text={`${bunIngridients[0].name}(низ)`}
