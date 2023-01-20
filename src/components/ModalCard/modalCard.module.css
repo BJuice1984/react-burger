@@ -7,7 +7,7 @@
 }
 
 .header {
-  justify-self: left;
+  align-self: flex-start;
 }
 
 .description {

@@ -3,7 +3,7 @@ import styles from './modalCard.module.css';
 export default function ModalCard() {
   return(
     <div className={ styles.container }>
-      <h2 className={`${ styles.header } text text_type_main-medium pt-10`}>Детали ингредиента</h2>
+      <h2 className={`${ styles.header } text text_type_main-medium pt-10 ml-10`}>Детали ингредиента</h2>
       <img
         className={ styles.pic }
         src="https://code.s3.yandex.net/react/code/meat-01.png"

@@ -45,3 +45,8 @@
   background-repeat: no-repeat;
   background-position: 10% 40%;
 }
+
+.description {
+  margin: 0;
+  margin-left: 8px;
+}
