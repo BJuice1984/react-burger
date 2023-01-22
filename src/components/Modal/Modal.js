@@ -4,7 +4,7 @@ import styles from './modal.module.css';
 
 const modalRoot = document.getElementById("modal");
 
-export default function Modal({ isModalOpen, handleCloseModal, component, isOrderPrice }) {
+export default function Modal({ isModalOpen, handleCloseModal, component }) {
 
   return(
     ReactDOM.createPortal(

@@ -7,7 +7,7 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
   const [isOrderPrice, SetIsOrderPrice] = useState('610');
 
   const openModal = () => {
-    handleOpenModal(isOrderPrice, <ModalOrder />)
+    handleOpenModal(<ModalOrder price={isOrderPrice} />)
     SetIsOrderPrice(isOrderPrice)
   }
 
@@ -54,9 +54,9 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
           <div>
             <DragIcon type="primary"/>
               <ConstructorElement
-                text={`${sauceIngridients[0].name}`}
-                price={50}
-                thumbnail={sauceIngridients[0].image} />
+              text={`${sauceIngridients[0].name}`}
+              price={50}
+              thumbnail={sauceIngridients[0].image} />
           </div>
           <div>
             <DragIcon type="primary"/>

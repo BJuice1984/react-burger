@@ -2,13 +2,11 @@ import { useState } from "react";
 
 export default function useModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOrderPrice, setIsOrderPrice] = useState('')
   const [isComponent, setIsComponent] = useState('')
 
 
-  const openModal = (item, component) => {
+  const openModal = (component) => {
     setIsModalOpen(true);
-    setIsOrderPrice(item)
     setIsComponent(component)
   }
 
@@ -20,7 +18,6 @@ export default function useModal() {
     isModalOpen,
     openModal,
     closeModal,
-    isOrderPrice,
     isComponent
   }
 }

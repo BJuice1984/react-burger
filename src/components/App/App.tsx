@@ -17,7 +17,6 @@ function App() {
     isModalOpen,
     openModal,
     closeModal,
-    isOrderPrice,
     isComponent
   } = useModal();
 
@@ -26,8 +25,7 @@ function App() {
       <Modal 
         component={isComponent}
         handleCloseModal={closeModal}
-        isModalOpen={isModalOpen}
-        isOrderPrice={isOrderPrice} />
+        isModalOpen={isModalOpen} />
 
       <div className={ styles.container }>
 
