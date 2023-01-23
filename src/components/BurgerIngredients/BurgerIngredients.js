@@ -1,7 +1,8 @@
 import styles from './burgerIngridients.module.css';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
 import BurgerTab from '../BurgerTab/BurgerTab';
-import PropTypes from 'prop-types';
+import { func } from 'prop-types';
+import { burgerIngredientArrayType } from '../../utils/prop-types';
 
 export default function BurgerIngredients({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
 
@@ -46,7 +47,8 @@ export default function BurgerIngredients({ bunIngridients, sauceIngridients, ma
 }
 
 BurgerIngredients.propTypes = {
-  bunIngridients: PropTypes.array.isRequired,
-  sauceIngridients: PropTypes.array.isRequired,
-  mainIngridients: PropTypes.array.isRequired,
+  bunIngridients: burgerIngredientArrayType.isRequired,
+  sauceIngridients: burgerIngredientArrayType.isRequired,
+  mainIngridients: burgerIngredientArrayType.isRequired,
+  handleOpenModal: func.isRequired
 }

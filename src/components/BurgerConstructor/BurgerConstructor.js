@@ -2,6 +2,8 @@ import { useState, Fragment } from "react";
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
 import ModalOrder from "../ModalOrder/ModalOrder";
+import { func } from 'prop-types';
+import { burgerIngredientArrayType } from "../../utils/prop-types";
 
 export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
   const [isOrderPrice, SetIsOrderPrice] = useState('610');
@@ -124,4 +126,11 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
       </div>
     </section>
   )
+}
+
+BurgerConstructor.propTypes = {
+  bunIngridients: burgerIngredientArrayType.isRequired,
+  sauceIngridients: burgerIngredientArrayType.isRequired,
+  mainIngridients: burgerIngredientArrayType.isRequired,
+  handleOpenModal: func.isRequired
 }

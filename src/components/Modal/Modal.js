@@ -2,6 +2,7 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import useClose from "../../hooks/useClose";
+import { func, bool, element } from 'prop-types';
 
 const modalRoot = document.getElementById("modal");
 
@@ -33,4 +34,10 @@ export default function Modal({ isModalOpen, handleCloseModal, component }) {
       </>
       , modalRoot)
   )
+}
+
+Modal.propTypes = {
+  isModalOpen: bool.isRequired,
+  handleCloseModal: func.isRequired,
+  component: element
 }

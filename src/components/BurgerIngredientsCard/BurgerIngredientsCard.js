@@ -1,6 +1,7 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalCard from '../ModalCard/ModalCard';
 import styles from './burgerIngredientsCard.module.css';
+import { func } from 'prop-types';
 import { burgerIngredientType } from '../../utils/prop-types';
 
 export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
@@ -28,5 +29,6 @@ export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
 }
 
 BurgerIngredientsCard.propTypes = {
-  ingridient: burgerIngredientType.isRequired
+  ingridient: burgerIngredientType.isRequired,
+  handleOpenModal: func.isRequired
 }
