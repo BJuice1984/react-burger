@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 
 export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
 
-  // console.log(ingridient)
-
   const openModal = () => {
     handleOpenModal(<ModalCard ingridient={ingridient}/>)
   }

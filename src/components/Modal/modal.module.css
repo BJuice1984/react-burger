@@ -7,8 +7,10 @@
   background-color: #1C1C21;
   margin: 0;
   border-radius: 40px;
-  min-width: 720px;
-  min-height: 539px;
+  min-width: fit-content;
+  min-height: fit-content;
+  max-width: 720px;
+  max-height: 718px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   visibility: hidden;
   opacity: 0;

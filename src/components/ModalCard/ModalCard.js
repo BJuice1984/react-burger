@@ -27,7 +27,6 @@ export default function ModalCard({ ingridient }) {
           <h2 className={`${ styles.calDescription } text text_type_main-small text_color_inactive pb-1`}>Углеводы, г</h2>
           <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingridient.carbohydrates}</p>
         </article>
-
       </div>
     </div>
   )
