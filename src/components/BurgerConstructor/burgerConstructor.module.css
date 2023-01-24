@@ -1,0 +1,23 @@
+.burgerConstructor {
+  margin: 0;
+  height: 85vh;
+}
+
+.burgerConstructorContainer {
+  margin: 0;
+  height: 80%;
+  overflow-y: auto;
+}
+
+.burgerContainer {
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.burgerElementPrice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+}

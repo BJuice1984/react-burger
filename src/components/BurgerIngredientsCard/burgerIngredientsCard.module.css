@@ -1,0 +1,25 @@
+.element {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.pic {
+  width: 240px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.price {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  margin: 0;
+  text-align: center;
+  min-height: 48px;
+}

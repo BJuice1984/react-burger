@@ -1,0 +1,52 @@
+.header {
+  margin: 0;
+  background-color: #1C1C21;
+}
+
+.container {
+  min-height: 88px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-self: left;
+}
+
+.link {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.5s;
+}
+
+.link:hover {
+  opacity: 0.5;
+  transition: 0.2s ease-in-out;
+}
+
+.btn {
+  margin: 0 auto;
+  min-width: 100px;
+  min-height: 32px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 10% 40%;
+}
+
+.description {
+  margin: 0;
+  margin-left: 8px;
+}

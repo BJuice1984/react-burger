@@ -1,0 +1,31 @@
+.ingridients {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.header {
+  margin: 0;
+}
+
+.ingridientsListContainer {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.ingridientsListHeader {
+  margin: 0;  
+}
+
+.ingridientsList {
+  margin: 0;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 14px;
+  row-gap: 35px;
+}
