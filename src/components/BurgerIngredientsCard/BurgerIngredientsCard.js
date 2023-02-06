@@ -3,15 +3,23 @@ import ModalCard from '../ModalCard/ModalCard';
 import styles from './burgerIngredientsCard.module.css';
 import { func } from 'prop-types';
 import { burgerIngredientType } from '../../utils/prop-types';
+import { useDrag } from 'react-dnd';
 
 export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
+  const [{isDrag}, dragRef] = useDrag({
+    type: "ingridient",
+    item: ingridient._id,
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    })
+  })
 
   const openModal = () => {
     handleOpenModal(<ModalCard ingridient={ingridient}/>)
   }
 
   return(
-    <article className={ styles.element }>
+    !isDrag && <article ref={dragRef} className={ styles.element }>
       <Counter count={1} size="default" extraClass="m-1" />
       <img className={ styles.pic }
         onClick={openModal}
