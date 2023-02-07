@@ -6,9 +6,10 @@ import { burgerIngredientType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 
 export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
+  const {_id} = ingridient
   const [{isDrag}, dragRef] = useDrag({
     type: "ingridient",
-    item: ingridient._id,
+    item: {_id},
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })
@@ -17,6 +18,7 @@ export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
   const openModal = () => {
     handleOpenModal(<ModalCard ingridient={ingridient}/>)
   }
+  console.log(ingridient._id)
 
   return(
     !isDrag && <article ref={dragRef} className={ styles.element }>

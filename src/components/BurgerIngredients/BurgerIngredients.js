@@ -6,8 +6,7 @@ import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCar
 import BurgerTab from '../BurgerTab/BurgerTab';
 import { func } from 'prop-types';
 import { burgerIngredientArrayType } from '../../utils/prop-types';
-import { DndProvider } from 'react-dnd/dist/core';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+
 import { getItems } from '../../services/actions/initialIngridients';
 
 export default function BurgerIngredients({ handleOpenModal }) {
@@ -31,10 +30,10 @@ export default function BurgerIngredients({ handleOpenModal }) {
 
   return(
     <section className={ styles.ingridients }>
-      <DndProvider backend={HTML5Backend}>
+      
         <h2 className={`${ styles.header } text text_type_main-large pt-10`}>Соберите бургер</h2>
         <BurgerTab />
-        { groupedIngridients.bun && groupedIngridients.sauce && groupedIngridients.main &&
+        {groupedIngridients.bun && groupedIngridients.sauce && groupedIngridients.main &&
           <Fragment>
             <ul className={ styles.ingridientsListContainer }>
               <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
@@ -70,7 +69,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
             </ul>
           </Fragment>
         }
-      </DndProvider>
+      
     </section>
   )
 }
