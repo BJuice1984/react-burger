@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
@@ -9,14 +9,15 @@ import { burgerIngredientArrayType } from "../../utils/prop-types";
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
 
-export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
+export default function BurgerConstructor({ handleOpenModal }) {
   const dispatch = useDispatch();
   
-  const userIngridients = useSelector(state => state.userIngridients.userItems);
+  const userIngridients = useSelector(state => state.userIngridients);
 
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
     collect: monitor => ({
+      dropItem: monitor.getItem(),
       isHover: monitor.isOver()
     }),
     drop: (ingridient) => dispatch(addIngridientId(ingridient)),
@@ -34,32 +35,31 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={`${ styles.burgerConstructorContainer } ${hover}`}>
-        {bunIngridients.length && sauceIngridients.length && mainIngridients.length && 
-        <Fragment>
-          <ConstructorElement
+        {userIngridients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="top"
           isLocked={true}
-          text={`${bunIngridients[0].name}(верх)`}
-          price={200}
-          thumbnail={bunIngridients[0].image} />
+          text={`${userIngridients.bun.name}(верх)`}
+          price={userIngridients.bun.price}
+          thumbnail={userIngridients.bun.image} />
+          ) : (<div className={`${styles.emptyElement} ${styles.emptyElementTop} text text_type_main-medium`}>Добавьте булки</div>)}
           
-        {userIngridients.map((ingridient, index) => 
-              <BurgerConstructorCard
-                ingridient={ingridient}
-                index={index}
-                key={ingridient.id} />)}
+        {userIngridients.userItems.length !== 0 ? (userIngridients.userItems.map((ingridient, index) => 
+          <BurgerConstructorCard
+            ingridient={ingridient}
+            index={index}
+            key={ingridient.id} />)
+          ) : (<div className={`${styles.emptyElement} text text_type_main-medium`}>Добавьте соусы и начинки</div>)}
           
-          
-          <ConstructorElement
+        {userIngridients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="bottom"
           isLocked={true}
-          text={`${bunIngridients[0].name}(низ)`}
-          price={200}
-          thumbnail={bunIngridients[0].image}/>
-        </Fragment>}
-        
+          text={`${userIngridients.bun.name}(низ)`}
+          price={userIngridients.bun.price}
+          thumbnail={userIngridients.bun.image}/>
+          ) : (<div className={`${styles.emptyElement} ${styles.emptyElementBottom} text text_type_main-medium`}>Добавьте булки</div>)}
+ 
       </div>
       <div className={`${ styles.burgerContainer } pt-10`}>
         <span className={`${ styles.burgerElementPrice } text text_type_digits-medium pr-10`}>
