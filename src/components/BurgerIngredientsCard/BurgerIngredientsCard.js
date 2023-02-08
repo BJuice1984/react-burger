@@ -9,7 +9,7 @@ export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
 
   const [{isDrag}, dragRef] = useDrag({
     type: "ingridient",
-    item: {ingridient},
+    item: ingridient,
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })

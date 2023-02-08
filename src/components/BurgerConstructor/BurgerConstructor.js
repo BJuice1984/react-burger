@@ -7,7 +7,7 @@ import ModalOrder from "../ModalOrder/ModalOrder";
 import { func } from 'prop-types';
 import { burgerIngredientArrayType } from "../../utils/prop-types";
 import { useDrop } from "react-dnd/dist/hooks";
-import { ADD_USER_ITEM } from "../../services/actions/userIngridients";
+import { addIngridientId } from "../../services/actions/userIngridients";
 
 export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
   const dispatch = useDispatch();
@@ -19,13 +19,9 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
     collect: monitor => ({
       isHover: monitor.isOver()
     }),
-    drop(ingridient) {
-      dispatch({
-        type: ADD_USER_ITEM,
-        ...ingridient
-      })
-    }
-  })
+    drop: (ingridient) => dispatch(addIngridientId(ingridient)),
+    })
+
   const [isOrderPrice, setIsOrderPrice] = useState('610');
 
   const openModal = () => {
@@ -52,7 +48,7 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
               <BurgerConstructorCard
                 ingridient={ingridient}
                 index={index}
-                key={ingridient._id} />)}
+                key={ingridient.id} />)}
           
           
           <ConstructorElement
