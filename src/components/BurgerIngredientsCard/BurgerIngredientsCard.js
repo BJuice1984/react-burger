@@ -6,10 +6,10 @@ import { burgerIngredientType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 
 export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
-  const {_id} = ingridient
+
   const [{isDrag}, dragRef] = useDrag({
     type: "ingridient",
-    item: {_id},
+    item: {ingridient},
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })

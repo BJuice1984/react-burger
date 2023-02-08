@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { ingridientsReducer } from './ingridients';
+import { initialIngridientsReducer } from './initialIngridients';
+import { userIngridientsReducer } from './userIngridients';
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -11,7 +12,8 @@ const composeEnhancers =
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 const rootReducer = combineReducers({
-  initialIngridients: ingridientsReducer,
+  initialIngridients: initialIngridientsReducer,
+  userIngridients: userIngridientsReducer
 })
 
 export const store = configureStore({

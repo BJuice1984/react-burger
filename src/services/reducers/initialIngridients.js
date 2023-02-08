@@ -1,13 +1,12 @@
-import { GET_ITEM_FAILED, GET_ITEM_SUCCESS, GET_ITEM_REQUEST, ADD_USER_ITEM } from "../actions/initialIngridients";
+import { GET_ITEM_FAILED, GET_ITEM_SUCCESS, GET_ITEM_REQUEST } from "../actions/initialIngridients";
 
-const ingridients = {
+const initialIngridients = {
   items: [],
-  userItems: [],
   itemsRequest: false,
   itemsFailed: false,
 }
 
-export const ingridientsReducer = (state = ingridients, action) => {
+export const initialIngridientsReducer = (state = initialIngridients, action) => {
   switch (action.type) {
     case GET_ITEM_REQUEST: {
       return {
@@ -28,12 +27,6 @@ export const ingridientsReducer = (state = ingridients, action) => {
         ...state,
         itemsRequest: false,
         itemsFailed:true
-      }
-    }
-    case ADD_USER_ITEM: {
-      return {
-        ...state,
-        userItems: [...state.userItems, ...state.items.filter(ingridient => ingridient._id === action._id)]
       }
     }
     default: {

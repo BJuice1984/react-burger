@@ -1,28 +1,28 @@
 import { useState, Fragment } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { func } from 'prop-types';
 import { burgerIngredientArrayType } from "../../utils/prop-types";
 import { useDrop } from "react-dnd/dist/hooks";
-import { ADD_USER_ITEM } from "../../services/actions/initialIngridients";
+import { ADD_USER_ITEM } from "../../services/actions/userIngridients";
 
 export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
   const dispatch = useDispatch();
   
-  const userIngridients = useSelector(state => state.initialIngridients.userItems);
+  const userIngridients = useSelector(state => state.userIngridients.userItems);
 
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
     collect: monitor => ({
       isHover: monitor.isOver()
     }),
-    drop(itemId) {
+    drop(ingridient) {
       dispatch({
         type: ADD_USER_ITEM,
-        ...itemId
+        ...ingridient
       })
     }
   })
