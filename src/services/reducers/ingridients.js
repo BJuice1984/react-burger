@@ -8,7 +8,6 @@ const ingridients = {
 }
 
 export const ingridientsReducer = (state = ingridients, action) => {
-  console.log(action)
   switch (action.type) {
     case GET_ITEM_REQUEST: {
       return {

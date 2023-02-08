@@ -12,9 +12,7 @@ import { ADD_USER_ITEM } from "../../services/actions/initialIngridients";
 export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
   const dispatch = useDispatch();
   
-  const userIngridients = useSelector(state => state.initialIngridients.userItems)
-
-  console.log(userIngridients)
+  const userIngridients = useSelector(state => state.initialIngridients.userItems);
 
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
@@ -35,11 +33,11 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
     setIsOrderPrice(isOrderPrice)
   }
 
-  const hover = isHover ? 'onHover' : '';
+  const hover = isHover ? styles.onHover : '';
 
   return(
-    <section className={`${ styles.burgerConstructor } ${hover} pt-25`} ref={dropTarget}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={ styles.burgerConstructorContainer }>
+    <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={`${ styles.burgerConstructorContainer } ${hover}`}>
         {bunIngridients.length && sauceIngridients.length && mainIngridients.length && 
         <Fragment>
           <ConstructorElement
@@ -50,28 +48,11 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
           price={200}
           thumbnail={bunIngridients[0].image} />
           
-          {userIngridients.length && <ul className={`${ styles.ingridientsListsssssssssssssssss } pt-6 pb-10`}>
-            {userIngridients.map(ingridient => 
+        {userIngridients.map((ingridient, index) => 
               <BurgerConstructorCard
                 ingridient={ingridient}
+                index={index}
                 key={ingridient._id} />)}
-          </ul>}
-
-
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${mainIngridients[0].name}`}
-              price={50}
-              thumbnail={mainIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
           
           
           <ConstructorElement

@@ -18,7 +18,6 @@ export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
   const openModal = () => {
     handleOpenModal(<ModalCard ingridient={ingridient}/>)
   }
-  console.log(ingridient._id)
 
   return(
     !isDrag && <article ref={dragRef} className={ styles.element }>
