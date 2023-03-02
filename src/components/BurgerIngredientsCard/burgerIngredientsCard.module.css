@@ -18,6 +18,10 @@
   align-items: center;
 }
 
+.price > svg {
+  padding-left: 5px;
+}
+
 .name {
   margin: 0;
   text-align: center;
