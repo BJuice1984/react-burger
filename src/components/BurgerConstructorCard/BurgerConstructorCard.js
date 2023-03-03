@@ -13,18 +13,17 @@ export default function BurgerConstructorCard({ ingridient, index }) {
   const [{isDrag}, drag] = useDrag({
     type: "sort_ingridient",
     item: () => {
-      return { ingridient, index }
+      return { index }
     },
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })
   });
 
-  const [{isHover}, drop] = useDrop({
+  const [{handlerId}, drop] = useDrop({
     accept: "sort_ingridient",
     collect: monitor => ({
-      dropItem: monitor.getItem(),
-      isHover: monitor.isOver()
+      handlerId: monitor.getHandlerId()
     }),
     hover(item, monitor) {
       const dragIndex = item.index;
@@ -57,13 +56,10 @@ export default function BurgerConstructorCard({ ingridient, index }) {
     },
   });
 
-  drag(drop(ref));
-
-  const hover = isHover ? styles.onHover : '';
-  const opacity = isDrag ? styles.onOpacity : '';
+  const hover = isDrag ? styles.onHover : '';
 
   return (
-    <article ref={ref} className={`${ styles.element } ${hover}`}>
+    <article ref={drag(drop(ref))} data-handler-id={handlerId} className={`${ styles.element } ${hover}`}>
       <DragIcon type="primary"/>
       <ConstructorElement
         extraClass="ml-2"
