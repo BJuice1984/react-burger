@@ -1,5 +1,5 @@
 import styles from './burgerIngridients.module.css';
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
@@ -12,7 +12,6 @@ import { getItems } from '../../services/actions/initialIngridients';
 export default function BurgerIngredients({ handleOpenModal }) {
 
   const groupedIngridients = groupBy(useSelector(state => state.initialIngridients.items), "type");
-  // const itemsRequest = useSelector(state => state.initialIngridients.itemsRequest);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +25,25 @@ export default function BurgerIngredients({ handleOpenModal }) {
   
       return { ...acc, [key]: [...curGroup, obj] };
     }, {});
-  }
+  };
+
+  const userIngridients = useSelector(state => state.userIngridients);
+
+  const userIngridientsCount = useMemo(() => {
+    const counter = {};
+    console.log('counter', counter)
+    userIngridients.userItems.forEach((item) => {
+      if (!counter[item._id]) counter[item._id] = 0;
+      counter[item._id]++;
+    });
+    if (userIngridients.bun)
+      counter[userIngridients.bun._id] = 2;
+
+    return counter;
+  }, [userIngridients])
+
+  console.log('userIngridientsCount', userIngridientsCount)
+  console.log('userIngridients.userItems', userIngridients.userItems)
 
   return(
     <section className={ styles.ingridients }>
@@ -43,6 +60,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
                     <BurgerIngredientsCard
                       ingridient={ingridient}
                       key={ingridient._id}
+                      count={userIngridientsCount[ingridient._id]}
                       handleOpenModal={handleOpenModal} />)}
                 </ul>
               </li>
@@ -53,6 +71,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
                     <BurgerIngredientsCard
                       ingridient={ingridient}
                       key={ingridient._id}
+                      count={userIngridientsCount[ingridient._id]}
                       handleOpenModal={handleOpenModal} />)}
                 </ul>
               </li>
@@ -63,6 +82,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
                     <BurgerIngredientsCard
                       ingridient={ingridient}
                       key={ingridient._id}
+                      count={userIngridientsCount[ingridient._id]}
                       handleOpenModal={handleOpenModal} />)}
                 </ul>
               </li>

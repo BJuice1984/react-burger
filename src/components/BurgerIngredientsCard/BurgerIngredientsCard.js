@@ -5,7 +5,7 @@ import { func } from 'prop-types';
 import { burgerIngredientType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 
-export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
+export default function BurgerIngredientsCard({ ingridient, count, handleOpenModal }) {
 
   const [{isDrag}, dragRef] = useDrag({
     type: "ingridient",
@@ -21,7 +21,7 @@ export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
 
   return(
     !isDrag && <article ref={dragRef} className={ styles.element }>
-      <Counter count={1} size="default" extraClass="m-1" />
+      {count && <Counter count={count} size="default" extraClass="m-1" />}
       <img className={ styles.pic }
         onClick={openModal}
         src={ingridient.image}

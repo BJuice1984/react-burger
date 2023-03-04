@@ -25,8 +25,6 @@ export default function BurgerConstructor({ handleOpenModal }) {
 
   const hover = isHover ? styles.onHover : '';
 
-  // const [isOrderPrice, setIsOrderPrice] = useState('610');
-
   const openModal = () => {
     handleOpenModal(<ModalOrder price={orderPrice} />)
     // setIsOrderPrice(isOrderPrice)
@@ -39,9 +37,6 @@ export default function BurgerConstructor({ handleOpenModal }) {
       ) + (userIngridients.bun ? userIngridients.bun.price * 2 : 0)
     )
   }, [userIngridients]);
-
-  // console.log(price)
-  // console.log(userIngridients)
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
