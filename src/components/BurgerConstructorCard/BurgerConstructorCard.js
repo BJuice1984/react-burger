@@ -13,6 +13,7 @@ function BurgerConstructorCard({ ingridient, index }) {
   const [{isDrag}, drag] = useDrag({
     type: "sort_ingridient",
     item: () => {
+      // Определяем элемент
       return { index }
     },
     collect: monitor => ({
@@ -26,22 +27,34 @@ function BurgerConstructorCard({ ingridient, index }) {
       handlerId: monitor.getHandlerId()
     }),
     hover(item, monitor) {
-      const dragIndex = item.index;
-      const hoverIndex = index;
+      if (!ref.current) {
+        // console.log('!ref.current', ref)
+        return;
+      }
 
+      // Индекс перемещаемого элемента
+      const dragIndex = item.index;
+      // Индекс текущего элемента (над которым находится курсор при dnd)
+      const hoverIndex = index;
+      // console.log('hoverIndex', hoverIndex)
+      // Выходим, если индексы сопадают
       if (dragIndex === hoverIndex) {
+        // console.log('dragIndex === hoverIndex')
         return
       };
-
+      // Получаем положение текущего элемента относительно экрана
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      // Получаем центр текущего элемента по вертикали
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+       // Получаем положение курсора
 		  const clientOffset = monitor.getClientOffset();
+      // Получаем положение курсора относительно текущего элемента
 		  const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
+      // Выходим, если перемещаемый элемент ниже, чем 50% от высоты текущего
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
       };
-
+      // Выходим, если перемещаемый элемент выше, чем 50% от высоты текущего
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return
       };
@@ -51,15 +64,16 @@ function BurgerConstructorCard({ ingridient, index }) {
         from: dragIndex,
         to: hoverIndex,
       });
-
+      // Сразу меняем индекс перемещаемого элемента
       item.index = hoverIndex;
     },
   });
 
   const hover = isDrag ? styles.onHover : '';
+  drag(drop(ref));
 
   return (
-    <article ref={drag(drop(ref))} data-handler-id={handlerId} className={`${ styles.element } ${hover}`}>
+    <article ref={ref} data-handler-id={handlerId} className={`${ styles.element } ${hover}`}>
       <DragIcon type="primary"/>
       <ConstructorElement
         extraClass="ml-2"
