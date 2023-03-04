@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
@@ -21,16 +21,27 @@ export default function BurgerConstructor({ handleOpenModal }) {
       isHover: monitor.isOver()
     }),
     drop: (ingridient) => dispatch(addIngridientId(ingridient)),
-    })
-
-  const [isOrderPrice, setIsOrderPrice] = useState('610');
-
-  const openModal = () => {
-    handleOpenModal(<ModalOrder price={isOrderPrice} />)
-    setIsOrderPrice(isOrderPrice)
-  }
+  });
 
   const hover = isHover ? styles.onHover : '';
+
+  // const [isOrderPrice, setIsOrderPrice] = useState('610');
+
+  const openModal = () => {
+    handleOpenModal(<ModalOrder price={orderPrice} />)
+    // setIsOrderPrice(isOrderPrice)
+  }
+
+  const orderPrice = useMemo(() => {
+    return (
+      userIngridients.userItems.reduce(
+        (acc, current) => acc + current.price, 0
+      ) + (userIngridients.bun ? userIngridients.bun.price * 2 : 0)
+    )
+  }, [userIngridients]);
+
+  // console.log(price)
+  // console.log(userIngridients)
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
@@ -63,7 +74,7 @@ export default function BurgerConstructor({ handleOpenModal }) {
       </div>
       <div className={`${ styles.burgerContainer } pt-10`}>
         <span className={`${ styles.burgerElementPrice } text text_type_digits-medium pr-10`}>
-          {isOrderPrice}<CurrencyIcon type="primary"/>
+          {orderPrice}<CurrencyIcon type="primary"/>
         </span>
         <Button
           htmlType="button"
