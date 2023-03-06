@@ -27,7 +27,6 @@ export default function BurgerConstructor({ handleOpenModal }) {
 
   const openModal = () => {
     handleOpenModal(<ModalOrder price={orderPrice} />)
-    // setIsOrderPrice(isOrderPrice)
   }
 
   const orderPrice = useMemo(() => {

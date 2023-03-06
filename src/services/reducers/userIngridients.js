@@ -1,4 +1,4 @@
-import { ADD_USER_ITEM, MOVE_USER_ITEM } from "../actions/userIngridients";
+import { ADD_USER_ITEM, MOVE_USER_ITEM, DELETE_USER_ITEM } from "../actions/userIngridients";
 
 const userIngridients = {
   userItems: [],
@@ -26,8 +26,13 @@ export const userIngridientsReducer = (state = userIngridients, action) => {
         ...state,
         userItems
       }
-
     }
+    case DELETE_USER_ITEM: {
+      return {
+        ...state,
+        userItems: [...state.userItems.filter((item) => item.id !== action.ingridient.id)]
+      }
+    } 
     default: {
       return state;
     }

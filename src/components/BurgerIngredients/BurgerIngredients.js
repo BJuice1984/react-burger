@@ -31,7 +31,6 @@ export default function BurgerIngredients({ handleOpenModal }) {
 
   const userIngridientsCount = useMemo(() => {
     const counter = {};
-    console.log('counter', counter)
     userIngridients.userItems.forEach((item) => {
       if (!counter[item._id]) counter[item._id] = 0;
       counter[item._id]++;
@@ -40,10 +39,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
       counter[userIngridients.bun._id] = 2;
 
     return counter;
-  }, [userIngridients])
-
-  console.log('userIngridientsCount', userIngridientsCount)
-  console.log('userIngridients.userItems', userIngridients.userItems)
+  }, [userIngridients]);
 
   return(
     <section className={ styles.ingridients }>

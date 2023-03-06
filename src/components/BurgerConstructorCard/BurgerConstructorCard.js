@@ -4,7 +4,7 @@ import { useRef, memo } from 'react';
 import styles from './BurgerConstructorCard.module.css';
 
 import { useDispatch } from 'react-redux';
-import { MOVE_USER_ITEM } from '../../services/actions/userIngridients';
+import { MOVE_USER_ITEM, DELETE_USER_ITEM } from '../../services/actions/userIngridients';
 
 function BurgerConstructorCard({ ingridient, index }) {
   const dispatch = useDispatch();
@@ -79,7 +79,11 @@ function BurgerConstructorCard({ ingridient, index }) {
         extraClass="ml-2"
         text={`${ingridient.name}`}
         price={ingridient.price}
-        thumbnail={ingridient.image} />
+        thumbnail={ingridient.image}
+        handleClose={() => dispatch({
+          type: DELETE_USER_ITEM,
+          ingridient: ingridient
+        })} />
     </article>
   )
 }
