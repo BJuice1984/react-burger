@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
 import BurgerTab from '../BurgerTab/BurgerTab';
 import { func } from 'prop-types';
-import { burgerIngredientArrayType } from '../../utils/prop-types';
+import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/prop-types';
 
 import { getItems } from '../../services/actions/initialIngridients';
 
@@ -91,8 +91,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
 }
 
 BurgerIngredients.propTypes = {
-  bunIngridients: burgerIngredientArrayType.isRequired,
-  sauceIngridients: burgerIngredientArrayType.isRequired,
-  mainIngridients: burgerIngredientArrayType.isRequired,
+  userIngridients: burgerIngredientArrayType,
+  groupedIngridients: groupedIngridientsType,
   handleOpenModal: func.isRequired
 }

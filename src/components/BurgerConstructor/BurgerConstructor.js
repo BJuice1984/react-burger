@@ -5,7 +5,6 @@ import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { func } from 'prop-types';
-import { burgerIngredientArrayType } from "../../utils/prop-types";
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
 
@@ -83,9 +82,6 @@ export default function BurgerConstructor({ handleOpenModal }) {
 }
 
 BurgerConstructor.propTypes = {
-  bunIngridients: burgerIngredientArrayType.isRequired,
-  sauceIngridients: burgerIngredientArrayType.isRequired,
-  mainIngridients: burgerIngredientArrayType.isRequired,
   handleOpenModal: func.isRequired
 }
 

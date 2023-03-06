@@ -1,9 +1,10 @@
-import { GET_ITEM_FAILED, GET_ITEM_SUCCESS, GET_ITEM_REQUEST } from "../actions/initialIngridients";
+import { GET_ITEM_FAILED, GET_ITEM_SUCCESS, GET_ITEM_REQUEST, SHOW_ITEM_DETAILS } from "../actions/initialIngridients";
 
 const initialIngridients = {
   items: [],
   itemsRequest: false,
   itemsFailed: false,
+  displayedItem: null
 }
 
 export const initialIngridientsReducer = (state = initialIngridients, action) => {
@@ -27,6 +28,13 @@ export const initialIngridientsReducer = (state = initialIngridients, action) =>
         ...state,
         itemsRequest: false,
         itemsFailed:true
+      }
+    }
+    case SHOW_ITEM_DETAILS: {
+      return {
+        ...state,
+        displayedItem: action.ingridient
+
       }
     }
     default: {

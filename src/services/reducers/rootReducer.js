@@ -13,7 +13,7 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 const rootReducer = combineReducers({
   initialIngridients: initialIngridientsReducer,
-  userIngridients: userIngridientsReducer
+  userIngridients: userIngridientsReducer,
 })
 
 export const store = configureStore({

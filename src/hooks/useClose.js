@@ -30,8 +30,7 @@ function useClose() {
       }
       
       document.addEventListener("mousedown", handleClickClose);    
-      return () => {document.removeEventListener("mousedown", handleClickClose)
-      }
+      return () => document.removeEventListener("mousedown", handleClickClose)
   
     }, [handleClose, isOpen, openedClass])
   }

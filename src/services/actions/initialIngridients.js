@@ -4,6 +4,8 @@ export const GET_ITEM_REQUEST = 'GET_ITEM_REQUEST';
 export const GET_ITEM_SUCCESS = 'GET_ITEM_SUCCESS';
 export const GET_ITEM_FAILED = 'GET_ITEM_FAILED';
 
+export const SHOW_ITEM_DETAILS = 'SHOW_ITEM_DETAILS';
+
 export const getItems = () => {
   return function(dispatch) {
     dispatch({ type: GET_ITEM_REQUEST })
