@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
 import BurgerTab from '../BurgerTab/BurgerTab';
-import { func } from 'prop-types';
 import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/prop-types';
 
 import { getItems } from '../../services/actions/initialIngridients';
 
-export default function BurgerIngredients({ handleOpenModal }) {
+export default function BurgerIngredients() {
 
   const groupedIngridients = groupBy(useSelector(state => state.initialIngridients.items), "type");
   const dispatch = useDispatch();
@@ -56,8 +55,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
                     <BurgerIngredientsCard
                       ingridient={ingridient}
                       key={ingridient._id}
-                      count={userIngridientsCount[ingridient._id]}
-                      handleOpenModal={handleOpenModal} />)}
+                      count={userIngridientsCount[ingridient._id]} />)}
                 </ul>
               </li>
               <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
@@ -67,8 +65,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
                     <BurgerIngredientsCard
                       ingridient={ingridient}
                       key={ingridient._id}
-                      count={userIngridientsCount[ingridient._id]}
-                      handleOpenModal={handleOpenModal} />)}
+                      count={userIngridientsCount[ingridient._id]} />)}
                 </ul>
               </li>
               <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
@@ -78,8 +75,7 @@ export default function BurgerIngredients({ handleOpenModal }) {
                     <BurgerIngredientsCard
                       ingridient={ingridient}
                       key={ingridient._id}
-                      count={userIngridientsCount[ingridient._id]}
-                      handleOpenModal={handleOpenModal} />)}
+                      count={userIngridientsCount[ingridient._id]} />)}
                 </ul>
               </li>
             </ul>
@@ -93,5 +89,4 @@ export default function BurgerIngredients({ handleOpenModal }) {
 BurgerIngredients.propTypes = {
   userIngridients: burgerIngredientArrayType,
   groupedIngridients: groupedIngridientsType,
-  handleOpenModal: func.isRequired
 }

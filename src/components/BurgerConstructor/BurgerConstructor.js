@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
-import ModalOrder from "../ModalOrder/ModalOrder";
-import { func } from 'prop-types';
+// import ModalOrder from "../ModalOrder/ModalOrder";
 import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
+import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
 
-export default function BurgerConstructor({ handleOpenModal }) {
+export default function BurgerConstructor() {
   const dispatch = useDispatch();
   
   const userIngridients = useSelector(state => state.userIngridients);
@@ -25,8 +25,15 @@ export default function BurgerConstructor({ handleOpenModal }) {
 
   const hover = isHover ? styles.onHover : '';
 
+  // const openModal = () => {
+  //   handleOpenModal(<ModalOrder price={orderPrice} />)
+  // }
+
   const openModal = () => {
-    handleOpenModal(<ModalOrder price={orderPrice} />)
+    dispatch({
+    type: SHOW_ITEM_DETAILS,
+    item: orderPrice
+    })
   }
 
   const orderPrice = useMemo(() => {
@@ -84,6 +91,5 @@ export default function BurgerConstructor({ handleOpenModal }) {
 
 BurgerConstructor.propTypes = {
   userIngridients: burgerIngredientArrayType,
-  handleOpenModal: func.isRequired
 }
 

@@ -5,7 +5,7 @@ import styles from './main.module.css';
 import { DndProvider } from 'react-dnd/dist/core';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-export default function Main({ openModal }) {
+export default function Main() {
 
   return (
     <>
@@ -13,10 +13,8 @@ export default function Main({ openModal }) {
     <main className={ styles.main }>
       <DndProvider backend={HTML5Backend}>
         <div className={ styles.container }>
-          <BurgerIngredients
-            handleOpenModal={openModal} />
-          <BurgerConstructor
-            handleOpenModal={openModal} />
+          <BurgerIngredients />
+          <BurgerConstructor />
         </div>
       </DndProvider>
     </main>

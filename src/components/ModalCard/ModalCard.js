@@ -1,7 +1,12 @@
 import styles from './modalCard.module.css';
+import { useSelector } from 'react-redux';
 
-export default function ModalCard({ ingridient }) {
+export default function ModalCard() {
+
+  const ingridient = useSelector(state => state.modalDetails.displayedItem);
+
   return(
+    ingridient && (
     <div className={ styles.container }>
       <h2 className={`${ styles.header } text text_type_main-medium pt-10 ml-10`}>Детали ингредиента</h2>
       <img
@@ -29,5 +34,6 @@ export default function ModalCard({ ingridient }) {
         </article>
       </div>
     </div>
+    )
   )
 }

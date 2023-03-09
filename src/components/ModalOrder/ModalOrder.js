@@ -1,6 +1,9 @@
 import styles from './modalOrder.module.css';
+import { useSelector } from 'react-redux';
 
-export default function ModalOrder({ price }) {
+export default function ModalOrder() {
+
+  const price = useSelector(state => state.modalDetails.displayedItem);
 
   return(
     <div className={ styles.container }>

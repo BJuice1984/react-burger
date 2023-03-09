@@ -1,11 +1,14 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import ModalCard from '../ModalCard/ModalCard';
+// import ModalCard from '../ModalCard/ModalCard';
 import styles from './burgerIngredientsCard.module.css';
-import { func } from 'prop-types';
 import { burgerIngredientType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
+import { useDispatch } from 'react-redux';
+import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
 
-export default function BurgerIngredientsCard({ ingridient, count, handleOpenModal }) {
+export default function BurgerIngredientsCard({ ingridient, count }) {
+
+  const dispatch = useDispatch();
 
   const [{isDrag}, dragRef] = useDrag({
     type: "ingridient",
@@ -16,7 +19,10 @@ export default function BurgerIngredientsCard({ ingridient, count, handleOpenMod
   })
 
   const openModal = () => {
-    handleOpenModal(<ModalCard ingridient={ingridient}/>)
+    dispatch({
+    type: SHOW_ITEM_DETAILS,
+    item: ingridient
+    })
   }
 
   return(
@@ -39,5 +45,4 @@ export default function BurgerIngredientsCard({ ingridient, count, handleOpenMod
 
 BurgerIngredientsCard.propTypes = {
   ingridient: burgerIngredientType.isRequired,
-  handleOpenModal: func.isRequired
 }
