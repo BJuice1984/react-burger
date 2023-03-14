@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
 import BurgerTab from '../BurgerTab/BurgerTab';
 import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/prop-types';
-
 import { getItems } from '../../services/actions/initialIngridients';
 
 export default function BurgerIngredients() {

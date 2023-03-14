@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
-// import ModalOrder from "../ModalOrder/ModalOrder";
 import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
@@ -18,16 +17,12 @@ export default function BurgerConstructor() {
     accept: "ingridient",
     collect: monitor => ({
       dropItem: monitor.getItem(),
-      isHover: monitor.isOver()
+      isHover: monitor.isOver(),
     }),
     drop: (ingridient) => dispatch(addIngridientId(ingridient)),
   });
 
   const hover = isHover ? styles.onHover : '';
-
-  // const openModal = () => {
-  //   handleOpenModal(<ModalOrder price={orderPrice} />)
-  // }
 
   const openModal = () => {
     dispatch({

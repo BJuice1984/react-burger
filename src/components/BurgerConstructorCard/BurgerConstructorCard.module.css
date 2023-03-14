@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  cursor: move;
+  cursor: grab;
   opacity: 1;
   transition: 0.1s ease-in-out;
 }
@@ -11,4 +11,5 @@
 .onHover {
   opacity: 0;
   transition: 0.1s ease-in-out;
+  cursor: grabbing;
 }

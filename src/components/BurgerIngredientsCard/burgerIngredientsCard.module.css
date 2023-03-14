@@ -4,6 +4,15 @@
   justify-items: center;
   flex-direction: column;
   position: relative;
+  cursor: grab;
+  opacity: 1;
+  transition: 0.1s ease-in-out;
+}
+
+.onHover {
+  opacity: .7;
+  transition: 0.1s ease-in-out;
+  box-shadow: 0 6px 10px -2px rgb(60, 60, 200);
 }
 
 .pic {

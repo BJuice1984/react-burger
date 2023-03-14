@@ -1,5 +1,4 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-// import ModalCard from '../ModalCard/ModalCard';
 import styles from './burgerIngredientsCard.module.css';
 import { burgerIngredientType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
@@ -16,7 +15,9 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })
-  })
+  });
+
+  const hover = isDrag ? styles.onHover : '';
 
   const openModal = () => {
     dispatch({
@@ -26,7 +27,7 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
   }
 
   return(
-    !isDrag && <article ref={dragRef} className={ styles.element }>
+    <article ref={dragRef} className={ `${ styles.element } ${hover}` }>
       {count && <Counter count={count} size="default" extraClass="m-1" />}
       <img className={ styles.pic }
         onClick={openModal}
