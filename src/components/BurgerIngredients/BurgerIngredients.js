@@ -6,6 +6,7 @@ import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCar
 import BurgerTab from '../BurgerTab/BurgerTab';
 import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/prop-types';
 import { getItems } from '../../services/actions/initialIngridients';
+import { BUNS, SAUCES, MAINS } from '../../utils/constants';
 
 export default function BurgerIngredients() {
 
@@ -47,8 +48,8 @@ export default function BurgerIngredients() {
         {groupedIngridients.bun && groupedIngridients.sauce && groupedIngridients.main &&
           <Fragment>
             <ul className={ styles.ingridientsListContainer }>
-              <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
-                Булки
+              <li id={BUNS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
+                {BUNS}
                 <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
                   {groupedIngridients.bun.map(ingridient => 
                     <BurgerIngredientsCard
@@ -57,8 +58,8 @@ export default function BurgerIngredients() {
                       count={userIngridientsCount[ingridient._id]} />)}
                 </ul>
               </li>
-              <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
-                Соусы
+              <li id={SAUCES} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
+                {SAUCES}
                 <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
                   {groupedIngridients.sauce.map(ingridient => 
                     <BurgerIngredientsCard
@@ -67,8 +68,8 @@ export default function BurgerIngredients() {
                       count={userIngridientsCount[ingridient._id]} />)}
                 </ul>
               </li>
-              <li className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
-                Начинки
+              <li id={MAINS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
+                {MAINS}
                 <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
                   {groupedIngridients.main.map(ingridient => 
                     <BurgerIngredientsCard
