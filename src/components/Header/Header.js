@@ -7,7 +7,7 @@ export default function Header() {
     <header className={ styles.header }>
       <div className={ styles.container }>
         <nav className={ styles.links }>
-          <Link to='/' className={`${ styles.link } p-2`}>{<BurgerIcon type="primary" />}<p className={`${ styles.description }`}>Конструктор</p></Link>
+          <Link to='/' className={`${ styles.link } pt-2 pb-2 pr-6`}>{<BurgerIcon type="primary" />}<p className={`${ styles.description }`}>Конструктор</p></Link>
           <Link to='/feed' className={`${ styles.link } p-2`}>{<ListIcon type="secondary" />}<p className={`${ styles.description }`}>Лента заказов</p></Link>
         </nav>
         <Logo />

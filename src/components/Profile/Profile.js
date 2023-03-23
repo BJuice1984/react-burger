@@ -11,32 +11,34 @@ export default function Profile() {
 
   return (
     <section className={ styles.profile }>
-      <ProfileNavigation />
-      <div className={ styles.container }>
-        <EmailInput
-          onChange={onChange}
-          value={value}
-          name={'name'}
-          placeholder="Имя"
-          isIcon={true}
-          extraClass="mb-6"
-        />
-        <EmailInput
-          onChange={onChange}
-          value={value}
-          name={'text'}
-          placeholder="Логин"
-          isIcon={true}
-          extraClass="mb-6"
-        />
-        <PasswordInput
-          onChange={onChange}
-          value={value}
-          name={'password'}
-          icon="EditIcon"
-        />
+      <div className={ styles.profile_container }>
+        <ProfileNavigation />
+        <div className={ styles.container }>
+          <EmailInput
+            onChange={onChange}
+            value={value}
+            name={'name'}
+            placeholder="Имя"
+            isIcon={true}
+            extraClass="mb-6"
+          />
+          <EmailInput
+            onChange={onChange}
+            value={value}
+            name={'text'}
+            placeholder="Логин"
+            isIcon={true}
+            extraClass="mb-6"
+          />
+          <PasswordInput
+            onChange={onChange}
+            value={value}
+            name={'password'}
+            icon="EditIcon"
+          />
+        </div>
+        <p className={`${styles.description} text text_type_main-small pt-4`}>В этом разделе вы можете изменить свои персональные данные</p>
       </div>
-      <p className={`${styles.description} text text_type_main-small pt-4`}>В этом разделе вы можете изменить свои персональные данные</p>
     </section>
   )
 }

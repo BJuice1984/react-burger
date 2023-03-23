@@ -1,6 +1,7 @@
 .burgerConstructor {
   margin: 0;
   height: 85vh;
+  justify-self: end;
 }
 
 .burgerConstructorContainer {
@@ -37,7 +38,7 @@
   box-sizing: border-box;
   border-radius: var(--common-border-radius-s);
   background: var(--background-element);
-  max-width: 536px;
+  width: 536px;
   min-height: 80px;
   text-align: center;
   line-height: 2;
