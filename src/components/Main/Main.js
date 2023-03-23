@@ -1,4 +1,3 @@
-import Header from "../Header/Header";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import styles from './main.module.css';
@@ -8,8 +7,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 export default function Main() {
 
   return (
-    <>
-    <Header />
     <main className={ styles.main }>
       <DndProvider backend={HTML5Backend}>
         <div className={ styles.container }>
@@ -18,6 +15,5 @@ export default function Main() {
         </div>
       </DndProvider>
     </main>
-    </>
   )
 }
