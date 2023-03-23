@@ -36,7 +36,7 @@ export default function Login() {
         Войти
       </Button>
       <p className={`${styles.login_text} text text_type_main-small pb-4`}>Вы — новый пользователь? <Link className={`${styles.login_link} text text_type_main-small`} to="/sign-up">Зарегистрироваться</Link></p>
-      <p className={`${styles.login_text} text text_type_main-small`}>Забыли пароль? <Link className={`${styles.login_link} text text_type_main-small`} to="/sign-up">Восстановить пароль</Link></p>
+      <p className={`${styles.login_text} text text_type_main-small`}>Забыли пароль? <Link className={`${styles.login_link} text text_type_main-small`} to="/forgot-password">Восстановить пароль</Link></p>
     </section>
   )
 }
