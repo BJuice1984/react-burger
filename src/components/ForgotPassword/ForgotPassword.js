@@ -4,7 +4,7 @@ import styles from "../Login/login.module.css";
 import { Link } from "react-router-dom";
 
 export default function ForgotPassword() {
-  const [value, setValue] = useState('bob@example.com')
+  const [value, setValue] = useState('')
   const onChange = e => {
     setValue(e.target.value)
   }

@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import Profile from '../Profile/Profile';
 import styles from './app.module.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/sign-up' element={<Registration />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/' element={<Main />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
 
       </div>
