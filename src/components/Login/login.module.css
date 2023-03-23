@@ -17,7 +17,7 @@
 }
 
 .button {
-  width: 128px;
+  width: fit-content;
 }
 
 .login_text {

@@ -3,6 +3,7 @@ import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
+import Registration from '../Registration/Registration';
 import styles from './app.module.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/sign-in' element={<Login />} />
+          <Route path='/sign-up' element={<Registration />} />
           <Route path='/' element={<Main />} />
         </Routes>
 
