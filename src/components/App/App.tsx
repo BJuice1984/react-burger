@@ -6,6 +6,7 @@ import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Profile from '../Profile/Profile';
+import Orders from '../Orders/Orders';
 import styles from './app.module.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/' element={<Main />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/orders' element={<Orders />} />
         </Routes>
 
       </div>
