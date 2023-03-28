@@ -6,7 +6,7 @@ import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCar
 import BurgerTab from '../BurgerTab/BurgerTab';
 import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/prop-types';
 import { getItems } from '../../services/actions/initialIngridients';
-import { BUNS, SAUCES, MAINS } from '../../utils/constants';
+import { BUNS, SAUCES, MAINS } from '../../constants/constants';
 import useBounding from '../../hooks/useBounding';
 
 export default function BurgerIngredients() {
@@ -50,46 +50,44 @@ export default function BurgerIngredients() {
 
   return(
     <section className={ styles.ingridients }>
-      
-        <h2 className={`${ styles.header } text text_type_main-large pt-10`}>Соберите бургер</h2>
-        <BurgerTab />
-        {groupedIngridients.bun && groupedIngridients.sauce && groupedIngridients.main &&
-          <Fragment>
-            <ul ref={listRef} className={ styles.ingridientsListContainer } onScroll={handleScroll}>
-              <li ref={itemsRef} id={BUNS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
-                {BUNS}
-                <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
-                  {groupedIngridients.bun.map(ingridient => 
-                    <BurgerIngredientsCard
-                      ingridient={ingridient}
-                      key={ingridient._id}
-                      count={userIngridientsCount[ingridient._id]} />)}
-                </ul>
-              </li>
-              <li ref={itemsRef} id={SAUCES} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
-                {SAUCES}
-                <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
-                  {groupedIngridients.sauce.map(ingridient => 
-                    <BurgerIngredientsCard
-                      ingridient={ingridient}
-                      key={ingridient._id}
-                      count={userIngridientsCount[ingridient._id]} />)}
-                </ul>
-              </li>
-              <li ref={itemsRef} id={MAINS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
-                {MAINS}
-                <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
-                  {groupedIngridients.main.map(ingridient => 
-                    <BurgerIngredientsCard
-                      ingridient={ingridient}
-                      key={ingridient._id}
-                      count={userIngridientsCount[ingridient._id]} />)}
-                </ul>
-              </li>
-            </ul>
-          </Fragment>
-        }
-      
+      <h2 className={`${ styles.header } text text_type_main-large pt-10`}>Соберите бургер</h2>
+      <BurgerTab nearestList={nearestList}/>
+      {groupedIngridients.bun && groupedIngridients.sauce && groupedIngridients.main &&
+        <Fragment>
+          <ul ref={listRef} className={ styles.ingridientsListContainer } onScroll={handleScroll}>
+            <li ref={itemsRef} id={BUNS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
+              {BUNS}
+              <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
+                {groupedIngridients.bun.map(ingridient => 
+                  <BurgerIngredientsCard
+                    ingridient={ingridient}
+                    key={ingridient._id}
+                    count={userIngridientsCount[ingridient._id]} />)}
+              </ul>
+            </li>
+            <li ref={itemsRef} id={SAUCES} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
+              {SAUCES}
+              <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
+                {groupedIngridients.sauce.map(ingridient => 
+                  <BurgerIngredientsCard
+                    ingridient={ingridient}
+                    key={ingridient._id}
+                    count={userIngridientsCount[ingridient._id]} />)}
+              </ul>
+            </li>
+            <li ref={itemsRef} id={MAINS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
+              {MAINS}
+              <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
+                {groupedIngridients.main.map(ingridient => 
+                  <BurgerIngredientsCard
+                    ingridient={ingridient}
+                    key={ingridient._id}
+                    count={userIngridientsCount[ingridient._id]} />)}
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      }
     </section>
   )
 }

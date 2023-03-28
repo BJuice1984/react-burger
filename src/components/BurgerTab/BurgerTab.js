@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { BUNS, SAUCES, MAINS } from "../../utils/constants";
+import { BUNS, SAUCES, MAINS } from "../../constants/constants";
 
-export default function BurgerTab() {
+export default function BurgerTab({ nearestList }) {
   const [current, setCurrent] = useState(BUNS)
+
+  useEffect(() => {
+    if (nearestList !== current) {
+      setCurrent(nearestList)
+    }
+  }, [current, nearestList])
 
   const onTabClick = (tab) => {
     setCurrent(tab);

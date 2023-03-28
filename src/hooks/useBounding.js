@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 
-
 function useBounding() {
   const listRef = useRef();
   const items = useRef({});
@@ -10,17 +9,14 @@ function useBounding() {
     if (elem) items.current[elem.id] = elem;
   }
 
-  const handleScroll = () => {
-
-    // const bunCoors = items.current['Булки'].getBoundingClientRect().top - listRef.current.getBoundingClientRect().top
-
-    // console.log(bunCoors)
-
+   const handleScroll = () => {
     for (let key in items.current) {
       const itemsCoors = items.current[key].getBoundingClientRect().top - listRef.current.getBoundingClientRect().top
-      console.log(key , itemsCoors)
+      if (itemsCoors <= 0 + 100) {
+        setNearestList(items.current[key].id)
+      }
     }
-  }
+  };
 
   return {
     listRef,
