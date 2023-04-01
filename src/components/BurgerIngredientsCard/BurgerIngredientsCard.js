@@ -37,7 +37,7 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
       <p className={`${ styles.price } pt-1 pb-1 text text_type_digits-default`}>
         {ingridient.price}<CurrencyIcon type="primary"/>
       </p>
-      <span className={`${ styles.name } text text_type_main-default`}>
+      <span className={`${ styles.name } text`}>
         {ingridient.name}
       </span>
     </article>

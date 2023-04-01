@@ -50,7 +50,7 @@ export default function BurgerIngredients() {
 
   return(
     <section className={ styles.ingridients }>
-      <h2 className={`${ styles.header } text text_type_main-large pt-10`}>Соберите бургер</h2>
+      <h2 className={ styles.header }>Соберите бургер</h2>
       <BurgerTab nearestList={nearestList}/>
       {groupedIngridients.bun && groupedIngridients.sauce && groupedIngridients.main &&
         <Fragment>

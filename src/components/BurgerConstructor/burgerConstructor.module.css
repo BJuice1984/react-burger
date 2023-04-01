@@ -2,6 +2,13 @@
   margin: 0;
   height: 85vh;
   justify-self: end;
+  display: block;
+}
+
+@media screen and (max-width: 1024px) {
+  .burgerConstructor {
+    display: none;
+  }
 }
 
 .burgerConstructorContainer {

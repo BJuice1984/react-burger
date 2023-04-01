@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BUNS, SAUCES, MAINS } from "../../constants/constants";
+import styles from './burgerTab.module.css'
 
 export default function BurgerTab({ nearestList }) {
   const [current, setCurrent] = useState(BUNS)
@@ -16,7 +17,7 @@ export default function BurgerTab({ nearestList }) {
     document.getElementById(tab).scrollIntoView({behavior: "smooth"})
   }
   return (
-    <div style={{ display: 'flex' }} className="pt-5 pb-10">
+    <div className={`${ styles.tabContainer } pt-5 pb-10`}>
       <Tab value={BUNS} active={current === BUNS} onClick={onTabClick}>
         {BUNS}
       </Tab>

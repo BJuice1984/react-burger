@@ -1,0 +1,121 @@
+.burgerMenu {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: none;
+  height: 100%;
+}
+
+.burgerMenu_type__visible {
+display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .burgerMenu_type__visible {
+    display: block;
+  }
+}
+
+.burgerMenu__toggler {
+  z-index: 5;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.burgerMenu__hamburger {
+  position: absolute;
+  z-index: 4;
+  top: 15px;
+  right: 10px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.burgerMenu__hamburgerBtn {
+  position: relative;
+  top: 0;
+  left: 0;
+  background: white;
+  height: 2px;
+  width: 60%;
+  transition: all  0.4s ease;
+}
+
+.burgerMenu__hamburgerBtn::before,
+.burgerMenu__hamburgerBtn::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  background: white;
+  width: 100%;
+  height: 2px;
+  transition: all  0.4s ease;
+}
+
+.burgerMenu__hamburgerBtn::after {
+  top: 7px;
+}
+
+.burgerMenu__toggler:checked + .burgerMenu__hamburger > .burgerMenu__hamburgerBtn {
+  background: rgba(0,0,0,0);
+}
+
+.burgerMenu__toggler:checked + .burgerMenu__hamburger > .burgerMenu__hamburgerBtn::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.burgerMenu__toggler:checked + .burgerMenu__hamburger > .burgerMenu__hamburgerBtn::after {
+  top: 0;
+  transform: rotate(135deg);
+}
+
+@media screen and (min-width: 768px) {
+  .burgerMenu__toggler:checked ~ .burger-menu__blur {
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(2px);
+    position: fixed;
+    margin-top: -18px;
+    margin-left: -30px;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 3;
+  }
+}
+
+.menu {
+  width: 100vh;
+  height: 100vh;
+  background-color: #202020;
+  position: fixed;
+  right: 0;
+  transform: translateX(100%);
+  transition: all 0.5s;
+  z-index: 3;
+  margin-top: -18px;
+}
+
+.menu_type_main {
+  background-color: #257FA7;
+}
+
+.burgerMenu__toggler:checked ~ .menu {
+  width: 100%;
+  transform: translateX(0);
+  transition: all 0.5s;
+}
+
+@media screen and (min-width: 768px) {
+  .burgerMenu__toggler:checked ~ .menu {
+    width: 70%;
+  }
+}
