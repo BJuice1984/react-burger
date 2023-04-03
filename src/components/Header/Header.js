@@ -1,24 +1,29 @@
 import LogoMobile from '../LogoMobile/LogoMobile';
 import MenuMobile from '../MenuMobile/MenuMobile';
-import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import BurgerIconLink from '../BurgerIconLink/BurgerIconLink';
+import ListIconLink from '../ListIconLink/ListIconLink';
+import ProfileIconLink from '../ProfileIconLink/ProfileIconLink';
 import styles from './header.module.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate()
+  
   return(
     <header className={ styles.header }>
       <div className={ styles.container }>
         <LogoMobile />
         <MenuMobile />
         <nav className={ styles.links }>
-          <Link to='/' className={`${ styles.link } pt-2 pb-2 pr-6`}>{<BurgerIcon type="primary" />}<p className={`${ styles.description }`}>Конструктор</p></Link>
-          <Link to='/feed' className={`${ styles.link } p-2`}>{<ListIcon type="secondary" />}<p className={`${ styles.description }`}>Лента заказов</p></Link>
+          <BurgerIconLink />
+          <ListIconLink />
         </nav>
         <div className={styles.logo}>
           <Logo />
         </div>
-        <button className={ styles.btn }>
-          <Link to='/profile' className={`${ styles.link } p-2`}>{<ProfileIcon type="secondary" />}<p className={`${ styles.description }`}>Личный кабинет</p></Link>
+        <button type='button' className={ styles.btn } onClick={() => navigate("/profile")}>
+          <ProfileIconLink />
         </button>
       </div>
     </header>

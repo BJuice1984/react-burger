@@ -70,3 +70,27 @@
     line-height: 1.1;
   }
 }
+
+.addBtn {
+  background-color: transparent;
+  color: #4c4cff;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: normal;
+  display: none;
+  opacity: .9;
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.addBtn:hover {
+  color: var(--text-primary-color);
+  opacity: 1;
+  transition: 0.1s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+  .addBtn {
+    display: block;
+  }
+}

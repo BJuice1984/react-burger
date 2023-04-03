@@ -40,6 +40,7 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
       <span className={`${ styles.name } text`}>
         {ingridient.name}
       </span>
+      <button className={`${ styles.addBtn } text`}>Добавить</button>
     </article>
   )
 }
