@@ -1,4 +1,5 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { burgerIngredientType, indexType } from '../../utils/prop-types';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef, memo } from 'react';
 import styles from './BurgerConstructorCard.module.css';
@@ -28,7 +29,6 @@ function BurgerConstructorCard({ ingridient, index }) {
     }),
     hover(item, monitor) {
       if (!ref.current) {
-        // console.log('!ref.current', ref)
         return;
       }
 
@@ -89,3 +89,8 @@ function BurgerConstructorCard({ ingridient, index }) {
 }
 
 export default memo(BurgerConstructorCard);
+
+BurgerConstructorCard.propTypes = {
+  ingridient: burgerIngredientType.isRequired,
+  index: indexType,
+}

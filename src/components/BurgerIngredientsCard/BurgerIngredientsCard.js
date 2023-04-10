@@ -1,6 +1,6 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerIngredientsCard.module.css';
-import { burgerIngredientType } from '../../utils/prop-types';
+import { burgerIngredientType, countType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
@@ -47,4 +47,5 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
 
 BurgerIngredientsCard.propTypes = {
   ingridient: burgerIngredientType.isRequired,
+  count: countType,
 }

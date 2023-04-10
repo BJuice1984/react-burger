@@ -20,5 +20,8 @@ export const groupedIngridientsType = objectOf({
   bun: arrayOf(burgerIngredientType),
   main: arrayOf(burgerIngredientType),
   sauce: arrayOf(burgerIngredientType)
-})
+});
+
+export const countType = number;
+export const indexType = number;
 
