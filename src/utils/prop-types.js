@@ -24,4 +24,5 @@ export const groupedIngridientsType = objectOf({
 
 export const countType = number;
 export const indexType = number;
+export const nearestListType = string;
 

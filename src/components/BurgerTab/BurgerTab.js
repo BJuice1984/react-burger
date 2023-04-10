@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { nearestListType } from "../../utils/prop-types";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BUNS, SAUCES, MAINS } from "../../constants/constants";
 import styles from './burgerTab.module.css'
@@ -29,4 +30,8 @@ export default function BurgerTab({ nearestList }) {
       </Tab>
     </div>
   )
+}
+
+BurgerTab.propTypes = {
+  nearestList: nearestListType.isRequired,
 }
