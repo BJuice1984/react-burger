@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
+import { BUNS } from "../constants/constants";
 
 function useBounding() {
   const listRef = useRef();
   const items = useRef({});
-  const [nearestList, setNearestList] = useState('');
+  const [nearestList, setNearestList] = useState(BUNS);
 
   const itemsRef = (elem) => {
     if (elem) items.current[elem.id] = elem;
