@@ -2,7 +2,7 @@ import { POST_ITEM_REQUEST, POST_ITEM_SUCCESS, POST_ITEM_FAILED } from "../actio
 
 const orderDetails = {
   orderName: '',
-  orderNumber: 0,
+  orderNumber: null,
   orderSuccess: false,
   orderRequest: false,
   orderFailed: false,
@@ -29,8 +29,9 @@ export const orderDetailsReducer = (state = orderDetails, action) => {
     case POST_ITEM_FAILED: {
       return {
         ...state,
+        orderSuccess: action.orderDetails.success,
         orderRequest: false,
-        orderFailed: true
+        orderFailed: true,
       }
     }
     default: {

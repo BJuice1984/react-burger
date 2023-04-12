@@ -1,6 +1,7 @@
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ModalCard from "../ModalCard/ModalCard";
 import ModalOrder from "../ModalOrder/ModalOrder";
+import ModalError from "../ModalError/ModalError";
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import useClose from "../../hooks/useClose";
@@ -40,7 +41,7 @@ export default function Modal() {
             onClick={closeModal}>
           </button>
 
-          {typeof(displayedItem) === "number" ? <ModalOrder /> : <ModalCard />}
+          {typeof(displayedItem) === "number" ? <ModalOrder /> : displayedItem === false ? <ModalError /> : <ModalCard />}
 
         </div>
       </>

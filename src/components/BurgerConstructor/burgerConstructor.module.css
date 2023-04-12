@@ -28,6 +28,7 @@
   align-items: center;
   justify-content: flex-end;
   text-align: right;
+  cursor: default;
 }
 
 .burgerElementPrice > svg {
@@ -59,4 +60,8 @@
 
 .emptyElementBottom {
   border-radius: var(--bottom-constructor-item-border-radius);
+}
+
+.buttonInactive {
+  cursor: not-allowed;
 }

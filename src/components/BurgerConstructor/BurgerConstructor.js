@@ -15,6 +15,7 @@ export default function BurgerConstructor() {
   const userIngridients = useSelector(state => state.userIngridients);
   const orderNumber = useSelector(state => state.orderDetails.orderNumber);
   const orderSuccess = useSelector(state => state.orderDetails.orderSuccess);
+  const orderFailed = useSelector(state => state.orderDetails.orderFailed);
 
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
@@ -39,16 +40,13 @@ export default function BurgerConstructor() {
         type: SHOW_ITEM_DETAILS,
         item: orderNumber
         })
+    } else if (orderFailed) {
+      dispatch({
+        type: SHOW_ITEM_DETAILS,
+        item: orderSuccess
+        })
     }
-  }, [dispatch, orderNumber, orderSuccess])
-
-  // const openModal = () => {
-  //   getOrderNumber();
-  //   dispatch({
-  //   type: SHOW_ITEM_DETAILS,
-  //   item: orderNumber
-  //   })
-  // }
+  }, [dispatch, orderFailed, orderNumber, orderSuccess])
 
   const orderPrice = useMemo(() => {
     return (
@@ -92,11 +90,13 @@ export default function BurgerConstructor() {
           {orderPrice}<CurrencyIcon type="primary"/>
         </span>
         <Button
+          disabled
           htmlType="button"
-          type="primary"
+          type={userIngridients.bun && userIngridients.userItems.length !== 0 ? "primary" : "secondary"}
           size="medium"
+          extraClass={userIngridients.bun && userIngridients.userItems.length !== 0 ? '' : styles.buttonInactive}
           onClick={getOrderNumber}>
-          Оформить заказ
+          {userIngridients.bun && userIngridients.userItems.length !== 0 ? 'Оформить заказ' : 'Добавьте ингридиенты'}
         </Button>
       </div>
     </section>

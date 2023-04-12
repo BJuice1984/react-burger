@@ -8,13 +8,17 @@ export const postItems = (ingridients) => {
   return function(dispatch) {
     dispatch({ type: POST_ITEM_REQUEST})
     postIngridients(ingridients).then(res => {
+      // console.log(res.status)
       if (res && res.success) {
         dispatch({
           type: POST_ITEM_SUCCESS,
           orderDetails: res
         })
       } else {
-        dispatch({ type: POST_ITEM_FAILED})
+        dispatch({
+          type: POST_ITEM_FAILED,
+          orderDetails: res
+        })
       }
     })
   }
