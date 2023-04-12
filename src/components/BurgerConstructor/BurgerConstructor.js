@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
@@ -14,7 +14,7 @@ export default function BurgerConstructor() {
   
   const userIngridients = useSelector(state => state.userIngridients);
   const orderNumber = useSelector(state => state.orderDetails.orderNumber);
-  // const orderRequest = useSelector(state => state.orderDetails.orderSuccess)
+  const orderSuccess = useSelector(state => state.orderDetails.orderSuccess);
 
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
@@ -33,13 +33,22 @@ export default function BurgerConstructor() {
     dispatch(postItems({"ingredients": ingridientsId}));
   }
 
-  const openModal = () => {
-    getOrderNumber();
-    dispatch({
-    type: SHOW_ITEM_DETAILS,
-    item: orderNumber
-    })
-  }
+  useEffect(() => {
+    if (orderSuccess) {
+      dispatch({
+        type: SHOW_ITEM_DETAILS,
+        item: orderNumber
+        })
+    }
+  }, [dispatch, orderNumber, orderSuccess])
+
+  // const openModal = () => {
+  //   getOrderNumber();
+  //   dispatch({
+  //   type: SHOW_ITEM_DETAILS,
+  //   item: orderNumber
+  //   })
+  // }
 
   const orderPrice = useMemo(() => {
     return (
@@ -86,7 +95,7 @@ export default function BurgerConstructor() {
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={openModal}>
+          onClick={getOrderNumber}>
           Оформить заказ
         </Button>
       </div>
