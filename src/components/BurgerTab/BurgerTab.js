@@ -5,17 +5,17 @@ import { BUNS, SAUCES, MAINS } from "../../constants/constants";
 import styles from './burgerTab.module.css'
 
 export default function BurgerTab({ nearestList }) {
-  const [current, setCurrent] = useState(BUNS)
+  const [current, setCurrent] = useState(BUNS);
 
   useEffect(() => {
     if (nearestList !== current) {
       setCurrent(nearestList)
     }
-  }, [current, nearestList])
+  }, [current, nearestList]);
 
   const onTabClick = (tab) => {
     setCurrent(tab);
-    document.getElementById(tab).scrollIntoView({behavior: "smooth"})
+    document.getElementById(tab).scrollIntoView({behavior: "smooth"});
   }
   return (
     <div className={`${ styles.tabContainer } pt-5 pb-10`}>

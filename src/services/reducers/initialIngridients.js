@@ -26,7 +26,7 @@ export const initialIngridientsReducer = (state = initialIngridients, action) =>
       return {
         ...state,
         itemsRequest: false,
-        itemsFailed:true
+        itemsFailed: true
       }
     }
     default: {

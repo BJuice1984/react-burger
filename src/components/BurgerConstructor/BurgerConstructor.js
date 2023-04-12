@@ -7,11 +7,14 @@ import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
 import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
+import { postItems } from "../../services/actions/orderDetails";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
   
   const userIngridients = useSelector(state => state.userIngridients);
+  const orderNumber = useSelector(state => state.orderDetails.orderNumber);
+  // const orderRequest = useSelector(state => state.orderDetails.orderSuccess)
 
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
@@ -24,10 +27,17 @@ export default function BurgerConstructor() {
 
   const hover = isHover ? styles.onHover : '';
 
+  const getOrderNumber = () => {
+    const ingridientsId = userIngridients.userItems.map(item => item._id);
+    ingridientsId.push(userIngridients.bun._id);
+    dispatch(postItems({"ingredients": ingridientsId}));
+  }
+
   const openModal = () => {
+    getOrderNumber();
     dispatch({
     type: SHOW_ITEM_DETAILS,
-    item: orderPrice
+    item: orderNumber
     })
   }
 
