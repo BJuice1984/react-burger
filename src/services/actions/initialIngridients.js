@@ -17,5 +17,9 @@ export const getItems = () => {
         dispatch({ type: GET_ITEM_FAILED })
       }
     })
+    .catch((err) => {
+      dispatch({ type: GET_ITEM_FAILED })
+      console.log(err)
+    })
   }
 }

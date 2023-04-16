@@ -29,7 +29,7 @@ export const orderDetailsReducer = (state = orderDetails, action) => {
     case POST_ITEM_FAILED: {
       return {
         ...state,
-        orderSuccess: action.orderDetails.success,
+        orderSuccess: action.orderDetails.success ? action.orderDetails.success : action.orderDetails,
         orderRequest: false,
         orderFailed: true,
       }

@@ -17,6 +17,8 @@ export default function BurgerConstructor() {
   const orderSuccess = useSelector(state => state.orderDetails.orderSuccess);
   const orderFailed = useSelector(state => state.orderDetails.orderFailed);
 
+  const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0
+
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
     collect: monitor => ({
@@ -35,7 +37,7 @@ export default function BurgerConstructor() {
   }
 
   useEffect(() => {
-    if (orderSuccess) {
+    if (orderSuccess && typeof(orderSuccess) !== "string") {
       dispatch({
         type: SHOW_ITEM_DETAILS,
         item: orderNumber
@@ -43,7 +45,7 @@ export default function BurgerConstructor() {
     } else if (orderFailed) {
       dispatch({
         type: SHOW_ITEM_DETAILS,
-        item: orderSuccess
+        item: !orderFailed
         })
     }
   }, [dispatch, orderFailed, orderNumber, orderSuccess])
@@ -90,13 +92,13 @@ export default function BurgerConstructor() {
           {orderPrice}<CurrencyIcon type="primary"/>
         </span>
         <Button
-          disabled
+          disabled={checkTrue ? false : true}
           htmlType="button"
-          type={userIngridients.bun && userIngridients.userItems.length !== 0 ? "primary" : "secondary"}
+          type={checkTrue ? "primary" : "secondary"}
           size="medium"
-          extraClass={userIngridients.bun && userIngridients.userItems.length !== 0 ? '' : styles.buttonInactive}
+          extraClass={checkTrue ? '' : styles.buttonInactive}
           onClick={getOrderNumber}>
-          {userIngridients.bun && userIngridients.userItems.length !== 0 ? 'Оформить заказ' : 'Добавьте ингридиенты'}
+          {checkTrue ? 'Оформить заказ' : 'Добавьте ингридиенты'}
         </Button>
       </div>
     </section>

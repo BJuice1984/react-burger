@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 export default function ModalError() {
 
-  const orderSuccess = useSelector(state => state.modalDetails.displayedItem);
+  const orderSuccess = useSelector(state => state.orderDetails.orderSuccess);
 
   return(
     <div className={ styles.container }>
