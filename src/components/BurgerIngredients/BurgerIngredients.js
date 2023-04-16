@@ -8,10 +8,11 @@ import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/p
 import { getItems } from '../../services/actions/initialIngridients';
 import { BUNS, SAUCES, MAINS } from '../../constants/constants';
 import useBounding from '../../hooks/useBounding';
+import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
 
 export default function BurgerIngredients() {
 
-  const groupedIngridients = groupBy(useSelector(state => state.initialIngridients.items), "type");
+  const groupedIngridients = groupBy(useSelector(getInitialIngridientsItems), "type");
   const dispatch = useDispatch();
 
   useEffect(() => {

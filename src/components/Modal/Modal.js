@@ -7,12 +7,13 @@ import styles from './modal.module.css';
 import useClose from "../../hooks/useClose";
 import { useSelector, useDispatch } from 'react-redux';
 import { DELETE_ITEM_DETAILS } from "../../services/actions/modalDetails";
+import { getModalDetails } from "../../services/selectors/modalDetails";
 
 const modalRoot = document.getElementById("modal");
 
 export default function Modal() {
 
-  const { modalOpen, displayedItem } = useSelector(state => state.modalDetails);
+  const { modalOpen, displayedItem } = useSelector(getModalDetails);
   const dispatch = useDispatch();
 
   const closeModal = () => {

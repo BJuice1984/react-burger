@@ -8,14 +8,16 @@ import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
 import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
 import { postItems } from "../../services/actions/orderDetails";
+import { getUserIngridients } from "../../services/selectors/userIngridients";
+import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
   
-  const userIngridients = useSelector(state => state.userIngridients);
-  const orderNumber = useSelector(state => state.orderDetails.orderNumber);
-  const orderSuccess = useSelector(state => state.orderDetails.orderSuccess);
-  const orderFailed = useSelector(state => state.orderDetails.orderFailed);
+  const userIngridients = useSelector(getUserIngridients);
+  const orderNumber = useSelector(getOrderNumber);
+  const orderSuccess = useSelector(getOrderSuccess);
+  const orderFailed = useSelector(getOrderFailed);
 
   const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0
 
@@ -30,7 +32,7 @@ export default function BurgerConstructor() {
 
   const hover = isHover ? styles.onHover : '';
 
-  const getOrderNumber = () => {
+  const getOrderNumberId = () => {
     const ingridientsId = userIngridients.userItems.map(item => item._id);
     ingridientsId.push(userIngridients.bun._id);
     dispatch(postItems({"ingredients": ingridientsId}));
@@ -97,7 +99,7 @@ export default function BurgerConstructor() {
           type={checkTrue ? "primary" : "secondary"}
           size="medium"
           extraClass={checkTrue ? '' : styles.buttonInactive}
-          onClick={getOrderNumber}>
+          onClick={getOrderNumberId}>
           {checkTrue ? 'Оформить заказ' : 'Добавьте ингридиенты'}
         </Button>
       </div>

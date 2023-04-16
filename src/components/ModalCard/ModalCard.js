@@ -1,9 +1,10 @@
 import styles from './modalCard.module.css';
 import { useSelector } from 'react-redux';
+import { getDisplayedItem } from '../../services/selectors/modalDetails';
 
 export default function ModalCard() {
 
-  const ingridient = useSelector(state => state.modalDetails.displayedItem);
+  const ingridient = useSelector(getDisplayedItem);
 
   return(
     ingridient && (
