@@ -1,40 +1,28 @@
 import { Routes, Route } from 'react-router-dom';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
-import useIngridients from '../../hooks/useIngridients';
-import useModal from '../../hooks/useModal';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
+import Registration from '../Registration/Registration';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import Profile from '../Profile/Profile';
+import Orders from '../Orders/Orders';
 import styles from './app.module.css';
 
 function App() {
 
-  const {
-    bunIngridients,
-    sauceIngridients,
-    mainIngridients,
-  } = useIngridients();
-
-  const {
-    isModalOpen,
-    openModal,
-    closeModal,
-    isComponent
-  } = useModal();
-
   return (
     <div className={ styles.page }>
-      <Modal 
-        component={isComponent}
-        handleCloseModal={closeModal}
-        isModalOpen={isModalOpen} />
-
+      <Modal />
       <div className={ styles.container }>
-
+        <Header />
         <Routes>
-          <Route path='/' element={<Main
-            bunIngridients={bunIngridients}
-            sauceIngridients={sauceIngridients}
-            mainIngridients={mainIngridients}
-            openModal={openModal} />}/>
+          <Route path='/sign-in' element={<Login />} />
+          <Route path='/sign-up' element={<Registration />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/' element={<Main />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/orders' element={<Orders />} />
         </Routes>
 
       </div>

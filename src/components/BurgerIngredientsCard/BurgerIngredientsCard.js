@@ -1,18 +1,34 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import ModalCard from '../ModalCard/ModalCard';
 import styles from './burgerIngredientsCard.module.css';
-import { func } from 'prop-types';
-import { burgerIngredientType } from '../../utils/prop-types';
+import { burgerIngredientType, countType } from '../../utils/prop-types';
+import { useDrag } from 'react-dnd';
+import { useDispatch } from 'react-redux';
+import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
 
-export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
+export default function BurgerIngredientsCard({ ingridient, count }) {
+
+  const dispatch = useDispatch();
+
+  const [{isDrag}, dragRef] = useDrag({
+    type: "ingridient",
+    item: ingridient,
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    })
+  });
+
+  const hover = isDrag ? styles.onHover : '';
 
   const openModal = () => {
-    handleOpenModal(<ModalCard ingridient={ingridient}/>)
+    dispatch({
+    type: SHOW_ITEM_DETAILS,
+    item: ingridient
+    })
   }
 
   return(
-    <article className={ styles.element }>
-      <Counter count={1} size="default" extraClass="m-1" />
+    <article ref={dragRef} className={ `${ styles.element } ${hover}` }>
+      {count && <Counter count={count} size="default" extraClass="m-1" />}
       <img className={ styles.pic }
         onClick={openModal}
         src={ingridient.image}
@@ -21,14 +37,15 @@ export default function BurgerIngredientsCard({ ingridient, handleOpenModal }) {
       <p className={`${ styles.price } pt-1 pb-1 text text_type_digits-default`}>
         {ingridient.price}<CurrencyIcon type="primary"/>
       </p>
-      <span className={`${ styles.name } text text_type_main-default`}>
+      <span className={`${ styles.name } text`}>
         {ingridient.name}
       </span>
+      <button className={`${ styles.addBtn } text`}>Добавить</button>
     </article>
   )
 }
 
 BurgerIngredientsCard.propTypes = {
   ingridient: burgerIngredientType.isRequired,
-  handleOpenModal: func.isRequired
+  count: countType,
 }

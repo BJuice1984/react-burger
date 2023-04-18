@@ -11,6 +11,11 @@
   overflow: visible;
 }
 
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -23,4 +28,14 @@
 ::-webkit-scrollbar-thumb {
   border: 3px solid #8585ad;
   background: #8585ad;
+}
+
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    display: none;
+  }
 }

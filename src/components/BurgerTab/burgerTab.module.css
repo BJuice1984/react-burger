@@ -1,0 +1,16 @@
+.tabContainer {
+  display: grid;
+  align-items: center;
+  justify-items: stretch;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+}
+
+@media screen and (max-width: 769px) {
+  .tabContainer > div {
+    min-width: 100px;
+    padding-left: 0;
+    padding-right: 0;
+    justify-self: stretch;
+  }
+}

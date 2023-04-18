@@ -1,0 +1,28 @@
+.profile {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.profile_container {
+  max-width: 1280px;
+  justify-self: center;
+  padding-top: 120px;
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: min-content;
+}
+
+.container {
+  display: flex;
+  justify-self: start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description {
+  margin: 0;
+  width: 320px;
+  color: #8585AD;
+  opacity: 0.4;
+}

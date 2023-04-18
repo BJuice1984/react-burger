@@ -1,4 +1,4 @@
-import { shape, string, number, arrayOf } from 'prop-types';
+import { shape, string, number, arrayOf, objectOf } from 'prop-types';
 
 export const burgerIngredientType = shape({
     _id: string.isRequired,
@@ -16,4 +16,14 @@ export const burgerIngredientType = shape({
   });
 
 export const burgerIngredientArrayType = arrayOf(burgerIngredientType);
+export const groupedIngridientsType = objectOf({
+  bun: arrayOf(burgerIngredientType),
+  main: arrayOf(burgerIngredientType),
+  sauce: arrayOf(burgerIngredientType)
+});
+
+export const countType = number;
+export const indexType = number;
+export const nearestListType = string;
+export const postIngridientsType = arrayOf(number);
 

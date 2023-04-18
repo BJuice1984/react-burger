@@ -4,6 +4,8 @@
 }
 
 .container {
+  margin: 0 auto;
+  max-width: 1280px;
   min-height: 88px;
   display: grid;
   align-items: center;
@@ -12,11 +14,55 @@
   grid-template-rows: 1fr;
 }
 
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-areas: "logo menuMobile";
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: normal;
+    min-height: 64px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
 .links {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  justify-self: left;
+  justify-self: start;
+}
+
+@media screen and (max-width: 1024px) {
+  .links {
+    display: none;
+  }
+}
+
+.logo {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    grid-area: logo;
+    justify-self: center;
+    align-self: center;
+    padding-top: 5px;
+  }
+
+  .logo > svg {
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .logo {
+    display: none;
+  }
 }
 
 .link {
@@ -36,14 +82,21 @@
 }
 
 .btn {
-  margin: 0 auto;
+  margin: 0;
   min-width: 100px;
   min-height: 32px;
+  justify-self: end;
   border: none;
   cursor: pointer;
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: 10% 40%;
+}
+
+@media screen and (max-width: 1024px) {
+  .btn {
+    display: none;
+  }
 }
 
 .description {

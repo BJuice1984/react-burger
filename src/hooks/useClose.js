@@ -1,39 +1,40 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function useClose() {
 
-  function EscClose(isOpen, handleClose) {
+  const modalOpen = useSelector(state => state.modalDetails.modalOpen);
+
+  function EscClose(closeModal) {
+
     useEffect(() => {
-      if (!isOpen) return;
+      if (!modalOpen) return;
   
       function handleEsc(e) {
         if (e.key === "Escape") {
-          handleClose()
+          closeModal()
         }
-      }
+      };
   
       document.addEventListener("keydown", handleEsc);
-  
-      return () => document.removeEventListener("keydown", handleEsc)
-    }, [handleClose, isOpen]);
+      return () => document.removeEventListener("keydown", handleEsc) //будет ли удаляться?
+    }, [closeModal]);
   } 
   
-  function ClickClose(isOpen, handleClose, openedClass) {
+  function ClickClose(closeModal, openedClass) {
   
     useEffect(() => {
-      if(!isOpen) return;
+      if(!modalOpen) return;
   
       function handleClickClose(e) {
         if (e.target.className.includes(openedClass)) {
-          handleClose()
+          closeModal()
         }
-      }
+      };
       
       document.addEventListener("mousedown", handleClickClose);    
-      return () => {document.removeEventListener("mousedown", handleClickClose)
-      }
-  
-    }, [handleClose, isOpen, openedClass])
+      return () => document.removeEventListener("mousedown", handleClickClose) //будет ли удаляться?
+    }, [closeModal, openedClass])
   }
 
   return {

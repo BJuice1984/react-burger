@@ -1,0 +1,54 @@
+.link {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+  .link {
+    font-size: 25px;
+  }
+
+  .link > svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .link {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .link > svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.link:hover {
+  opacity: 0.5;
+  transition: 0.2s ease-in-out;
+}
+
+.description {
+  margin: 0;
+  margin-left: 8px;
+  align-self: self-end;
+}
+
+@media screen and (max-width: 768px) {
+  .description {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .description {
+    margin-left: 8px;
+  }
+}

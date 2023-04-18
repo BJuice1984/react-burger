@@ -1,127 +1,106 @@
-import { useState, Fragment } from "react";
-import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerConstructor.module.css';
-import ModalOrder from "../ModalOrder/ModalOrder";
-import { func } from 'prop-types';
-import { burgerIngredientArrayType } from "../../utils/prop-types";
+import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
+import { burgerIngredientArrayType } from '../../utils/prop-types';
+import { useDrop } from "react-dnd/dist/hooks";
+import { addIngridientId } from "../../services/actions/userIngridients";
+import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
+import { postItems } from "../../services/actions/orderDetails";
+import { getUserIngridients } from "../../services/selectors/userIngridients";
+import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
 
-export default function BurgerConstructor({ bunIngridients, sauceIngridients, mainIngridients, handleOpenModal }) {
-  const [isOrderPrice, SetIsOrderPrice] = useState('610');
+export default function BurgerConstructor() {
+  const dispatch = useDispatch();
+  
+  const userIngridients = useSelector(getUserIngridients);
+  const orderNumber = useSelector(getOrderNumber);
+  const orderSuccess = useSelector(getOrderSuccess);
+  const orderFailed = useSelector(getOrderFailed);
 
-  const openModal = () => {
-    handleOpenModal(<ModalOrder price={isOrderPrice} />)
-    SetIsOrderPrice(isOrderPrice)
+  const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0
+
+  const [{isHover}, dropTarget] = useDrop({
+    accept: "ingridient",
+    collect: monitor => ({
+      dropItem: monitor.getItem(),
+      isHover: monitor.isOver(),
+    }),
+    drop: (ingridient) => dispatch(addIngridientId(ingridient)),
+  });
+
+  const hover = isHover ? styles.onHover : '';
+
+  const getOrderNumberId = () => {
+    const ingridientsId = userIngridients.userItems.map(item => item._id);
+    ingridientsId.push(userIngridients.bun._id);
+    dispatch(postItems({"ingredients": ingridientsId}));
   }
 
+  useEffect(() => {
+    if (orderSuccess && typeof(orderSuccess) !== "string") {
+      dispatch({
+        type: SHOW_ITEM_DETAILS,
+        item: orderNumber
+        })
+    } else if (orderFailed) {
+      dispatch({
+        type: SHOW_ITEM_DETAILS,
+        item: !orderFailed
+        })
+    }
+  }, [dispatch, orderFailed, orderNumber, orderSuccess])
+
+  const orderPrice = useMemo(() => {
+    return (
+      userIngridients.userItems.reduce(
+        (acc, current) => acc + current.price, 0
+      ) + (userIngridients.bun ? userIngridients.bun.price * 2 : 0)
+    )
+  }, [userIngridients]);
+
   return(
-    <section className={`${ styles.burgerConstructor } pt-25`}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={ styles.burgerConstructorContainer }>
-        {bunIngridients.length && sauceIngridients.length && mainIngridients.length && 
-        <Fragment>
-          <ConstructorElement
+    <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={`${ styles.burgerConstructorContainer } ${hover}`}>
+        {userIngridients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="top"
           isLocked={true}
-          text={`${bunIngridients[0].name}(верх)`}
-          price={200}
-          thumbnail={bunIngridients[0].image} />
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${mainIngridients[0].name}`}
-              price={50}
-              thumbnail={mainIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <div>
-            <DragIcon type="primary"/>
-              <ConstructorElement
-              text={`${sauceIngridients[0].name}`}
-              price={50}
-              thumbnail={sauceIngridients[0].image} />
-          </div>
-          <ConstructorElement
+          text={`${userIngridients.bun.name}(верх)`}
+          price={userIngridients.bun.price}
+          thumbnail={userIngridients.bun.image} />
+          ) : (<div className={`${styles.emptyElement} ${styles.emptyElementTop} text text_type_main-medium`}>Добавьте булки</div>)}
+          
+        {userIngridients.userItems.length !== 0 ? (userIngridients.userItems.map((ingridient, index) => 
+          <BurgerConstructorCard
+            ingridient={ingridient}
+            index={index}
+            key={ingridient.id} />)
+          ) : (<div className={`${styles.emptyElement} text text_type_main-medium`}>Добавьте соусы и начинки</div>)}
+          
+        {userIngridients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="bottom"
           isLocked={true}
-          text={`${bunIngridients[0].name}(низ)`}
-          price={200}
-          thumbnail={bunIngridients[0].image}/>
-        </Fragment>}
-        
+          text={`${userIngridients.bun.name}(низ)`}
+          price={userIngridients.bun.price}
+          thumbnail={userIngridients.bun.image}/>
+          ) : (<div className={`${styles.emptyElement} ${styles.emptyElementBottom} text text_type_main-medium`}>Добавьте булки</div>)}
+ 
       </div>
       <div className={`${ styles.burgerContainer } pt-10`}>
         <span className={`${ styles.burgerElementPrice } text text_type_digits-medium pr-10`}>
-          {isOrderPrice}<CurrencyIcon type="primary"/>
+          {orderPrice}<CurrencyIcon type="primary"/>
         </span>
         <Button
+          disabled={checkTrue ? false : true}
           htmlType="button"
-          type="primary"
+          type={checkTrue ? "primary" : "secondary"}
           size="medium"
-          onClick={openModal}>
-          Оформить заказ
+          extraClass={checkTrue ? '' : styles.buttonInactive}
+          onClick={getOrderNumberId}>
+          {checkTrue ? 'Оформить заказ' : 'Добавьте ингридиенты'}
         </Button>
       </div>
     </section>
@@ -129,8 +108,6 @@ export default function BurgerConstructor({ bunIngridients, sauceIngridients, ma
 }
 
 BurgerConstructor.propTypes = {
-  bunIngridients: burgerIngredientArrayType.isRequired,
-  sauceIngridients: burgerIngredientArrayType.isRequired,
-  mainIngridients: burgerIngredientArrayType.isRequired,
-  handleOpenModal: func.isRequired
+  userIngridients: burgerIngredientArrayType,
 }
+
