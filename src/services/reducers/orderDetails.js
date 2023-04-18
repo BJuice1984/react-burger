@@ -29,6 +29,8 @@ export const orderDetailsReducer = (state = orderDetails, action) => {
     case POST_ITEM_FAILED: {
       return {
         ...state,
+        orderName: '',
+        orderNumber: null,
         orderSuccess: action.orderDetails.success ? action.orderDetails.success : action.orderDetails,
         orderRequest: false,
         orderFailed: true,
