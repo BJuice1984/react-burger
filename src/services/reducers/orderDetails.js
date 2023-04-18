@@ -13,7 +13,7 @@ export const orderDetailsReducer = (state = orderDetails, action) => {
     case POST_ITEM_REQUEST: {
       return {
         ...state,
-        orderRequest: true
+        orderRequest: true 
       }
     }
     case POST_ITEM_SUCCESS: {
