@@ -1,11 +1,11 @@
 .window {
   position: absolute;
   top: 20%;
-  left: 30%;
-  right: 30%;
+  left: 0;
+  right: 0;
   z-index: 20;
   background-color: #1C1C21;
-  margin: 0;
+  margin: auto;
   border-radius: 40px;
   min-width: fit-content;
   min-height: fit-content;
@@ -15,6 +15,25 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.1s, opacity 0.1s linear;
+}
+
+@media screen and (max-width: 768px) {
+  .window {
+    top: 10%;
+    max-width: 610px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .window {
+    top: 0;
+    bottom: 0;
+    border-radius: 0;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: var(--background-alt);
+    box-shadow: none;
+  }
 }
 
 .windowOpened {
@@ -35,6 +54,13 @@
   height: 25px;
   width: 25px;
   transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 490px) {
+  .closeButton {
+    top: auto;
+    bottom: 68px;
+  }
 }
 
 .closeButton:hover {

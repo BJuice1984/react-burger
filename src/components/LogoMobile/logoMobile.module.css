@@ -10,6 +10,12 @@
   margin-left: 15px;
 }
 
+@media screen and (max-width: 1024px) {
+  .logo {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .logo {
     display: none;

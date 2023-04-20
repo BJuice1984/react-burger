@@ -3,6 +3,12 @@
   justify-self: center;
 }
 
+@media screen and (max-width: 1280px) {
+  .main {
+    margin: 0 15px;
+  }
+}
+
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -11,7 +17,13 @@
   overflow: visible;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1280px) {
+  .container {
+    grid-template-columns: min-content 1fr;
+  }
+}
+
+@media screen and (max-width: 1024px) {
   .container {
     grid-template-columns: 1fr;
   }
@@ -30,7 +42,7 @@
   background: #8585ad;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   ::-webkit-scrollbar-track {
     display: none;
   }
