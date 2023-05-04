@@ -25,6 +25,7 @@ export const initialIngridientsReducer = (state = initialIngridients, action) =>
     case GET_ITEM_FAILED: {
       return {
         ...state,
+        items: [],
         itemsRequest: false,
         itemsFailed: true
       }

@@ -6,7 +6,7 @@
   grid-template-rows: 1fr;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 1280px) {
   .tabContainer > div {
     min-width: 100px;
     padding-left: 0;

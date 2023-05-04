@@ -9,7 +9,7 @@ const checkResponse = (res) =>  {
 };
 
 export const getIngridients = () => {
-  return fetch(`${INGRIDIENTS_API}`, {
+  return fetch(INGRIDIENTS_API, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ export const getIngridients = () => {
 }
 
 export const postIngridients = (ingridients) => {
-  return fetch(`${ORDER_API}`, {
+  return fetch(ORDER_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

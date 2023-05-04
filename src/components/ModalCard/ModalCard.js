@@ -15,7 +15,7 @@ export default function ModalCard() {
         src={ingridient.image}
         alt="Картинка. Изображение ингридиента">
       </img>
-      <span className={`${ styles.description } text text_type_main-default pt-4 pb-8`}>{ingridient.name}</span>
+      <span className={`${ styles.description } text pt-4 pb-8`}>{ingridient.name}</span>
       <div className={`${ styles.calContainer } pb-15`}>
         <article className={`${ styles.cal } pb-2`}>
           <h2 className={`${ styles.calDescription } text text_type_main-small text_color_inactive pb-1`}>Калории,ккал</h2>

@@ -18,6 +18,7 @@
 
 .button {
   width: fit-content;
+  align-self: center;
 }
 
 .login_text {
