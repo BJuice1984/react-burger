@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../Login/login.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import { FORGOT_PASSWORD } from "../../constants/constants";
+import { Link } from "react-router-dom";
+// import { FORGOT_PASSWORD, USER_IS_NOT_EXIST } from "../../constants/constants";
+import { SHOW_ITEM_DETAILS } from "../../services/actions/modalDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { postForgotPassword, resetForgotPassword } from "../../services/actions/forgotPassword";
-import { postForgotPasswordIsUserExist } from "../../services/selectors/forgotPassword";
+import { postForgotPasswordIsUserExist, postForgotPasswordFailed } from "../../services/selectors/forgotPassword";
+import { POST_FORGOT_PASSWORD_FAILED } from "../../services/actions/forgotPassword";
 
 export default function ForgotPassword() {
   const [emailCode, setEmailcode] = useState(false);
@@ -15,10 +17,9 @@ export default function ForgotPassword() {
     code: '',
   });
 
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const isUserExist = useSelector(postForgotPasswordIsUserExist);
+  const forgotPasswordFailed = useSelector(postForgotPasswordFailed)
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -29,21 +30,30 @@ export default function ForgotPassword() {
   };
 
   useEffect(() => {
-    if (isUserExist) 
-    return setEmailcode(true)
-  }, [isUserExist]);
+    if (isUserExist) return setEmailcode(true)
+    return setEmailcode(false)
+  }, [emailCode, isUserExist]);
+
+  useEffect(() => {
+    if (forgotPasswordFailed) {
+      dispatch({
+        type: SHOW_ITEM_DETAILS,
+        items: false
+      })
+    }
+  }, [dispatch, forgotPasswordFailed])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!emailCode) {
-      // console.log('handleSubmit')
       dispatch(postForgotPassword(value.email))
     } else if (isUserExist) {
       dispatch(resetForgotPassword(value.password, value.code))
-      // console.log(value.password)
-      // console.log(value.code)
     } else {
-      navigate(FORGOT_PASSWORD)
+      setEmailcode(false);
+      dispatch({
+        type: POST_FORGOT_PASSWORD_FAILED
+      })
     }
   }
 
@@ -65,12 +75,11 @@ export default function ForgotPassword() {
           isIcon={false}
           extraClass="mb-6"
         />}
-        {emailCode && <EmailInput
+        {emailCode && <Input
           onChange={handleChange}
           value={value.code}
           name={'code'}
           placeholder='Введите код из письма'
-          isIcon={false}
           extraClass="mb-6"
         />}
         <Button

@@ -5,38 +5,48 @@ import { Link } from "react-router-dom";
 import { SIGN_IN } from "../../constants/constants";
 
 export default function Registration() {
-  const [value, setValue] = useState('bob@example.com')
-  const onChange = e => {
-    setValue(e.target.value)
-  }
+  const [value, setValue] = useState({
+    email: 'bob@example.com',
+    password: '',
+    name: '',
+  });
+
+  const handleChange = e => {
+    const {name, value} = e.target;
+    setValue((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
 
   return (
     <section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Регистрация</h2>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <form style={{ display: 'flex', flexDirection: 'column' }}>
         <EmailInput
-          onChange={onChange}
-          value={value}
+          onChange={handleChange}
+          value={value.name}
           name={'name'}
           placeholder="Имя"
           isIcon={false}
           extraClass="mb-6"
         />
         <EmailInput
-          onChange={onChange}
-          value={value}
+          onChange={handleChange}
+          value={value.email}
           name={'email'}
           placeholder="E-mail"
           isIcon={false}
           extraClass="mb-6"
         />
         <PasswordInput
-          onChange={onChange}
-          value={value}
+          onChange={handleChange}
+          value={value.password}
           name={'password'}
           extraClass="mb-6"
         />
-      </div>
+      </form>
       <Button
         htmlType="button"
         type="primary"
