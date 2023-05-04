@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS } from '../../constants/constants';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
 import Header from '../Header/Header';
@@ -17,12 +18,12 @@ function App() {
       <div className={ styles.container }>
         <Header />
         <Routes>
-          <Route path='/sign-in' element={<Login />} />
-          <Route path='/sign-up' element={<Registration />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path={SIGN_IN} element={<Login />} />
+          <Route path={SIGN_UP} element={<Registration />} />
+          <Route path={FORGOT_PASSWORD} element={<ForgotPassword />} />
           <Route path='/' element={<Main />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/orders' element={<Orders />} />
+          <Route path={PROFILE} element={<Profile />} />
+          <Route path={PROFILE+ORDERS} element={<Orders />} />
         </Routes>
 
       </div>

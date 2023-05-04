@@ -27,3 +27,7 @@ export const indexType = number;
 export const nearestListType = string;
 export const postIngridientsType = arrayOf(number);
 
+export const emailType = string;
+export const passwordType = string;
+export const tokenType = number;
+

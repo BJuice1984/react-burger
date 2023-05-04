@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../Login/login.module.css";
 import { Link } from "react-router-dom";
+import { SIGN_IN } from "../../constants/constants";
 
 export default function Registration() {
   const [value, setValue] = useState('bob@example.com')
@@ -43,7 +44,7 @@ export default function Registration() {
         extraClass={`${styles.button} mb-20`}>
         Зарегистрироваться
       </Button>
-      <p className={`${styles.login_text} text text_type_main-small`}>Уже зарегистрированы? <Link className={`${styles.login_link} text text_type_main-small`} to="/sign-in">Войти</Link></p>
+      <p className={`${styles.login_text} text text_type_main-small`}>Уже зарегистрированы? <Link className={`${styles.login_link} text text_type_main-small`} to={SIGN_IN}>Войти</Link></p>
     </section>
   )
 }
