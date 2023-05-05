@@ -33,8 +33,8 @@ export const forgotPasswordReducer = (state = forgotPasswordDetails, action) => 
         forgotPasswordFailed: true
       }
     }
-    default: {
-      return state;
-    }
+      default: {
+        return state;
+      }
   }
 }
