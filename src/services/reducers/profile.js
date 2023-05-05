@@ -3,8 +3,8 @@ import { POST_FETCH_REQUEST, POST_FETCH_SUCCESS, POST_FETCH_FAILED } from "../ac
 const profileDetails = {
   profileEmail: '',
   profileName: '',
-  profilePassword: '',
-  profileToken: '',
+  profileAccessToken: null,
+  profileRefreshToken: null,
   fetchSuccess: false,
   fetchRequest: false,
   fetchFailed: false,
@@ -21,10 +21,10 @@ export const profileReducer = (state = profileDetails, action) => {
     case POST_FETCH_SUCCESS: {
       return {
         ...state,
-        profileEmail: action.profile.email,
-        profileName: action.profile.name,
-        profilePassword: action.profile.password,
-        profileToken: action.profile.token,
+        profileEmail: action.profile.user.email,
+        profileName: action.profile.user.name,
+        profileAccessToken: action.profile.accessToken,
+        profileRefreshToken: action.profile.refreshToken,
         fetchSuccess: action.profile.success,
         fetchRequest: false,
         fetchFailed: false,

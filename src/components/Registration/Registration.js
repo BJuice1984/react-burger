@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../Login/login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SIGN_IN } from "../../constants/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { postRegister } from "../../services/actions/profile";
+import { postProfileAccessToken, postProfileRefreshToken } from "../../services/selectors/profile";
 
 export default function Registration() {
   const [value, setValue] = useState({
-    email: 'bob@example.com',
+    email: 'bob_johns@example.com',
     password: '',
     name: '',
   });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const profileAccessToken = useSelector(postProfileAccessToken);
+  const profileRefreshToken = useSelector(postProfileRefreshToken);
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -17,6 +26,16 @@ export default function Registration() {
       ...prev,
       [name]: value
     }));
+  };
+
+  useEffect(() => {
+    if (profileAccessToken !== null)
+    return navigate(SIGN_IN)
+  }, [navigate, profileAccessToken])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postRegister(value.email, value.password, value.name))
   };
 
 
@@ -51,7 +70,8 @@ export default function Registration() {
         htmlType="button"
         type="primary"
         size="medium"
-        extraClass={`${styles.button} mb-20`}>
+        extraClass={`${styles.button} mb-20`}
+        onClick={handleSubmit}>
         Зарегистрироваться
       </Button>
       <p className={`${styles.login_text} text text_type_main-small`}>Уже зарегистрированы? <Link className={`${styles.login_link} text text_type_main-small`} to={SIGN_IN}>Войти</Link></p>

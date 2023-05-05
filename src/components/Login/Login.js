@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SIGN_UP, FORGOT_PASSWORD } from "../../constants/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { postLogin } from "../../services/actions/profile";
+import { postProfileAccessToken, postProfileRefreshToken } from "../../services/selectors/profile";
 
 export default function Login() {
   const [value, setValue] = useState({
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const profileAccessToken = useSelector(postProfileAccessToken);
+  const profileRefreshToken = useSelector(postProfileRefreshToken);
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -18,9 +27,15 @@ export default function Login() {
     }));
   };
 
+  useEffect(() => {
+    if (profileAccessToken !== null)
+    return navigate('/')
+  }, [navigate, profileAccessToken])
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+    dispatch(postLogin(value.email, value.password))
+  };
 
   return (
     <section className={ styles.login }>
@@ -46,7 +61,8 @@ export default function Login() {
           htmlType="button"
           type="primary"
           size="medium"
-          extraClass={`${styles.button} mb-20`}>
+          extraClass={`${styles.button} mb-20`}
+          onClick={handleSubmit}>
           Войти
         </Button>
       </form>

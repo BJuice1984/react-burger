@@ -11,19 +11,19 @@ export const postRegister = (email, password, name) => {
       if (res && res.success) {
         dispatch({
           type: POST_FETCH_SUCCESS,
-          forgotPassword: res
+          profile: res
         })
       } else {
         dispatch({
           type: POST_FETCH_FAILED,
-          forgotPassword: res
+          profile: res
         })
       }
     })
     .catch((err) => {
       dispatch({
         type: POST_FETCH_FAILED,
-        forgotPassword: err
+        profile: err
       })
     })
   }
@@ -36,19 +36,19 @@ export const postLogin = (email, password) => {
       if (res && res.success) {
         dispatch({
           type: POST_FETCH_SUCCESS,
-          forgotPassword: res
+          profile: res
         })
       } else {
         dispatch({
           type: POST_FETCH_FAILED,
-          forgotPassword: res
+          profile: res
         })
       }
     })
     .catch((err) => {
       dispatch({
         type: POST_FETCH_FAILED,
-        forgotPassword: err
+        profile: err
       })
     })
   }
@@ -61,19 +61,19 @@ export const postLogout = (token) => {
       if (res && res.success) {
         dispatch({
           type: POST_FETCH_SUCCESS,
-          forgotPassword: res
+          profile: res
         })
       } else {
         dispatch({
           type: POST_FETCH_FAILED,
-          forgotPassword: res
+          profile: res
         })
       }
     })
     .catch((err) => {
       dispatch({
         type: POST_FETCH_FAILED,
-        forgotPassword: err
+        profile: err
       })
     })
   }
@@ -86,19 +86,19 @@ export const postRefreshToken = (token) => {
       if (res && res.success) {
         dispatch({
           type: POST_FETCH_SUCCESS,
-          forgotPassword: res
+          profile: res
         })
       } else {
         dispatch({
           type: POST_FETCH_FAILED,
-          forgotPassword: res
+          profile: res
         })
       }
     })
     .catch((err) => {
       dispatch({
         type: POST_FETCH_FAILED,
-        forgotPassword: err
+        profile: err
       })
     })
   }
