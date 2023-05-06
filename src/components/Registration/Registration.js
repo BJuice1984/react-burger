@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../Login/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { SIGN_IN } from "../../constants/constants";
@@ -43,12 +43,11 @@ export default function Registration() {
     <section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Регистрация</h2>
       <form style={{ display: 'flex', flexDirection: 'column' }}>
-        <EmailInput
+        <Input
           onChange={handleChange}
           value={value.name}
           name={'name'}
           placeholder="Имя"
-          isIcon={false}
           extraClass="mb-6"
         />
         <EmailInput

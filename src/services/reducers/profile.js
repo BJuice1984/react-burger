@@ -1,8 +1,8 @@
 import { POST_FETCH_REQUEST, POST_FETCH_SUCCESS, POST_FETCH_FAILED } from "../actions/profile";
 
 const profileDetails = {
-  profileEmail: '',
-  profileName: '',
+  profileEmail: null,
+  profileName: null,
   profileAccessToken: null,
   profileRefreshToken: null,
   fetchSuccess: false,

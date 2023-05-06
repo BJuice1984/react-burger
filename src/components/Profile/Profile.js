@@ -1,38 +1,52 @@
 import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
-import { EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput, PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
 import styles from "./profile.module.css";
+import { useSelector } from "react-redux";
+import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 
 export default function Profile() {
-  const [value, setValue] = useState('')
-  const onChange = e => {
-    setValue(e.target.value)
-  }
+  const profileEmail = useSelector(postProfileEmail);
+  const profileName = useSelector(postProfileName);
+
+  const [value, setValue] = useState({
+    name: profileName ? profileName : '',
+    email: profileEmail ? profileEmail : '',
+    password: '',
+  });
+
+  const handleChange = e => {
+    const {name, value} = e.target;
+    setValue((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   return (
     <section className={ styles.profile }>
       <div className={ styles.profile_container }>
         <ProfileNavigation />
         <div className={ styles.container }>
-          <EmailInput
-            onChange={onChange}
-            value={value}
+          <Input
+            onChange={handleChange}
+            value={value.name}
             name={'name'}
             placeholder="Имя"
-            isIcon={true}
             extraClass="mb-6"
+            icon="EditIcon"
           />
           <EmailInput
-            onChange={onChange}
-            value={value}
-            name={'text'}
+            onChange={handleChange}
+            value={value.email}
+            name={'email'}
             placeholder="Логин"
             isIcon={true}
             extraClass="mb-6"
           />
           <PasswordInput
-            onChange={onChange}
-            value={value}
+            onChange={handleChange}
+            value={value.password}
             name={'password'}
             icon="EditIcon"
           />
