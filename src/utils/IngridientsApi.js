@@ -9,12 +9,7 @@ const checkResponse = (res) =>  {
 };
 
 export const getIngridients = () => {
-  return fetch(INGRIDIENTS_API, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  })
+  return fetch(INGRIDIENTS_API)
   .then(checkResponse)
 }
 

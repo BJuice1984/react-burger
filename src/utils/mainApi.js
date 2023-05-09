@@ -1,5 +1,6 @@
-import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, REFRESH_TOKEN_API } from "../constants/constants";
-import { emailType, passwordType, tokenType } from "./prop-types";
+import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, REFRESH_TOKEN_API, USER_API } from "../constants/constants";
+import { emailType, passwordType, tokenType, nameType } from "./prop-types";
+import useCookies from "../hooks/useCookies";
 
 const checkResponse = (res) =>  {
   if (res.ok) {
@@ -80,11 +81,39 @@ export const resetPassword = (password, token) => {
   .then(checkResponse)
 };
 
+export const getUser = (cookie) => {
+  return fetch(USER_API, {
+    headers: {
+      Authorization: 'Bearer ' + cookie
+    },
+  })
+  .then(checkResponse)
+};
+
 forgotPassword.propTypes = {
   email: emailType.isRequired,
-}
+};
 
 resetPassword.propTypes = {
   password: passwordType.isRequired,
   token: tokenType.isRequired,
-}
+};
+
+refreshToken.propTypes = {
+  token: tokenType.isRequired,
+};
+
+logout.propTypes = {
+  token: tokenType.isRequired,
+};
+
+login.propTypes = {
+  email: emailType.isRequired,
+  password: passwordType.isRequired,
+};
+
+register.propTypes = {
+  email: emailType.isRequired,
+  password: passwordType.isRequired,
+  name: nameType.isRequired,
+};

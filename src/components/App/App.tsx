@@ -9,6 +9,7 @@ import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Profile from '../Profile/Profile';
 import Orders from '../Orders/Orders';
 import styles from './app.module.css';
+import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
           <Route path={SIGN_UP} element={<Registration />} />
           <Route path={FORGOT_PASSWORD} element={<ForgotPassword />} />
           <Route path='/' element={<Main />} />
-          <Route path={PROFILE} element={<Profile />} />
+          <Route path={PROFILE} element={<ProtectedRouteElement component={<Profile />}/>} />
           <Route path={PROFILE+ORDERS} element={<Orders />} />
         </Routes>
 
