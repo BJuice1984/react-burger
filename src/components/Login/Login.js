@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { SIGN_UP, FORGOT_PASSWORD } from "../../constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../services/actions/profile";
-import { postProfileAccessToken, postProfileRefreshToken } from "../../services/selectors/profile";
+import { postProfileRefreshToken } from "../../services/selectors/profile";
 
 export default function Login() {
   const [value, setValue] = useState({
@@ -16,7 +16,6 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const profileAccessToken = useSelector(postProfileAccessToken);
   const profileRefreshToken = useSelector(postProfileRefreshToken);
 
   const handleChange = e => {
@@ -28,9 +27,9 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (profileAccessToken !== null)
+    if (profileRefreshToken)
     return navigate('/')
-  }, [navigate, profileAccessToken])
+  }, [navigate, profileRefreshToken])
 
   const handleSubmit = (e) => {
     e.preventDefault();

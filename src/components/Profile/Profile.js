@@ -17,8 +17,8 @@ export default function Profile() {
   }, [dispatch])
 
   const [value, setValue] = useState({
-    name: profileName ? profileName : '',
-    email: profileEmail ? profileEmail : '',
+    name: profileName || '',
+    email: profileEmail || '',
     password: '',
   });
 

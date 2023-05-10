@@ -5,7 +5,8 @@ function useSessionStorage() {
   };
 
   function getToken(prop) {
-    sessionStorage.getItem(`${prop}`)
+    console.log(prop)
+    JSON.parse(sessionStorage.getItem(prop))
   };
 
   function clearToken(prop) {

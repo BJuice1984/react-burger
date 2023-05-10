@@ -31,4 +31,5 @@ export const emailType = string;
 export const passwordType = string;
 export const nameType = string;
 export const tokenType = number;
+export const cookieType = string;
 

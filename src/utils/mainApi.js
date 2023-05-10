@@ -1,9 +1,8 @@
 import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, REFRESH_TOKEN_API, USER_API } from "../constants/constants";
-import { emailType, passwordType, tokenType, nameType } from "./prop-types";
-import useCookies from "../hooks/useCookies";
+import { emailType, passwordType, tokenType, nameType, cookieType } from "./prop-types";
 
-const checkResponse = (res) =>  {
-  if (res.ok) {
+const checkResponse = (res) => {
+  if (res.ok || res.status === 403) {
     return res.json();
   }
   return Promise.reject(`Ошибка даных: ${res.status}`)
@@ -33,12 +32,13 @@ export const login = (email, password) => {
   .then(checkResponse)
 };
 
-export const logout = (token) => {
+export const logout = (token, cookie) => {
   return fetch(LOGOUT_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + cookie
     },
     body: JSON.stringify({ token })
   })
@@ -46,6 +46,7 @@ export const logout = (token) => {
 };
 
 export const refreshToken = (token) => {
+  console.log(token)
   return fetch(REFRESH_TOKEN_API, {
     method: 'POST',
     headers: {
@@ -116,4 +117,8 @@ register.propTypes = {
   email: emailType.isRequired,
   password: passwordType.isRequired,
   name: nameType.isRequired,
+};
+
+getUser.propTypes = {
+  cookie: cookieType.isRequired,
 };

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { SIGN_IN } from "../../constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { postRegister } from "../../services/actions/profile";
-import { postProfileAccessToken, postProfileRefreshToken } from "../../services/selectors/profile";
+import { postProfileRefreshToken } from "../../services/selectors/profile";
 
 export default function Registration() {
   const [value, setValue] = useState({
@@ -17,7 +17,6 @@ export default function Registration() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const profileAccessToken = useSelector(postProfileAccessToken);
   const profileRefreshToken = useSelector(postProfileRefreshToken);
 
   const handleChange = e => {
@@ -29,9 +28,9 @@ export default function Registration() {
   };
 
   useEffect(() => {
-    if (profileAccessToken !== null)
+    if (profileRefreshToken !== null)
     return navigate(SIGN_IN)
-  }, [navigate, profileAccessToken])
+  }, [navigate, profileRefreshToken])
 
   const handleSubmit = (e) => {
     e.preventDefault();
