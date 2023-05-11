@@ -17,7 +17,14 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(getUser());
-  }, [dispatch, cookie])
+  }, [dispatch, cookie]);
+
+  useEffect(() => {
+    setValue({
+      name: profileName,
+      email: profileEmail,
+    })
+  }, [profileEmail, profileName])
 
   const [value, setValue] = useState({
     name: profileName || '',

@@ -46,7 +46,6 @@ export const logout = (token, cookie) => {
 };
 
 export const refreshToken = (token) => {
-  console.log(token)
   return fetch(REFRESH_TOKEN_API, {
     method: 'POST',
     headers: {

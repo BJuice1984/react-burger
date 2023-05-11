@@ -104,33 +104,6 @@ export const postLogout = () => {
   }
 };
 
-// export const postRefreshToken = () => {
-//   return function(dispatch) {
-//     let token = JSON.parse(sessionStorage.getItem('refreshToken'));
-
-//     dispatch({ type: POST_FETCH_REQUEST})
-//     Auth.refreshToken(token).then(res => {
-//       if (res && res.success) {
-//         dispatch({
-//           type: POST_FETCH_SUCCESS,
-//           profile: res
-//         })
-//       } else {
-//         dispatch({
-//           type: POST_FETCH_FAILED,
-//           profile: res
-//         })
-//       }
-//     })
-//     .catch((err) => {
-//       dispatch({
-//         type: POST_FETCH_FAILED,
-//         profile: err
-//       })
-//     })
-//   }
-// };
-
 export const getUser = () => {
   return function(dispatch) {
     const { deleteCookie, getCookie } = useCookies();
@@ -156,7 +129,6 @@ export const getUser = () => {
       }
     })
     .catch((err) => {
-      // console.log('err', err)
       dispatch({
         type: POST_FETCH_FAILED,
         profile: err
