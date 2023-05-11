@@ -6,6 +6,7 @@ import useRefreshToken from '../../hooks/useRefreshToken';
 export const POST_FETCH_REQUEST = 'POST_FETCH_REQUEST';
 export const POST_FETCH_SUCCESS = 'POST_FETCH_SUCCESS';
 export const POST_FETCH_FAILED = 'POST_FETCH_FAILED';
+export const POST_PROFILE_LOGOUT = 'POST_PROFILE_LOGOUT';
 
 export const postRegister = (email, password, name) => {
   return function(dispatch) {
@@ -78,21 +79,13 @@ export const postLogout = () => {
     let cookie = getCookie('token');
     let token = JSON.parse(sessionStorage.getItem('refreshToken'));
 
-    dispatch({ type: POST_FETCH_REQUEST})
+    dispatch({ type: POST_PROFILE_LOGOUT})
     Auth.logout(token, cookie).then(res => {
       if (res && res.success) {
         clearToken('refreshToken');
         deleteCookie('token');
-        dispatch({
-          type: POST_FETCH_SUCCESS,
-          profile: res
-        })
       } else {
         clearToken('refreshToken');
-        dispatch({
-          type: POST_FETCH_FAILED,
-          profile: res
-        })
       }
     })
     .catch((err) => {
