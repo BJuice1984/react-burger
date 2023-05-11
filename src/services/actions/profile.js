@@ -133,7 +133,7 @@ export const postLogout = () => {
 
 export const getUser = () => {
   return function(dispatch) {
-    const { getCookie } = useCookies();
+    const { deleteCookie, getCookie } = useCookies();
     let cookie = getCookie('token');
     const { postRefreshToken } = useRefreshToken();
 
@@ -146,6 +146,8 @@ export const getUser = () => {
         })
       } else if (res.message === 'jwt malformed') {
         postRefreshToken();
+      } else if (res.message === 'invalid signature') {
+        deleteCookie('token');
       } else {
         dispatch({
           type: POST_FETCH_FAILED,
@@ -154,7 +156,7 @@ export const getUser = () => {
       }
     })
     .catch((err) => {
-      console.log('err', err)
+      // console.log('err', err)
       dispatch({
         type: POST_FETCH_FAILED,
         profile: err

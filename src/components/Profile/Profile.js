@@ -5,16 +5,19 @@ import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import { getUser } from "../../services/actions/profile";
+import useCookies from "../../hooks/useCookies";
 
 export default function Profile() {
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
+  const { getCookie } = useCookies();
+  let cookie = getCookie('token');
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUser());
-  }, [dispatch])
+  }, [dispatch, cookie])
 
   const [value, setValue] = useState({
     name: profileName || '',
