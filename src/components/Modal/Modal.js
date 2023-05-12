@@ -8,18 +8,20 @@ import useClose from "../../hooks/useClose";
 import { useSelector, useDispatch } from 'react-redux';
 import { DELETE_ITEM_DETAILS } from "../../services/actions/modalDetails";
 import { getModalDetails } from "../../services/selectors/modalDetails";
+import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("modal");
 
 export default function Modal() {
-
   const { modalOpen, displayedItem } = useSelector(getModalDetails);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const closeModal = () => {
     dispatch({
     type: DELETE_ITEM_DETAILS,
-    })
+    });
+    navigate(-1);
   };
 
   const {

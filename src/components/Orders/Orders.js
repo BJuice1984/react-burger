@@ -1,6 +1,7 @@
 import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
 import Order from "../Order/Order";
 import styles from "./orders.module.css";
+import { Outlet } from "react-router-dom";
 
 export default function Orders() {
 
@@ -22,6 +23,7 @@ export default function Orders() {
         </div>
         <p className={`${styles.description} text text_type_main-small pt-4`}>В этом разделе вы можете просмотреть свою историю заказов</p>
       </div>
+      <Outlet />
     </section>
   )
 }

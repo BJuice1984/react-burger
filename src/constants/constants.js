@@ -18,7 +18,8 @@ export const SIGN_IN = '/sign-in';
 export const SIGN_UP = '/sign-up';
 export const FORGOT_PASSWORD = '/forgot-password';
 export const PROFILE = '/profile';
-export const ORDERS = '/orders';
+export const ORDERS = 'orders';
+export const INGRIDIENTS = '/ingridients';
 
 export const USER_IS_NOT_EXIST = 'Извините, но такойго пользователя нет в нашей базе. Попробуйте ввести свой email ещё раз'
 

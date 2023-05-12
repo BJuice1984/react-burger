@@ -4,10 +4,13 @@ import { burgerIngredientType, countType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
+import { Link, useLocation } from 'react-router-dom';
+import { INGRIDIENTS } from '../../constants/constants';
 
 export default function BurgerIngredientsCard({ ingridient, count }) {
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [{isDrag}, dragRef] = useDrag({
     type: "ingridient",
@@ -27,7 +30,8 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
   }
 
   return(
-    <article ref={dragRef} className={ `${ styles.element } ${hover}` }>
+    <Link to={`${INGRIDIENTS}/${ingridient._id}`} state={{ background: location }}
+      ref={dragRef} className={ `${ styles.element } ${hover}` }>
       {count && <Counter count={count} size="default" extraClass="m-1" />}
       <img className={ styles.pic }
         onClick={openModal}
@@ -41,7 +45,7 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
         {ingridient.name}
       </span>
       <button className={`${ styles.addBtn } text`}>Добавить</button>
-    </article>
+    </Link>
   )
 }
 

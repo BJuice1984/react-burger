@@ -9,11 +9,9 @@ export const checkAuth = () => {
     let cookie = getCookie('token');
 
     if (cookie) {
-      console.log('authCookie')
       dispatch({ type: AUTH_CHECKED });
       dispatch(getUser());
     } else {
-      console.log('auth')
       dispatch({ type: AUTH_CHECKED });
     }
 
