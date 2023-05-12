@@ -6,6 +6,8 @@ import useRefreshToken from '../../hooks/useRefreshToken';
 export const POST_FETCH_REQUEST = 'POST_FETCH_REQUEST';
 export const POST_FETCH_SUCCESS = 'POST_FETCH_SUCCESS';
 export const POST_FETCH_FAILED = 'POST_FETCH_FAILED';
+
+export const POST_PROFILE_FETCH_SUCCESS = 'POST_PROFILE_FETCH_SUCCESS';
 export const POST_PROFILE_LOGOUT = 'POST_PROFILE_LOGOUT';
 
 export const postRegister = (email, password, name) => {
@@ -107,13 +109,14 @@ export const getUser = () => {
     Auth.getUser(cookie).then(res => {
       if (res && res.success) {
         dispatch({
-          type: POST_FETCH_SUCCESS,
+          type: POST_PROFILE_FETCH_SUCCESS,
           profile: res
         })
       } else if (res.message === 'jwt malformed') {
         postRefreshToken();
       } else if (res.message === 'invalid signature') {
         deleteCookie('token');
+        postRefreshToken();
       } else {
         dispatch({
           type: POST_FETCH_FAILED,

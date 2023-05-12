@@ -23,6 +23,7 @@ export default function Profile() {
     setValue({
       name: profileName,
       email: profileEmail,
+      password: '',
     })
   }, [profileEmail, profileName])
 
