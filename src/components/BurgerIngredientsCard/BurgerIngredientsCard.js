@@ -5,7 +5,7 @@ import { useDrag } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
 import { Link, useLocation } from 'react-router-dom';
-import { INGRIDIENTS } from '../../constants/constants';
+import { INGREDIENTS } from '../../constants/constants';
 
 export default function BurgerIngredientsCard({ ingridient, count }) {
 
@@ -30,7 +30,7 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
   }
 
   return(
-    <Link to={`${INGRIDIENTS}/${ingridient._id}`} state={{ background: location }}
+    <Link to={`${INGREDIENTS}/${ingridient._id}`} state={{ background: location }}
       ref={dragRef} className={ `${ styles.element } ${hover}` }>
       {count && <Counter count={count} size="default" extraClass="m-1" />}
       <img className={ styles.pic }

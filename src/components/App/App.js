@@ -1,7 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGRIDIENTS } from '../../constants/constants';
+import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS } from '../../constants/constants';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
+import ModalCard from '../ModalCard/ModalCard';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
@@ -18,7 +19,6 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state && location.state.background;
-  console.log(background)
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className={ styles.page }>
-      {/* <Modal /> */}
+      <Modal />
       <div className={ styles.container }>
         <Header />
         <Routes location={background || location}>
@@ -37,10 +37,11 @@ function App() {
           <Route path={PROFILE} element={<ProtectedRouteElement component={<Profile />}/>}>
             <Route path={ORDERS} element={<Orders />} />
           </Route>
+          <Route path={`${INGREDIENTS}/:id`} element={<Main />} />
         </Routes>
         {background &&
         <Routes>
-          <Route path={`${INGRIDIENTS}/:id`} element={<Modal/>} />
+          <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard />}/>} />
         </Routes>}
 
       </div>

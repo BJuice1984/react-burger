@@ -1,5 +1,4 @@
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import ModalCard from "../ModalCard/ModalCard";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import ModalError from "../ModalError/ModalError";
 import ReactDOM from "react-dom";
@@ -12,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("modal");
 
-export default function Modal() {
+export default function Modal({ component }) {
   const { modalOpen, displayedItem } = useSelector(getModalDetails);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ export default function Modal() {
     dispatch({
     type: DELETE_ITEM_DETAILS,
     });
-    navigate(-1);
+    component && navigate(-1);
   };
 
   const {
@@ -43,8 +42,8 @@ export default function Modal() {
             aria-label="Закрыть"
             onClick={closeModal}>
           </button>
-
-          {typeof(displayedItem) === "number" ? <ModalOrder /> : displayedItem === false ? <ModalError /> : <ModalCard />}
+          {component && component}
+          {typeof(displayedItem) === "number" ? <ModalOrder /> : displayedItem === false && <ModalError /> }
 
         </div>
       </>
