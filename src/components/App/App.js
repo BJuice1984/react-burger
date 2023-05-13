@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS } from '../../constants/constants';
 import Main from '../Main/Main';
+import Ingredient from '../Ingredient/Ingredient';
 import Modal from '../Modal/Modal';
 import ModalCard from '../ModalCard/ModalCard';
 import Header from '../Header/Header';
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <div className={ styles.page }>
-      <Modal />
+      {/* <Modal /> */}
       <div className={ styles.container }>
         <Header />
         <Routes location={background || location}>
@@ -37,7 +38,7 @@ function App() {
           <Route path={PROFILE} element={<ProtectedRouteElement component={<Profile />}/>}>
             <Route path={ORDERS} element={<Orders />} />
           </Route>
-          <Route path={`${INGREDIENTS}/:id`} element={<Main />} />
+          <Route path={`${INGREDIENTS}/:id`} element={<Ingredient />} />
         </Routes>
         {background &&
         <Routes>

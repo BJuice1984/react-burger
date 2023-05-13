@@ -1,19 +1,15 @@
 import styles from './modalCard.module.css';
 import { useSelector } from 'react-redux';
 import { getDisplayedItem } from '../../services/selectors/modalDetails';
-// import { useParams } from 'react-router-dom';
 
 export default function ModalCard() {
 
   const ingridient = useSelector(getDisplayedItem);
 
-  // const { id } = useParams();
-  // console.log(id)
-
   return(
     ingridient && (
     <div className={ styles.container }>
-      <h2 className={`${ styles.header } text text_type_main-medium pt-10 ml-10`}>Детали ингредиента</h2>
+      <h2 className={`${ styles.header } text text_type_main-medium pt-10`}>Детали ингредиента</h2>
       <img
         className={ styles.pic }
         src={ingridient.image}
