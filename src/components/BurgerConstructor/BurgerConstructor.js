@@ -62,7 +62,7 @@ export default function BurgerConstructor() {
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={`${ styles.burgerConstructorContainer } ${hover}`}>
+      <div className={`${ styles.burgerConstructorContainer } ${hover}`}>
         {userIngridients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="top"
