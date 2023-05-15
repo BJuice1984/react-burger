@@ -1,25 +1,15 @@
-import { useEffect } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SIGN_UP, FORGOT_PASSWORD } from "../../constants/constants";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { postLogin } from "../../services/actions/profile";
-import { postProfileRefreshToken } from "../../services/selectors/profile";
 
 export default function Login() {
   const {values, handleChange } = useForm({});
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const profileRefreshToken = useSelector(postProfileRefreshToken);
-
-  useEffect(() => {
-    if (profileRefreshToken)
-    return navigate('/')
-  }, [navigate, profileRefreshToken])
 
   const handleSubmit = (e) => {
     e.preventDefault();

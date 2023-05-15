@@ -5,10 +5,14 @@ import BurgerIconLink from '../BurgerIconLink/BurgerIconLink';
 import ListIconLink from '../ListIconLink/ListIconLink';
 import ProfileIconLink from '../ProfileIconLink/ProfileIconLink';
 import styles from './header.module.css'
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
+import { PROFILE } from '../../constants/constants';
 
 export default function Header() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const isBurgerConstructor = !!useMatch({ path: '/'});
+  const isProfile = !!useMatch({ path: PROFILE})
   
   return(
     <header className={ styles.header }>
@@ -16,14 +20,14 @@ export default function Header() {
         <LogoMobile />
         <MenuMobile />
         <nav className={ styles.links }>
-          <BurgerIconLink />
+          <BurgerIconLink isBurgerConstructor={isBurgerConstructor}/>
           <ListIconLink />
         </nav>
         <div className={styles.logo}>
           <Logo />
         </div>
-        <button type='button' className={ styles.btn } onClick={() => navigate("/profile")}>
-          <ProfileIconLink />
+        <button type='button' className={ styles.btn } onClick={() => navigate(PROFILE)}>
+          <ProfileIconLink isProfile={isProfile}/>
         </button>
       </div>
     </header>
