@@ -1,6 +1,7 @@
 import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
-import { EmailInput, PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
+import { EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
@@ -15,31 +16,19 @@ export default function Profile() {
 
   const dispatch = useDispatch();
 
+  const {values, handleChange, setValues} = useForm({});
+
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch, cookie]);
 
   useEffect(() => {
-    setValue({
-      name: profileName,
-      email: profileEmail,
+    setValues({
+      name: profileName || '',
+      email: profileEmail || '',
       password: '',
     })
-  }, [profileEmail, profileName])
-
-  const [value, setValue] = useState({
-    name: profileName || '',
-    email: profileEmail || '',
-    password: '',
-  });
-
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setValue((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  }, [profileEmail, profileName, setValues])
 
   return (
     <section className={ styles.profile }>
@@ -48,7 +37,7 @@ export default function Profile() {
         <div className={ styles.container }>
           <EmailInput
             onChange={handleChange}
-            value={value.name}
+            value={values.name}
             name={'name'}
             placeholder="Имя"
             extraClass="mb-6"
@@ -57,7 +46,7 @@ export default function Profile() {
           />
           <EmailInput
             onChange={handleChange}
-            value={value.email}
+            value={values.email}
             name={'email'}
             placeholder="Логин"
             isIcon={true}
@@ -65,7 +54,7 @@ export default function Profile() {
           />
           <PasswordInput
             onChange={handleChange}
-            value={value.password}
+            value={values.password}
             name={'password'}
             icon="EditIcon"
           />

@@ -1,33 +1,21 @@
 import { useState, useEffect } from "react";
 import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../Login/login.module.css";
+import { useForm } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 // import { FORGOT_PASSWORD, USER_IS_NOT_EXIST } from "../../constants/constants";
 import { SHOW_ITEM_DETAILS } from "../../services/actions/modalDetails";
 import { useDispatch, useSelector } from "react-redux";
-import { postForgotPassword, resetForgotPassword } from "../../services/actions/forgotPassword";
+import { postForgotPassword, resetForgotPassword, POST_FORGOT_PASSWORD_FAILED } from "../../services/actions/forgotPassword";
 import { postForgotPasswordIsUserExist, postForgotPasswordFailed } from "../../services/selectors/forgotPassword";
-import { POST_FORGOT_PASSWORD_FAILED } from "../../services/actions/forgotPassword";
 
 export default function ForgotPassword() {
   const [emailCode, setEmailcode] = useState(false);
-  const [value, setValue] = useState({
-    email: '',
-    password: '',
-    code: '',
-  });
+  const {values, handleChange } = useForm({});
 
   const dispatch = useDispatch();
   const isUserExist = useSelector(postForgotPasswordIsUserExist);
   const forgotPasswordFailed = useSelector(postForgotPasswordFailed)
-
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setValue((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   useEffect(() => {
     if (isUserExist) return setEmailcode(true)
@@ -46,9 +34,9 @@ export default function ForgotPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!emailCode) {
-      dispatch(postForgotPassword(value.email))
+      dispatch(postForgotPassword(values.email))
     } else if (isUserExist) {
-      dispatch(resetForgotPassword(value.password, value.code))
+      dispatch(resetForgotPassword(values.password, values.code))
     } else {
       setEmailcode(false);
       dispatch({
@@ -65,13 +53,13 @@ export default function ForgotPassword() {
       onSubmit={handleSubmit}>
         {emailCode ? <PasswordInput
           onChange={handleChange}
-          value={value.password}
+          value={values.password}
           name={'password'}
           placeholder='Введите новый пароль'
           extraClass="mb-6"
         /> : <EmailInput
           onChange={handleChange}
-          value={value.email}
+          value={values.email}
           name={'email'}
           placeholder='Укажите e-mail'
           isIcon={false}
@@ -79,7 +67,7 @@ export default function ForgotPassword() {
         />}
         {emailCode && <Input
           onChange={handleChange}
-          value={value.code}
+          value={values.code}
           name={'code'}
           placeholder='Введите код из письма'
           extraClass="mb-6"

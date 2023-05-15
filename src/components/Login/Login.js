@@ -1,30 +1,20 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { SIGN_UP, FORGOT_PASSWORD } from "../../constants/constants";
+import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../services/actions/profile";
 import { postProfileRefreshToken } from "../../services/selectors/profile";
 
 export default function Login() {
-  const [value, setValue] = useState({
-    email: '',
-    password: '',
-  });
+  const {values, handleChange } = useForm({});
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const profileRefreshToken = useSelector(postProfileRefreshToken);
-
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setValue((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   useEffect(() => {
     if (profileRefreshToken)
@@ -33,7 +23,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postLogin(value.email, value.password))
+    dispatch(postLogin(values.email, values.password))
   };
 
   return (
@@ -44,7 +34,7 @@ export default function Login() {
       onSubmit={handleSubmit}>
         <EmailInput
           onChange={handleChange}
-          value={value.email}
+          value={values.email}
           name={'email'}
           placeholder="E-mail"
           isIcon={false}
@@ -52,7 +42,7 @@ export default function Login() {
         />
         <PasswordInput
           onChange={handleChange}
-          value={value.password}
+          value={values.password}
           name={'password'}
           extraClass="mb-6"
         />

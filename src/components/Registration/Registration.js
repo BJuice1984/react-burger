@@ -1,31 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../Login/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { SIGN_IN } from "../../constants/constants";
+import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { postRegister } from "../../services/actions/profile";
 import { postProfileRefreshToken } from "../../services/selectors/profile";
 
 export default function Registration() {
-  const [value, setValue] = useState({
-    email: 'bob_johns@example.com',
-    password: '',
-    name: '',
-  });
+  const {values, handleChange } = useForm({});
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const profileRefreshToken = useSelector(postProfileRefreshToken);
 
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setValue((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   useEffect(() => {
     if (profileRefreshToken !== null)
@@ -34,7 +24,7 @@ export default function Registration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postRegister(value.email, value.password, value.name))
+    dispatch(postRegister(values.email, values.password, values.name))
   };
 
 
@@ -46,14 +36,14 @@ export default function Registration() {
       onSubmit={handleSubmit}>
         <Input
           onChange={handleChange}
-          value={value.name}
+          value={values.name}
           name={'name'}
           placeholder="Имя"
           extraClass="mb-6"
         />
         <EmailInput
           onChange={handleChange}
-          value={value.email}
+          value={values.email}
           name={'email'}
           placeholder="E-mail"
           isIcon={false}
@@ -61,7 +51,7 @@ export default function Registration() {
         />
         <PasswordInput
           onChange={handleChange}
-          value={value.password}
+          value={values.password}
           name={'password'}
           extraClass="mb-6"
         />
