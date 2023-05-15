@@ -21,13 +21,15 @@ function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
 
+  console.log(background)
+
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
 
   return (
     <div className={ styles.page }>
-      {/* <Modal /> */}
+      {!background && <Modal />}
       <div className={ styles.container }>
         <Header />
         <Routes location={background || location}>

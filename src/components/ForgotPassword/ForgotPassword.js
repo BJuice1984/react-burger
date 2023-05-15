@@ -60,7 +60,9 @@ export default function ForgotPassword() {
   return (
     <section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Восстановление пароля</h2>
-      <form style={{ display: 'flex', flexDirection: 'column' }}>
+      <form
+      className={ styles.form }
+      onSubmit={handleSubmit}>
         {emailCode ? <PasswordInput
           onChange={handleChange}
           value={value.password}
@@ -83,11 +85,10 @@ export default function ForgotPassword() {
           extraClass="mb-6"
         />}
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          extraClass={`${styles.button} mb-20`}
-          onClick={handleSubmit}>
+          extraClass={`${styles.button} mb-20`}>
           {emailCode ? 'Сохранить' : 'Восстановить'}
         </Button>
       </form>

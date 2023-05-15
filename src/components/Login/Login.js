@@ -39,8 +39,8 @@ export default function Login() {
   return (
     <section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Вход</h2>
-      <form 
-      style={{ display: 'flex', flexDirection: 'column' }}
+      <form
+      className={ styles.form }
       onSubmit={handleSubmit}>
         <EmailInput
           onChange={handleChange}
@@ -57,11 +57,10 @@ export default function Login() {
           extraClass="mb-6"
         />
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          extraClass={`${styles.button} mb-20`}
-          onClick={handleSubmit}>
+          extraClass={`${styles.button} mb-20`}>
           Войти
         </Button>
       </form>

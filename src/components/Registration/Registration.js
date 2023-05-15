@@ -41,7 +41,9 @@ export default function Registration() {
   return (
     <section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Регистрация</h2>
-      <form style={{ display: 'flex', flexDirection: 'column' }}>
+      <form
+      className={ styles.form }
+      onSubmit={handleSubmit}>
         <Input
           onChange={handleChange}
           value={value.name}
@@ -63,15 +65,14 @@ export default function Registration() {
           name={'password'}
           extraClass="mb-6"
         />
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          extraClass={`${styles.button} mb-20`}>
+          Зарегистрироваться
+        </Button>
       </form>
-      <Button
-        htmlType="button"
-        type="primary"
-        size="medium"
-        extraClass={`${styles.button} mb-20`}
-        onClick={handleSubmit}>
-        Зарегистрироваться
-      </Button>
       <p className={`${styles.login_text} text text_type_main-small`}>Уже зарегистрированы? <Link className={`${styles.login_link} text text_type_main-small`} to={SIGN_IN}>Войти</Link></p>
     </section>
   )
