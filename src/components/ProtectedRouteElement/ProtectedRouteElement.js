@@ -19,7 +19,7 @@ export default function ProtectedRouteElement({ onlyUnAuth = false, component })
   }
 
   if (!onlyUnAuth && !profileEmail && !profileName) {
-    return <Navigate to={{ pathname: SIGN_IN, state: { from: location }}}/>
+    return <Navigate to={SIGN_IN} state={{ from: location }} />
   }
 
   return component;
