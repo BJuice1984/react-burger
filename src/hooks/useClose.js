@@ -1,14 +1,14 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function useClose() {
 
-  const modalOpen = useSelector(state => state.modalDetails.modalOpen);
+  // const modalOpen = useSelector(state => state.modalDetails.modalOpen);
 
   function EscClose(closeModal) {
 
     useEffect(() => {
-      if (!modalOpen) return;
+      // if (!modalOpen) return;
   
       function handleEsc(e) {
         if (e.key === "Escape") {
@@ -24,7 +24,7 @@ function useClose() {
   function ClickClose(closeModal, openedClass) {
   
     useEffect(() => {
-      if(!modalOpen) return;
+      // if(!modalOpen) return;
   
       function handleClickClose(e) {
         if (e.target.className.includes(openedClass)) {

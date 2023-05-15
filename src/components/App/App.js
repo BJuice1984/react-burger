@@ -1,7 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS } from '../../constants/constants';
 import Main from '../Main/Main';
-import Ingredient from '../Ingredient/Ingredient';
 import Modal from '../Modal/Modal';
 import ModalCard from '../ModalCard/ModalCard';
 import Header from '../Header/Header';
@@ -15,16 +14,16 @@ import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElemen
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkAuth } from '../../services/actions/checkAuth';
+import { getItems } from '../../services/actions/initialIngridients';
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state && location.state.background;
 
-  console.log(background)
-
   useEffect(() => {
     dispatch(checkAuth());
+    dispatch(getItems());
   }, [dispatch]);
 
   return (
@@ -40,11 +39,11 @@ function App() {
           <Route path={PROFILE} element={<ProtectedRouteElement component={<Profile />}/>}>
             <Route path={ORDERS} element={<Orders />} />
           </Route>
-          <Route path={`${INGREDIENTS}/:id`} element={<Ingredient />} />
+          <Route path={`${INGREDIENTS}/:id`} element={<ModalCard background = {background}/>} />
         </Routes>
         {background &&
         <Routes>
-          <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard />}/>} />
+          <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard background = {background}/>}/>} />
         </Routes>}
 
       </div>

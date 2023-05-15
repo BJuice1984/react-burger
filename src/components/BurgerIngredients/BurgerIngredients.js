@@ -1,11 +1,9 @@
 import styles from './burgerIngridients.module.css';
 import { Fragment, useMemo } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
 import BurgerTab from '../BurgerTab/BurgerTab';
 import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/prop-types';
-import { getItems } from '../../services/actions/initialIngridients';
 import { BUNS, SAUCES, MAINS } from '../../constants/constants';
 import useBounding from '../../hooks/useBounding';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
@@ -13,11 +11,6 @@ import { getInitialIngridientsItems } from '../../services/selectors/initialIngr
 export default function BurgerIngredients() {
 
   const groupedIngridients = groupBy(useSelector(getInitialIngridientsItems), "type");
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getItems())
-  }, [dispatch]);
 
   function groupBy(objectArray, property) {
     return objectArray.reduce((acc, obj) => {

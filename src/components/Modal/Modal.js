@@ -34,8 +34,8 @@ export default function Modal({ component }) {
   return(
     ReactDOM.createPortal(
       <>
-        <ModalOverlay />
-        <div className={`${ styles.window } ${modalOpen ? styles.windowOpened : ''}`}>
+        <ModalOverlay component={component}/>
+        <div className={`${ styles.window } ${component || modalOpen ? styles.windowOpened : ''}`}>
           <button 
             className={ styles.closeButton }
             type="button" 
