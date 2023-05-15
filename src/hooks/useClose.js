@@ -5,7 +5,7 @@ function useClose() {
 
   // const modalOpen = useSelector(state => state.modalDetails.modalOpen);
 
-  function EscClose(closeModal) {
+  function useEscClose(closeModal) {
 
     useEffect(() => {
       // if (!modalOpen) return;
@@ -21,7 +21,7 @@ function useClose() {
     }, [closeModal]);
   } 
   
-  function ClickClose(closeModal, openedClass) {
+  function useClickClose(closeModal, openedClass) {
   
     useEffect(() => {
       // if(!modalOpen) return;
@@ -38,8 +38,8 @@ function useClose() {
   }
 
   return {
-    EscClose,
-    ClickClose
+    useEscClose,
+    useClickClose
   }
 }
 

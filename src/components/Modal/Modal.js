@@ -24,12 +24,12 @@ export default function Modal({ component }) {
   };
 
   const {
-    EscClose,
-    ClickClose
+    useEscClose,
+    useClickClose
   } = useClose();
 
-  EscClose(closeModal);
-  ClickClose(closeModal, "modalOpened");
+  useEscClose(closeModal);
+  useClickClose(closeModal, "modalOpened");
 
   return(
     ReactDOM.createPortal(
