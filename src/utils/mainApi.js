@@ -1,15 +1,9 @@
 import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, REFRESH_TOKEN_API, USER_API } from "../constants/constants";
+import { request } from "./utilsApi";
 import { emailType, passwordType, tokenType, nameType, cookieType } from "./prop-types";
 
-const checkResponse = (res) => {
-  if (res.ok || res.status === 403) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка даных: ${res.status}`)
-};
-
 export const register = (email, password, name) => {
-  return fetch(REGISTER_API, {
+  return request(REGISTER_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -17,11 +11,10 @@ export const register = (email, password, name) => {
     },
     body: JSON.stringify({ email, password, name })
   })
-  .then(checkResponse)
 };
 
 export const login = (email, password) => {
-  return fetch(LOGIN_API, {
+  return request(LOGIN_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -29,11 +22,10 @@ export const login = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
-  .then(checkResponse)
 };
 
 export const logout = (token, cookie) => {
-  return fetch(LOGOUT_API, {
+  return request(LOGOUT_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -42,11 +34,10 @@ export const logout = (token, cookie) => {
     },
     body: JSON.stringify({ token })
   })
-  .then(checkResponse)
 };
 
 export const refreshToken = (token) => {
-  return fetch(REFRESH_TOKEN_API, {
+  return request(REFRESH_TOKEN_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -54,11 +45,10 @@ export const refreshToken = (token) => {
     },
     body: JSON.stringify({ token })
   })
-  .then(checkResponse)
 };
 
 export const forgotPassword = (email) => {
-  return fetch(RESET_PASSWORD_API, {
+  return request(RESET_PASSWORD_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -66,11 +56,10 @@ export const forgotPassword = (email) => {
     },
     body: JSON.stringify({ email })
   })
-  .then(checkResponse)
 };
 
 export const resetPassword = (password, token) => {
-  return fetch(`${RESET_PASSWORD_API}/reset`, {
+  return request(`${RESET_PASSWORD_API}/reset`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -78,16 +67,14 @@ export const resetPassword = (password, token) => {
     },
     body: JSON.stringify({ password, token })
   })
-  .then(checkResponse)
 };
 
 export const getUser = (cookie) => {
-  return fetch(USER_API, {
+  return request(USER_API, {
     headers: {
       Authorization: 'Bearer ' + cookie
     },
   })
-  .then(checkResponse)
 };
 
 forgotPassword.propTypes = {

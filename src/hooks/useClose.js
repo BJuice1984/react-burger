@@ -3,13 +3,8 @@ import { useEffect } from "react";
 
 function useClose() {
 
-  // const modalOpen = useSelector(state => state.modalDetails.modalOpen);
-
   function useEscClose(closeModal) {
-
     useEffect(() => {
-      // if (!modalOpen) return;
-  
       function handleEsc(e) {
         if (e.key === "Escape") {
           closeModal()
@@ -22,10 +17,7 @@ function useClose() {
   } 
   
   function useClickClose(closeModal, openedClass) {
-  
     useEffect(() => {
-      // if(!modalOpen) return;
-  
       function handleClickClose(e) {
         if (e.target.className.includes(openedClass)) {
           closeModal()
