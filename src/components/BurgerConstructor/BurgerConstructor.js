@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { SIGN_IN } from "../../constants/constants";
 import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
 import { burgerIngredientArrayType } from '../../utils/prop-types';
@@ -10,14 +12,18 @@ import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
 import { postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
 import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
+import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const userIngridients = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
   const orderSuccess = useSelector(getOrderSuccess);
   const orderFailed = useSelector(getOrderFailed);
+  const profileEmail = useSelector(postProfileEmail);
+  const profileName = useSelector(postProfileName);
 
   const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0
 
@@ -33,6 +39,10 @@ export default function BurgerConstructor() {
   const hover = isHover ? styles.onHover : '';
 
   const getOrderNumberId = () => {
+    if (!profileEmail && !profileName) {
+      return navigate(SIGN_IN);
+    }
+
     const ingridientsId = userIngridients.userItems.map(item => item._id);
     ingridientsId.push(userIngridients.bun._id);
     dispatch(postItems({"ingredients": ingridientsId}));
