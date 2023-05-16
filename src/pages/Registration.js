@@ -36,14 +36,14 @@ export default function Registration() {
       onSubmit={handleSubmit}>
         <Input
           onChange={handleChange}
-          value={values.name}
+          value={values.name || ''}
           name={'name'}
           placeholder="Имя"
           extraClass="mb-6"
         />
         <EmailInput
           onChange={handleChange}
-          value={values.email}
+          value={values.email || ''}
           name={'email'}
           placeholder="E-mail"
           isIcon={false}
@@ -51,7 +51,7 @@ export default function Registration() {
         />
         <PasswordInput
           onChange={handleChange}
-          value={values.password}
+          value={values.password || ''}
           name={'password'}
           extraClass="mb-6"
         />

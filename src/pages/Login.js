@@ -24,7 +24,7 @@ export default function Login() {
       onSubmit={handleSubmit}>
         <EmailInput
           onChange={handleChange}
-          value={values.email}
+          value={values.email || ''}
           name={'email'}
           placeholder="E-mail"
           isIcon={false}
@@ -32,7 +32,7 @@ export default function Login() {
         />
         <PasswordInput
           onChange={handleChange}
-          value={values.password}
+          value={values.password || ''}
           name={'password'}
           extraClass="mb-6"
         />

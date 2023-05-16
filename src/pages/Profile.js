@@ -37,7 +37,7 @@ export default function Profile() {
         <div className={ styles.container }>
           <EmailInput
             onChange={handleChange}
-            value={values.name}
+            value={values.name || ''}
             name={'name'}
             placeholder="Имя"
             extraClass="mb-6"
@@ -46,7 +46,7 @@ export default function Profile() {
           />
           <EmailInput
             onChange={handleChange}
-            value={values.email}
+            value={values.email || ''}
             name={'email'}
             placeholder="Логин"
             isIcon={true}
@@ -54,7 +54,7 @@ export default function Profile() {
           />
           <PasswordInput
             onChange={handleChange}
-            value={values.password}
+            value={values.password || ''}
             name={'password'}
             icon="EditIcon"
           />

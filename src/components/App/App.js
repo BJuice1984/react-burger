@@ -33,7 +33,6 @@ function App() {
 
   return (
     <div className={ styles.page }>
-      {/* {!background && <Modal />} */}
       <div className={ styles.container }>
         <Header />
         <Routes location={background || location}>

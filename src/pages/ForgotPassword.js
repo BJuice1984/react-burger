@@ -53,13 +53,13 @@ export default function ForgotPassword() {
       onSubmit={handleSubmit}>
         {emailCode ? <PasswordInput
           onChange={handleChange}
-          value={values.password}
+          value={values.password || ''}
           name={'password'}
           placeholder='Введите новый пароль'
           extraClass="mb-6"
         /> : <EmailInput
           onChange={handleChange}
-          value={values.email}
+          value={values.email || ''}
           name={'email'}
           placeholder='Укажите e-mail'
           isIcon={false}
@@ -67,7 +67,7 @@ export default function ForgotPassword() {
         />}
         {emailCode && <Input
           onChange={handleChange}
-          value={values.code}
+          value={values.code || ''}
           name={'code'}
           placeholder='Введите код из письма'
           extraClass="mb-6"

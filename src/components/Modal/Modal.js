@@ -15,17 +15,13 @@ useEffect(() => {
   }
 }, [component]);
 
-  const closeModal = () => {
-    handleClose()
-  };
-
   const {
     useEscClose,
     useClickClose
   } = useClose();
 
-  useEscClose(closeModal);
-  useClickClose(closeModal, "modalOpened");
+  useEscClose(handleClose);
+  useClickClose(handleClose, "modalOpened");
 
   return(
     ReactDOM.createPortal(
@@ -36,7 +32,7 @@ useEffect(() => {
             className={ styles.closeButton }
             type="button" 
             aria-label="Закрыть"
-            onClick={closeModal}>
+            onClick={handleClose}>
           </button>
           {component}
         </div>
