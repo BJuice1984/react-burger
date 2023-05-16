@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS } from '../../constants/constants';
 import Main from '../../pages/Main';
 import Modal from '../Modal/Modal';
@@ -17,6 +17,7 @@ import { checkAuth } from '../../services/actions/checkAuth';
 import { getItems } from '../../services/actions/initialIngridients';
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state && location.state.background;
@@ -25,6 +26,10 @@ function App() {
     dispatch(checkAuth());
     dispatch(getItems());
   }, [dispatch]);
+
+  const closeModalCard = () => {
+    navigate(-1);
+  }
 
   return (
     <div className={ styles.page }>
@@ -43,7 +48,7 @@ function App() {
         </Routes>
         {background &&
         <Routes>
-          <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard background = {background}/>}/>} />
+          <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard background = {background}/>} handleClose={closeModalCard}/>} />
         </Routes>}
 
       </div>

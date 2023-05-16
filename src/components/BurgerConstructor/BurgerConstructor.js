@@ -8,8 +8,7 @@ import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCar
 import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
-import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
-import { postItems } from "../../services/actions/orderDetails";
+import { CLEAR_ORDER_NUMBER, postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
 import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
@@ -48,6 +47,10 @@ export default function BurgerConstructor() {
     const ingridientsId = userIngridients.userItems.map(item => item._id);
     ingridientsId.push(userIngridients.bun._id);
     dispatch(postItems({"ingredients": ingridientsId}));
+  }
+
+  const closeModalOrder = () => {
+    dispatch({type: CLEAR_ORDER_NUMBER})
   }
 
   // useEffect(() => {
@@ -116,7 +119,7 @@ export default function BurgerConstructor() {
         </Button>
       </div>
       {orderNumber && (
-        <Modal component={<ModalOrder />}/>
+        <Modal component={<ModalOrder />} handleClose={closeModalOrder} />
       )}
     </section>
   )
