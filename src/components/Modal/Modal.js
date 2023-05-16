@@ -1,6 +1,4 @@
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import ModalOrder from "../ModalOrder/ModalOrder";
-import ModalError from "../ModalError/ModalError";
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import useClose from "../../hooks/useClose";
@@ -12,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const modalRoot = document.getElementById("modal");
 
 export default function Modal({ component }) {
-  const { modalOpen, displayedItem } = useSelector(getModalDetails);
+  const { modalOpen } = useSelector(getModalDetails);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,7 +33,7 @@ export default function Modal({ component }) {
     ReactDOM.createPortal(
       <>
         <ModalOverlay component={component}/>
-        <div className={`${ styles.window } ${component || modalOpen ? styles.windowOpened : ''}`}>
+        <div className={`${ styles.window } ${modalOpen ? styles.windowOpened : ''}`}>
           <button 
             className={ styles.closeButton }
             type="button" 
@@ -43,8 +41,6 @@ export default function Modal({ component }) {
             onClick={closeModal}>
           </button>
           {component && component}
-          {typeof(displayedItem) === "number" ? <ModalOrder /> : displayedItem === false && <ModalError /> }
-
         </div>
       </>
       , modalRoot)

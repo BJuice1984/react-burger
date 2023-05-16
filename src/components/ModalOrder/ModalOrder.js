@@ -1,10 +1,10 @@
 import styles from './modalOrder.module.css';
 import { useSelector } from 'react-redux';
-import { getDisplayedItem } from '../../services/selectors/modalDetails';
+import { getOrderNumber } from '../../services/selectors/orderDetails';
 
 export default function ModalOrder() {
 
-  const orderNumber = useSelector(getDisplayedItem);
+  const orderNumber = useSelector(getOrderNumber);
 
   return(
     <div className={ styles.container }>

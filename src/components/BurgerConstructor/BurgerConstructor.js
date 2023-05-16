@@ -13,6 +13,8 @@ import { postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
 import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
+import Modal from "../Modal/Modal";
+import ModalOrder from "../ModalOrder/ModalOrder";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -20,8 +22,8 @@ export default function BurgerConstructor() {
   
   const userIngridients = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
-  const orderSuccess = useSelector(getOrderSuccess);
-  const orderFailed = useSelector(getOrderFailed);
+  // const orderSuccess = useSelector(getOrderSuccess);
+  // const orderFailed = useSelector(getOrderFailed);
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
 
@@ -48,19 +50,19 @@ export default function BurgerConstructor() {
     dispatch(postItems({"ingredients": ingridientsId}));
   }
 
-  useEffect(() => {
-    if (orderSuccess && typeof(orderSuccess) !== "string") {
-      dispatch({
-        type: SHOW_ITEM_DETAILS,
-        item: orderNumber
-        })
-    } else if (orderFailed) {
-      dispatch({
-        type: SHOW_ITEM_DETAILS,
-        item: !orderFailed
-        })
-    }
-  }, [dispatch, orderFailed, orderNumber, orderSuccess])
+  // useEffect(() => {
+  //   if (orderSuccess && typeof(orderSuccess) !== "string") {
+  //     dispatch({
+  //       type: SHOW_ITEM_DETAILS,
+  //       item: orderNumber
+  //       })
+  //   } else if (orderFailed) {
+  //     dispatch({
+  //       type: SHOW_ITEM_DETAILS,
+  //       item: !orderFailed
+  //       })
+  //   }
+  // }, [dispatch, orderFailed, orderNumber, orderSuccess])
 
   const orderPrice = useMemo(() => {
     return (
@@ -113,6 +115,9 @@ export default function BurgerConstructor() {
           {checkTrue ? 'Оформить заказ' : 'Добавьте ингридиенты'}
         </Button>
       </div>
+      {orderNumber && (
+        <Modal component={<ModalOrder />}/>
+      )}
     </section>
   )
 }
