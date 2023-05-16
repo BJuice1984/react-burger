@@ -1,13 +1,13 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS } from '../../constants/constants';
-import Main from '../Main/Main';
+import Main from '../../pages/Main';
 import Modal from '../Modal/Modal';
 import ModalCard from '../ModalCard/ModalCard';
 import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Registration from '../Registration/Registration';
-import ForgotPassword from '../ForgotPassword/ForgotPassword';
-import Profile from '../Profile/Profile';
+import Login from '../../pages/Login';
+import Registration from '../../pages/Registration';
+import ForgotPassword from '../../pages/ForgotPassword';
+import Profile from '../../pages/Profile';
 import Orders from '../Orders/Orders';
 import styles from './app.module.css';
 import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';

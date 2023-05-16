@@ -1,10 +1,10 @@
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./login.module.css";
+import styles from "../components/Login/login.module.css";
 import { Link } from "react-router-dom";
-import { SIGN_UP, FORGOT_PASSWORD } from "../../constants/constants";
-import { useForm } from "../../hooks/useForm";
+import { SIGN_UP, FORGOT_PASSWORD } from "../constants/constants";
+import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
-import { postLogin } from "../../services/actions/profile";
+import { postLogin } from "../services/actions/profile";
 
 export default function Login() {
   const {values, handleChange } = useForm({});

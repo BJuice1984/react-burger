@@ -1,12 +1,12 @@
-import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
+import ProfileNavigation from "../components/ProfileNavigation/ProfileNavigation";
 import { EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../hooks/useForm";
 import { useEffect } from "react";
-import styles from "./profile.module.css";
+import styles from "../components/Profile/profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
-import { getUser } from "../../services/actions/profile";
-import useCookies from "../../hooks/useCookies";
+import { postProfileEmail, postProfileName } from "../services/selectors/profile";
+import { getUser } from "../services/actions/profile";
+import useCookies from "../hooks/useCookies";
 
 export default function Profile() {
   const profileEmail = useSelector(postProfileEmail);

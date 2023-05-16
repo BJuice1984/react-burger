@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "../Login/login.module.css";
+import styles from "../components/Login/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { SIGN_IN } from "../../constants/constants";
-import { useForm } from "../../hooks/useForm";
+import { SIGN_IN } from "../constants/constants";
+import { useForm } from "../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { postRegister } from "../../services/actions/profile";
-import { postProfileRefreshToken } from "../../services/selectors/profile";
+import { postRegister } from "../services/actions/profile";
+import { postProfileRefreshToken } from "../services/selectors/profile";
 
 export default function Registration() {
   const {values, handleChange } = useForm({});

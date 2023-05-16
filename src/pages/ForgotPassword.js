@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "../Login/login.module.css";
-import { useForm } from "../../hooks/useForm";
+import styles from "../components/Login/login.module.css";
+import { useForm } from "../hooks/useForm";
 import { Link } from "react-router-dom";
 // import { FORGOT_PASSWORD, USER_IS_NOT_EXIST } from "../../constants/constants";
-import { SHOW_ITEM_DETAILS } from "../../services/actions/modalDetails";
+import { SHOW_ITEM_DETAILS } from "../services/actions/modalDetails";
 import { useDispatch, useSelector } from "react-redux";
-import { postForgotPassword, resetForgotPassword, POST_FORGOT_PASSWORD_FAILED } from "../../services/actions/forgotPassword";
-import { postForgotPasswordIsUserExist, postForgotPasswordFailed } from "../../services/selectors/forgotPassword";
+import { postForgotPassword, resetForgotPassword, POST_FORGOT_PASSWORD_FAILED } from "../services/actions/forgotPassword";
+import { postForgotPasswordIsUserExist, postForgotPasswordFailed } from "../services/selectors/forgotPassword";
 
 export default function ForgotPassword() {
   const [emailCode, setEmailcode] = useState(false);
