@@ -1,4 +1,4 @@
-import { POST_FORGOT_PASSWORD_EMAIL_REQUEST, POST_FORGOT_PASSWORD_EMAIL_SUCCESS, POST_FORGOT_PASSWORD_EMAIL_FAILED } from "../actions/forgotPassword";
+import { POST_FORGOT_PASSWORD_REQUEST, POST_FORGOT_PASSWORD_SUCCESS, POST_FORGOT_PASSWORD_FAILED } from "../actions/forgotPassword";
 
 const forgotPasswordDetails = {
   isUserExist: false,
@@ -9,13 +9,13 @@ const forgotPasswordDetails = {
 
 export const forgotPasswordReducer = (state = forgotPasswordDetails, action) => {
   switch (action.type) {
-    case POST_FORGOT_PASSWORD_EMAIL_REQUEST: {
+    case POST_FORGOT_PASSWORD_REQUEST: {
       return {
         ...state,
         forgotPasswordRequest: true
       }
     }
-    case POST_FORGOT_PASSWORD_EMAIL_SUCCESS: {
+    case POST_FORGOT_PASSWORD_SUCCESS: {
       return {
         ...state,
         isUserExist: true,
@@ -24,7 +24,7 @@ export const forgotPasswordReducer = (state = forgotPasswordDetails, action) => 
         forgotPasswordFailed: false
       }
     }
-    case POST_FORGOT_PASSWORD_EMAIL_FAILED: {
+    case POST_FORGOT_PASSWORD_FAILED: {
       return {
         ...state,
         isUserExist: false,
@@ -33,8 +33,8 @@ export const forgotPasswordReducer = (state = forgotPasswordDetails, action) => 
         forgotPasswordFailed: true
       }
     }
-    default: {
-      return state;
-    }
+      default: {
+        return state;
+      }
   }
 }

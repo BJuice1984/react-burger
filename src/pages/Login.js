@@ -1,36 +1,30 @@
-import { useState } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./login.module.css";
+import styles from "../components/Login/login.module.css";
 import { Link } from "react-router-dom";
-import { SIGN_UP, FORGOT_PASSWORD } from "../../constants/constants";
+import { SIGN_UP, FORGOT_PASSWORD } from "../constants/constants";
+import { useForm } from "../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { postLogin } from "../services/actions/profile";
 
 export default function Login() {
-  const [value, setValue] = useState({
-    email: '',
-    password: '',
-  });
+  const {values, handleChange } = useForm({});
 
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setValue((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+    dispatch(postLogin(values.email, values.password))
+  };
 
   return (
     <section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Вход</h2>
-      <form 
-      style={{ display: 'flex', flexDirection: 'column' }}
+      <form
+      className={ styles.form }
       onSubmit={handleSubmit}>
         <EmailInput
           onChange={handleChange}
-          value={value.email}
+          value={values.email || ''}
           name={'email'}
           placeholder="E-mail"
           isIcon={false}
@@ -38,12 +32,12 @@ export default function Login() {
         />
         <PasswordInput
           onChange={handleChange}
-          value={value.password}
+          value={values.password || ''}
           name={'password'}
           extraClass="mb-6"
         />
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
           extraClass={`${styles.button} mb-20`}>

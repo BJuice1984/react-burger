@@ -1,15 +1,10 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function useClose() {
 
-  const modalOpen = useSelector(state => state.modalDetails.modalOpen);
-
-  function EscClose(closeModal) {
-
+  function useEscClose(closeModal) {
     useEffect(() => {
-      if (!modalOpen) return;
-  
       function handleEsc(e) {
         if (e.key === "Escape") {
           closeModal()
@@ -21,11 +16,8 @@ function useClose() {
     }, [closeModal]);
   } 
   
-  function ClickClose(closeModal, openedClass) {
-  
+  function useClickClose(closeModal, openedClass) {
     useEffect(() => {
-      if(!modalOpen) return;
-  
       function handleClickClose(e) {
         if (e.target.className.includes(openedClass)) {
           closeModal()
@@ -38,8 +30,8 @@ function useClose() {
   }
 
   return {
-    EscClose,
-    ClickClose
+    useEscClose,
+    useClickClose
   }
 }
 

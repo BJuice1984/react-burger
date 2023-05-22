@@ -1,37 +1,40 @@
 import styles from './modalCard.module.css';
 import { useSelector } from 'react-redux';
-import { getDisplayedItem } from '../../services/selectors/modalDetails';
+import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
+import { useParams } from 'react-router-dom';
 
-export default function ModalCard() {
+export default function ModalCard(background) {
 
-  const ingridient = useSelector(getDisplayedItem);
+  const { id } = useParams();
+  const ingredients = useSelector(getInitialIngridientsItems);
+  const ingredient = ingredients.find(item => item._id === id);
 
   return(
-    ingridient && (
+    ingredient && (
     <div className={ styles.container }>
-      <h2 className={`${ styles.header } text text_type_main-medium pt-10 ml-10`}>Детали ингредиента</h2>
+      <h2 className={`${ styles.header } text text_type_main-medium pt-10`}>Детали ингредиента</h2>
       <img
         className={ styles.pic }
-        src={ingridient.image}
+        src={background ? ingredient.image : ingredient.image_large}
         alt="Картинка. Изображение ингридиента">
       </img>
-      <span className={`${ styles.description } text pt-4 pb-8`}>{ingridient.name}</span>
+      <span className={`${ styles.description } text pt-4 pb-8`}>{ingredient.name}</span>
       <div className={`${ styles.calContainer } pb-15`}>
         <article className={`${ styles.cal } pb-2`}>
           <h2 className={`${ styles.calDescription } text text_type_main-small text_color_inactive pb-1`}>Калории,ккал</h2>
-          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingridient.calories}</p>
+          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingredient.calories}</p>
         </article>
         <article className={`${ styles.cal } pb-2`}>
           <h2 className={`${ styles.calDescription } text text_type_main-small text_color_inactive pb-1`}>Белки, г</h2>
-          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingridient.proteins}</p>
+          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingredient.proteins}</p>
         </article>
         <article className={`${ styles.cal } pb-2`}>
           <h2 className={`${ styles.calDescription } text text_type_main-small text_color_inactive pb-1`}>Жиры, г</h2>
-          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingridient.fat}</p>
+          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingredient.fat}</p>
         </article>
         <article className={`${ styles.cal } pb-2`}>
           <h2 className={`${ styles.calDescription } text text_type_main-small text_color_inactive pb-1`}>Углеводы, г</h2>
-          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingridient.carbohydrates}</p>
+          <p className={`${ styles.calValue } text text_type_main-small text_color_inactive`}>{ingredient.carbohydrates}</p>
         </article>
       </div>
     </div>

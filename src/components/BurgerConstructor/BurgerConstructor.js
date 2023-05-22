@@ -1,23 +1,30 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { SIGN_IN } from "../../constants/constants";
 import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
 import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngridients";
-import { SHOW_ITEM_DETAILS } from '../../services/actions/modalDetails';
-import { postItems } from "../../services/actions/orderDetails";
+import { CLEAR_ORDER_NUMBER, postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
 import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
+import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
+import Modal from "../Modal/Modal";
+import ModalOrder from "../ModalOrder/ModalOrder";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const userIngridients = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
-  const orderSuccess = useSelector(getOrderSuccess);
-  const orderFailed = useSelector(getOrderFailed);
+  // const orderSuccess = useSelector(getOrderSuccess);
+  // const orderFailed = useSelector(getOrderFailed);
+  const profileEmail = useSelector(postProfileEmail);
+  const profileName = useSelector(postProfileName);
 
   const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0
 
@@ -33,24 +40,32 @@ export default function BurgerConstructor() {
   const hover = isHover ? styles.onHover : '';
 
   const getOrderNumberId = () => {
+    if (!profileEmail && !profileName) {
+      return navigate(SIGN_IN);
+    }
+
     const ingridientsId = userIngridients.userItems.map(item => item._id);
     ingridientsId.push(userIngridients.bun._id);
     dispatch(postItems({"ingredients": ingridientsId}));
   }
 
-  useEffect(() => {
-    if (orderSuccess && typeof(orderSuccess) !== "string") {
-      dispatch({
-        type: SHOW_ITEM_DETAILS,
-        item: orderNumber
-        })
-    } else if (orderFailed) {
-      dispatch({
-        type: SHOW_ITEM_DETAILS,
-        item: !orderFailed
-        })
-    }
-  }, [dispatch, orderFailed, orderNumber, orderSuccess])
+  const closeModalOrder = () => {
+    dispatch({type: CLEAR_ORDER_NUMBER})
+  }
+
+  // useEffect(() => {
+  //   if (orderSuccess && typeof(orderSuccess) !== "string") {
+  //     dispatch({
+  //       type: SHOW_ITEM_DETAILS,
+  //       item: orderNumber
+  //       })
+  //   } else if (orderFailed) {
+  //     dispatch({
+  //       type: SHOW_ITEM_DETAILS,
+  //       item: !orderFailed
+  //       })
+  //   }
+  // }, [dispatch, orderFailed, orderNumber, orderSuccess])
 
   const orderPrice = useMemo(() => {
     return (
@@ -62,7 +77,7 @@ export default function BurgerConstructor() {
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={`${ styles.burgerConstructorContainer } ${hover}`}>
+      <div className={`${ styles.burgerConstructorContainer } ${hover}`}>
         {userIngridients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="top"
@@ -103,6 +118,9 @@ export default function BurgerConstructor() {
           {checkTrue ? 'Оформить заказ' : 'Добавьте ингридиенты'}
         </Button>
       </div>
+      {orderNumber && (
+        <Modal component={<ModalOrder />} handleClose={closeModalOrder} />
+      )}
     </section>
   )
 }

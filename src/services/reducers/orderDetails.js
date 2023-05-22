@@ -1,4 +1,4 @@
-import { POST_ITEM_REQUEST, POST_ITEM_SUCCESS, POST_ITEM_FAILED } from "../actions/orderDetails";
+import { POST_ITEM_REQUEST, POST_ITEM_SUCCESS, POST_ITEM_FAILED, CLEAR_ORDER_NUMBER } from "../actions/orderDetails";
 
 const orderDetails = {
   orderName: '',
@@ -34,6 +34,13 @@ export const orderDetailsReducer = (state = orderDetails, action) => {
         orderSuccess: action.orderDetails.success ? action.orderDetails.success : action.orderDetails,
         orderRequest: false,
         orderFailed: true,
+      }
+    }
+    case CLEAR_ORDER_NUMBER: {
+      return {
+        ...state,
+        orderName: '',
+        orderNumber: null,
       }
     }
     default: {

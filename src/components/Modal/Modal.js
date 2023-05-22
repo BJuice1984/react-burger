@@ -1,49 +1,40 @@
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import ModalCard from "../ModalCard/ModalCard";
-import ModalOrder from "../ModalOrder/ModalOrder";
-import ModalError from "../ModalError/ModalError";
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import useClose from "../../hooks/useClose";
-import { useSelector, useDispatch } from 'react-redux';
-import { DELETE_ITEM_DETAILS } from "../../services/actions/modalDetails";
-import { getModalDetails } from "../../services/selectors/modalDetails";
+import { useEffect, useState } from "react";
 
 const modalRoot = document.getElementById("modal");
 
-export default function Modal() {
+export default function Modal({ component, handleClose }) {
+const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { modalOpen, displayedItem } = useSelector(getModalDetails);
-  const dispatch = useDispatch();
-
-  const closeModal = () => {
-    dispatch({
-    type: DELETE_ITEM_DETAILS,
-    })
-  };
+useEffect(() => {
+  if (component) {
+    setIsModalOpen(true);
+  }
+}, [component]);
 
   const {
-    EscClose,
-    ClickClose
+    useEscClose,
+    useClickClose
   } = useClose();
 
-  EscClose(closeModal);
-  ClickClose(closeModal, "modalOpened");
+  useEscClose(handleClose);
+  useClickClose(handleClose, "modalOpened");
 
   return(
     ReactDOM.createPortal(
       <>
-        <ModalOverlay />
-        <div className={`${ styles.window } ${modalOpen ? styles.windowOpened : ''}`}>
+        <ModalOverlay isModalOpen={isModalOpen}/>
+        <div className={`${ styles.window } ${isModalOpen ? styles.windowOpened : ''}`}>
           <button 
             className={ styles.closeButton }
             type="button" 
             aria-label="Закрыть"
-            onClick={closeModal}>
+            onClick={handleClose}>
           </button>
-
-          {typeof(displayedItem) === "number" ? <ModalOrder /> : displayedItem === false ? <ModalError /> : <ModalCard />}
-
+          {component}
         </div>
       </>
       , modalRoot)
