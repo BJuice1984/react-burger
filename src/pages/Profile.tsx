@@ -19,6 +19,7 @@ export default function Profile() {
   const {values, handleChange, setValues} = useForm({});
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(getUser());
   }, [dispatch, cookie]);
 

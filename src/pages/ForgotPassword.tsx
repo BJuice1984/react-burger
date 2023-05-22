@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../components/Login/login.module.css";
 import { useForm } from "../hooks/useForm";
@@ -10,7 +10,7 @@ import { postForgotPassword, resetForgotPassword, POST_FORGOT_PASSWORD_FAILED } 
 import { postForgotPasswordIsUserExist, postForgotPasswordFailed } from "../services/selectors/forgotPassword";
 
 export default function ForgotPassword() {
-  const [emailCode, setEmailcode] = useState(false);
+  const [emailCode, setEmailcode] = useState<boolean>(false);
   const {values, handleChange } = useForm({});
 
   const dispatch = useDispatch();
@@ -31,11 +31,13 @@ export default function ForgotPassword() {
     }
   }, [dispatch, forgotPasswordFailed])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!emailCode) {
+      //@ts-ignore
       dispatch(postForgotPassword(values.email))
     } else if (isUserExist) {
+      //@ts-ignore
       dispatch(resetForgotPassword(values.password, values.code))
     } else {
       setEmailcode(false);

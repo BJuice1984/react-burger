@@ -77,9 +77,9 @@ export const postLogin = (email, password) => {
 export const postLogout = () => {
   return function(dispatch) {
     const { deleteCookie, getCookie } = useCookies();
-    const { clearToken } = useSessionStorage();
+    const { clearToken, getToken } = useSessionStorage();
     let cookie = getCookie('token');
-    let token = JSON.parse(sessionStorage.getItem('refreshToken'));
+    let token = getToken('refreshToken');
 
     dispatch({ type: POST_PROFILE_LOGOUT})
     Auth.logout(token, cookie).then(res => {

@@ -23,7 +23,9 @@ function App() {
   const background = location.state && location.state.background;
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(checkAuth());
+    //@ts-ignore
     dispatch(getItems());
   }, [dispatch]);
 
