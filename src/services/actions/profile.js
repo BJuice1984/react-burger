@@ -19,7 +19,7 @@ export const postRegister = (email, password, name) => {
     Auth.register(email, password, name).then(res => {
       if (res && res.success) {
         setToken('refreshToken', res.refreshToken);
-        setCookie('token', res);
+        setCookie('token', res.accessToken);
         dispatch({
           type: POST_FETCH_SUCCESS,
           profile: res
@@ -51,7 +51,7 @@ export const postLogin = (email, password) => {
     Auth.login(email, password).then(res => {
       if (res && res.success) {
         setToken('refreshToken', res.refreshToken);
-        setCookie('token', res);
+        setCookie('token', res.accessToken);
         dispatch({
           type: POST_FETCH_SUCCESS,
           profile: res

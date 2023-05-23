@@ -1,7 +1,6 @@
 function useCookies() {
-
   // Эта функция нормализует работу с временем жизни куки и обрабатывает те случаи, когда время жизни куки не было передано
-  function trimCookie(name, value, props) {
+  function trimCookie(name: string, value: string, props?: any) {
     props = props || {};
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
@@ -24,13 +23,13 @@ function useCookies() {
     document.cookie = updatedCookie;
   };
 
-  function setCookie(prop, res) {    
+  function setCookie(prop: string, res: string) {
     let authToken;
-    authToken = res.accessToken.split('Bearer ')[1];
+    authToken = res.split('Bearer ')[1];
     trimCookie(prop, authToken);
   };
 
-  function getCookie(name) {
+  function getCookie(name: string): string | undefined {
     const matches = document.cookie.match(
       // eslint-disable-next-line no-useless-escape
       new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
@@ -38,7 +37,7 @@ function useCookies() {
     return matches ? decodeURIComponent(matches[1]) : undefined;
   };
 
-  function deleteCookie(name) {
+  function deleteCookie(name: string) {
     trimCookie(name, "", {'max-age': -1})
   };
 

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { BUNS, SAUCES, MAINS  } from "../constants/constants";
+import { BUNS } from "../constants/constants";
 
 enum Section {
   buns = 'Булки',
@@ -16,20 +16,18 @@ function useBounding() {
   const items = useRef<TItems>({});
   const [nearestList, setNearestList] = useState<string>(BUNS);
 
-  const itemsRef = (elem: { id: string; }) => {
-
+  const itemsRef = (elem: HTMLLIElement) => {
     if (elem) items!.current![elem.id as Section] = elem;
-    //@ts-ignore
-    console.log(items)
   }
 
-   const handleScroll = () => {
-    for (let key in items.current) { 
-      const itemsCoors = items.current[key].getBoundingClientRect().top - listRef!.current!.getBoundingClientRect().top
-      if (itemsCoors <= 0 + 100) {  //@ts-ignore
-        setNearestList(items.current[key].id)
+  const handleScroll = () => {
+    const currTop = listRef.current?.getBoundingClientRect().top ?? 0 //!
+    Object.values(items.current).forEach(item => {
+      const itemsCoors = item.getBoundingClientRect().top - currTop
+      if (itemsCoors <= 0 + 100) { 
+        setNearestList(item.id)
       }
-    }
+    })
   };
 
   return {
