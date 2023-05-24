@@ -20,7 +20,7 @@ function useBounding() {
     if (elem) items!.current![elem.id as Section] = elem;
   }
 
-  const handleScroll = () => {
+  const handleScroll = ():void => {
     const currTop = listRef.current?.getBoundingClientRect().top ?? 0 //!
     Object.values(items.current).forEach(item => {
       const itemsCoors = item.getBoundingClientRect().top - currTop
