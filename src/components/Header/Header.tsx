@@ -18,7 +18,9 @@ export default function Header() {
     <header className={ styles.header }>
       <div className={ styles.container }>
         <LogoMobile />
-        <MenuMobile />
+        <MenuMobile 
+          isProfile={isProfile}
+          isBurgerConstructor={isBurgerConstructor}/>
         <nav className={ styles.links }>
           <BurgerIconLink isBurgerConstructor={isBurgerConstructor}/>
           <ListIconLink />
