@@ -5,8 +5,8 @@ import useClose from "../../hooks/useClose";
 import { FC, ReactElement, useEffect, useState } from "react";
 
 type ModalType = {
-  component: ReactElement;
-  handleClose: () => void;
+  component: ReactElement,
+  handleClose: () => void,
 }
 
 const Modal: FC<ModalType> = ({ component, handleClose }) => {
