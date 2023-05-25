@@ -1,8 +1,10 @@
 import styles from './modalError.module.css';
 import { useSelector } from 'react-redux';
 
-export default function ModalError() {
+//Временно не функционирует, т.к. нужно настраивать пропсы
 
+export default function ModalError() {
+//@ts-ignore
   const orderSuccess = useSelector(state => state.orderDetails.orderSuccess);
   console.log('Err')
 
