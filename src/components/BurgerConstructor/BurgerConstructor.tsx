@@ -14,19 +14,20 @@ import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
+import { UserIngridientsType } from "../../utils/types";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const userIngridients = useSelector(getUserIngridients);
+  const userIngridients: UserIngridientsType = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
   // const orderSuccess = useSelector(getOrderSuccess);
   // const orderFailed = useSelector(getOrderFailed);
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
 
-  const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0
+  const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0;
 
   const [{isHover}, dropTarget] = useDrop({
     accept: "ingridient",
@@ -45,8 +46,11 @@ export default function BurgerConstructor() {
     }
 
     const ingridientsId = userIngridients.userItems.map(item => item._id);
-    ingridientsId.push(userIngridients.bun._id);
-    dispatch(postItems({"ingredients": ingridientsId}));
+    if (userIngridients.bun) {
+      ingridientsId.push(userIngridients.bun._id);
+      //@ts-ignore
+      dispatch(postItems({"ingredients": ingridientsId}));
+    }
   }
 
   const closeModalOrder = () => {
@@ -124,8 +128,3 @@ export default function BurgerConstructor() {
     </section>
   )
 }
-
-BurgerConstructor.propTypes = {
-  userIngridients: burgerIngredientArrayType,
-}
-

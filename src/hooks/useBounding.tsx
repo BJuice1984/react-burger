@@ -12,7 +12,7 @@ type TItems = {
 };
 
 function useBounding() {
-  const listRef = useRef<HTMLUListElement>();
+  const listRef = useRef<HTMLUListElement>(null);
   const items = useRef<TItems>({});
   const [nearestList, setNearestList] = useState<string>(BUNS);
 
@@ -20,7 +20,7 @@ function useBounding() {
     if (elem) items!.current![elem.id as Section] = elem;
   }
 
-  const handleScroll = ():void => {
+  const handleScroll = (): void => {
     const currTop = listRef.current?.getBoundingClientRect().top ?? 0 //!
     Object.values(items.current).forEach(item => {
       const itemsCoors = item.getBoundingClientRect().top - currTop

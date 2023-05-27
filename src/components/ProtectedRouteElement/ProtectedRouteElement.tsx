@@ -7,7 +7,7 @@ import { ReactElement } from "react";
 type ProtectedRouteElementType = {
   onlyUnAuth?: boolean,
   component: ReactElement
-}
+};
 
 export default function ProtectedRouteElement({ onlyUnAuth = false, component }: ProtectedRouteElementType) {
   const profileEmail = useSelector(postProfileEmail);

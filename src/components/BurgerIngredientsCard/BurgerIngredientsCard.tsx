@@ -1,11 +1,16 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burgerIngredientsCard.module.css';
-import { burgerIngredientType, countType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { INGREDIENTS } from '../../constants/constants';
+import { IngredientType } from '../../utils/types';
 
-export default function BurgerIngredientsCard({ ingridient, count }) {
+type BurgerIngredientsCardType = {
+  ingridient: IngredientType,
+  count: number
+};
+
+export default function BurgerIngredientsCard({ ingridient, count }: BurgerIngredientsCardType) {
   const location = useLocation();
 
   const [{isDrag}, dragRef] = useDrag({
@@ -35,9 +40,4 @@ export default function BurgerIngredientsCard({ ingridient, count }) {
       <button className={`${ styles.addBtn } text`}>Добавить</button>
     </Link>
   )
-}
-
-BurgerIngredientsCard.propTypes = {
-  ingridient: burgerIngredientType.isRequired,
-  count: countType,
 }
