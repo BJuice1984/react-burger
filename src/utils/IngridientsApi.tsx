@@ -1,12 +1,12 @@
 import { INGRIDIENTS_API, ORDER_API } from '../constants/constants';
 import { request } from './utilsApi';
-import { postIngridientsType } from './prop-types';
+import { IngredientType } from './types';
 
 export const getIngridients = () => {
-  return request(INGRIDIENTS_API)
+  return request(INGRIDIENTS_API, {})
 }
 
-export const postIngridients = (ingridients) => {
+export const postIngridients = (ingridients: Array<IngredientType>) => {
   return request(ORDER_API, {
     method: 'POST',
     headers: {
@@ -15,8 +15,4 @@ export const postIngridients = (ingridients) => {
     },
     body: JSON.stringify(ingridients)
   })
-}
-
-postIngridients.propTypes = {
-  ingridients: postIngridientsType.isRequired,
 }

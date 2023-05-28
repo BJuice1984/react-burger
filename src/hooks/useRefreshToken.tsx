@@ -8,7 +8,8 @@ function useRefreshToken() {
   let token = getToken('refreshToken');
 
   function postRefreshToken() {
-    refreshToken(token).then(res => {
+    if (token) 
+    return refreshToken(token).then(res => {
       if (res && res.success) {
         setCookie('token', res);
         setToken('refreshToken', res.refreshToken);

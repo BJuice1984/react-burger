@@ -54,15 +54,7 @@ function BurgerConstructorCard({ ingridient, index }: BurgerConstructorCardType)
        // Получаем положение курсора
 		  const clientOffset = monitor.getClientOffset();
       // Получаем положение курсора относительно текущего элемента
-
-
-
-      
-      //@ts-ignore
-
-
-
-		  const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+		  const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
       // Выходим, если перемещаемый элемент ниже, чем 50% от высоты текущего
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
