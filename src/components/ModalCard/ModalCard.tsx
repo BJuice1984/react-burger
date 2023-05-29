@@ -2,12 +2,13 @@ import styles from './modalCard.module.css';
 import { useSelector } from 'react-redux';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
 import { useParams } from 'react-router-dom';
+import { IngredientType } from '../../utils/types';
 
-export default function ModalCard(background) {
+export default function ModalCard() {
 
   const { id } = useParams();
   const ingredients = useSelector(getInitialIngridientsItems);
-  const ingredient = ingredients.find(item => item._id === id);
+  const ingredient = ingredients.find((item: IngredientType) => item._id === id);
 
   return(
     ingredient && (
@@ -15,7 +16,7 @@ export default function ModalCard(background) {
       <h2 className={`${ styles.header } text text_type_main-medium pt-10`}>Детали ингредиента</h2>
       <img
         className={ styles.pic }
-        src={background ? ingredient.image : ingredient.image_large}
+        src={ingredient.image_large}
         alt="Картинка. Изображение ингридиента">
       </img>
       <span className={`${ styles.description } text pt-4 pb-8`}>{ingredient.name}</span>

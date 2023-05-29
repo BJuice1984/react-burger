@@ -7,27 +7,32 @@ import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/p
 import { BUNS, SAUCES, MAINS } from '../../constants/constants';
 import useBounding from '../../hooks/useBounding';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
+import { getUserIngridients } from "../../services/selectors/userIngridients";
+import { UserIngridientsType, IngredientsGroupedType, IngredientType } from '../../utils/types';
+
+type CounterType = {
+  [key: string]: number
+}
 
 export default function BurgerIngredients() {
+  const groupedIngridients: IngredientsGroupedType = groupBy(useSelector(getInitialIngridientsItems), "type");
 
-  const groupedIngridients = groupBy(useSelector(getInitialIngridientsItems), "type");
-
-  function groupBy(objectArray, property) {
+  function groupBy(objectArray: Array<IngredientType>, property: string) {
     return objectArray.reduce((acc, obj) => {
-      const key = obj[property];
-      const curGroup = acc[key] ?? [];
+      const key = obj[property as keyof typeof obj];
+      const curGroup = acc[key as keyof typeof acc] ?? [];
   
       return { ...acc, [key]: [...curGroup, obj] };
     }, {});
   };
 
-  const userIngridients = useSelector(state => state.userIngridients);
+  const userIngridients: UserIngridientsType = useSelector(getUserIngridients);
 
   const userIngridientsCount = useMemo(() => {
-    const counter = {};
+    const counter: CounterType = {};
     userIngridients.userItems.forEach((item) => {
-      if (!counter[item._id]) counter[item._id] = 0;
-      counter[item._id]++;
+      if (!counter[item._id as keyof typeof counter]) counter[item._id] = 0;
+      counter[item._id as keyof typeof counter]++;
     });
     if (userIngridients.bun)
       counter[userIngridients.bun._id] = 2;

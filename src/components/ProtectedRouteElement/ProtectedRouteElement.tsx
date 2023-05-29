@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
-// import { postProfileRefreshToken } from "../../services/selectors/profile";
-// import { authChecked } from "../../services/selectors/checkAuth";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import { SIGN_IN } from "../../constants/constants";
 import { Navigate, useLocation } from "react-router-dom";
+import { ReactElement } from "react";
 
-export default function ProtectedRouteElement({ onlyUnAuth = false, component }) {
-  // const accessToken = useSelector(postProfileRefreshToken);
-  // const isAuthChecked = useSelector(authChecked);
+type ProtectedRouteElementType = {
+  onlyUnAuth?: boolean,
+  component: ReactElement
+};
+
+export default function ProtectedRouteElement({ onlyUnAuth = false, component }: ProtectedRouteElementType) {
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
 

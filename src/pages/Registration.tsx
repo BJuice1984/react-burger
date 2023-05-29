@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FormEvent, useEffect } from "react";
 import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../components/Login/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,8 +22,9 @@ export default function Registration() {
     return navigate(SIGN_IN)
   }, [navigate, profileRefreshToken])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(postRegister(values.email, values.password, values.name))
   };
 

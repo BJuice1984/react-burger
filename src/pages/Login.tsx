@@ -5,14 +5,16 @@ import { SIGN_UP, FORGOT_PASSWORD } from "../constants/constants";
 import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../services/actions/profile";
+import { FormEvent } from "react";
 
 export default function Login() {
   const {values, handleChange } = useForm({});
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(postLogin(values.email, values.password))
   };
 

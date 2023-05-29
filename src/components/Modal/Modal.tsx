@@ -2,12 +2,17 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import useClose from "../../hooks/useClose";
-import { useEffect, useState } from "react";
+import { FC, ReactElement, useEffect, useState } from "react";
 
-const modalRoot = document.getElementById("modal");
+type ModalType = {
+  component: ReactElement,
+  handleClose: () => void,
+}
 
-export default function Modal({ component, handleClose }) {
-const [isModalOpen, setIsModalOpen] = useState(false);
+const Modal: FC<ModalType> = ({ component, handleClose }) => {
+const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+const modalRoot = document.getElementById("modal")!;
 
 useEffect(() => {
   if (component) {
@@ -40,3 +45,5 @@ useEffect(() => {
       , modalRoot)
   )
 }
+
+export default Modal;

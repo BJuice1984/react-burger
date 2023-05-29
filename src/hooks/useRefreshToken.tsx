@@ -4,11 +4,12 @@ import useSessionStorage from "./useSessionStorage";
 
 function useRefreshToken() {
   const { setCookie } = useCookies();
-  const { setToken } = useSessionStorage();
-  let token = JSON.parse(sessionStorage.getItem('refreshToken'));
+  const { setToken, getToken } = useSessionStorage();
+  let token = getToken('refreshToken');
 
   function postRefreshToken() {
-    refreshToken(token).then(res => {
+    if (token) 
+    return refreshToken(token).then(res => {
       if (res && res.success) {
         setCookie('token', res);
         setToken('refreshToken', res.refreshToken);

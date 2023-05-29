@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { nearestListType } from "../../utils/prop-types";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BUNS, SAUCES, MAINS } from "../../constants/constants";
 import styles from './burgerTab.module.css'
 
-export default function BurgerTab({ nearestList }) {
+type BurgerTabType = {
+  nearestList: string
+}
+
+export default function BurgerTab({ nearestList }: BurgerTabType) {
   const [current, setCurrent] = useState(BUNS);
 
   useEffect(() => {
@@ -13,9 +16,9 @@ export default function BurgerTab({ nearestList }) {
     }
   }, [current, nearestList]);
 
-  const onTabClick = (tab) => {
+  const onTabClick = (tab: string) => {
     setCurrent(tab);
-    document.getElementById(tab).scrollIntoView({behavior: "smooth"});
+    document.getElementById(tab)!.scrollIntoView({behavior: "smooth"});
   }
   return (
     <div className={`${ styles.tabContainer } pt-5 pb-10`}>
@@ -30,8 +33,4 @@ export default function BurgerTab({ nearestList }) {
       </Tab>
     </div>
   )
-}
-
-BurgerTab.propTypes = {
-  nearestList: nearestListType.isRequired,
-}
+};

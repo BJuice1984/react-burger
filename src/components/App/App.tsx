@@ -16,14 +16,29 @@ import { useDispatch } from 'react-redux';
 import { checkAuth } from '../../services/actions/checkAuth';
 import { getItems } from '../../services/actions/initialIngridients';
 
+type LocationType = {
+  hash: string;
+  pathname: string;
+  search: string;
+  state: undefined | null;
+};
+
+type LocationWithStateType = Omit<LocationType, 'state'> & {
+  state: {
+    background: LocationType;
+  };
+};
+
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location: LocationType | LocationWithStateType = useLocation();
   const background = location.state && location.state.background;
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(checkAuth());
+    //@ts-ignore
     dispatch(getItems());
   }, [dispatch]);
 
@@ -43,11 +58,11 @@ function App() {
           <Route path={PROFILE} element={<ProtectedRouteElement component={<Profile />}/>}>
             <Route path={ORDERS} element={<Orders />} />
           </Route>
-          <Route path={`${INGREDIENTS}/:id`} element={<ModalCard background = {background}/>} />
+          <Route path={`${INGREDIENTS}/:id`} element={<ModalCard/>} />
         </Routes>
         {background &&
         <Routes>
-          <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard background = {background}/>} handleClose={closeModalCard}/>} />
+          <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard/>} handleClose={closeModalCard}/>} />
         </Routes>}
 
       </div>

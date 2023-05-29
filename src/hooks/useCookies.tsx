@@ -1,36 +1,30 @@
 function useCookies() {
-
   // Эта функция нормализует работу с временем жизни куки и обрабатывает те случаи, когда время жизни куки не было передано
-  function trimCookie(name, value, props) {
+  type propTypes = {
+    [property: string]: number;
+  }
+
+  function trimCookie(name: string, value: string, props?: propTypes) {
     props = props || {};
-    let exp = props.expires;
-    if (typeof exp == 'number' && exp) {
-      const d = new Date();
-      d.setTime(d.getTime() + exp * 1000);
-      exp = props.expires = d;
-    }
-    if (exp && exp.toUTCString) {
-      props.expires = exp.toUTCString();
-    }
     value = encodeURIComponent(value);
     let updatedCookie = name + '=' + value;
     for (const propName in props) {
       updatedCookie += '; ' + propName;
       const propValue = props[propName];
-      if (propValue !== true) {
+      if (propValue === -1) {
         updatedCookie += '=' + propValue;
       }
     }
     document.cookie = updatedCookie;
   };
 
-  function setCookie(prop, res) {    
+  function setCookie(prop: string, res: string) {
     let authToken;
-    authToken = res.accessToken.split('Bearer ')[1];
+    authToken = res.split('Bearer ')[1];
     trimCookie(prop, authToken);
   };
 
-  function getCookie(name) {
+  function getCookie(name: string): string | undefined {
     const matches = document.cookie.match(
       // eslint-disable-next-line no-useless-escape
       new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
@@ -38,7 +32,7 @@ function useCookies() {
     return matches ? decodeURIComponent(matches[1]) : undefined;
   };
 
-  function deleteCookie(name) {
+  function deleteCookie(name: string) {
     trimCookie(name, "", {'max-age': -1})
   };
 

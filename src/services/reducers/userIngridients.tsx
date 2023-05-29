@@ -1,11 +1,12 @@
 import { ADD_USER_ITEM, MOVE_USER_ITEM, DELETE_USER_ITEM } from "../actions/userIngridients";
+import { UserIngridientsType } from "../../utils/types";
 
-const userIngridients = {
+const userIngridients: UserIngridientsType = {
   userItems: [],
   bun: null,
 }
 
-export const userIngridientsReducer = (state = userIngridients, action) => {
+export const userIngridientsReducer = (state = userIngridients, action: any) => {
   switch (action.type) {
     case ADD_USER_ITEM: {
       if (action.ingridient.type === 'bun') {

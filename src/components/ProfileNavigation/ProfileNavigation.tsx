@@ -12,13 +12,14 @@ export default function ProfileNavigation() {
   const navigate = useNavigate();
 
   const handleLogut = () => {
+    //@ts-ignore
     dispatch(postLogout());
     navigate(SIGN_IN);
   }
 
   return(
     <nav className={ styles.links }>
-      <Link to={PROFILE} className={`${ styles.link } ${location.pathname === {PROFILE} ? '' : styles.link_disactive }`}><p className={`${ styles.description } text`}>Профиль</p></Link>
+      <Link to={PROFILE} className={`${ styles.link } ${location.pathname === PROFILE ? '' : styles.link_disactive }`}><p className={`${ styles.description } text`}>Профиль</p></Link>
       <Link to={ORDERS} className={`${ styles.link } ${location.pathname === ORDERS ? '' : styles.link_disactive }`}><p className={`${ styles.description } text`}>История заказов</p></Link>
       <button className={ styles.btn } onClick={handleLogut}>Выход</button>
     </nav>

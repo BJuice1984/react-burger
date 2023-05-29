@@ -1,15 +1,20 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { burgerIngredientType, indexType } from '../../utils/prop-types';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef, memo } from 'react';
 import styles from './BurgerConstructorCard.module.css';
 
 import { useDispatch } from 'react-redux';
 import { MOVE_USER_ITEM, DELETE_USER_ITEM } from '../../services/actions/userIngridients';
+import { IngredientType } from '../../utils/types';
 
-function BurgerConstructorCard({ ingridient, index }) {
+type BurgerConstructorCardType = {
+  ingridient: IngredientType,
+  index: number
+};
+
+function BurgerConstructorCard({ ingridient, index }: BurgerConstructorCardType) {
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
 
   const [{isDrag}, drag] = useDrag({
     type: "sort_ingridient",
@@ -27,7 +32,7 @@ function BurgerConstructorCard({ ingridient, index }) {
     collect: monitor => ({
       handlerId: monitor.getHandlerId()
     }),
-    hover(item, monitor) {
+    hover(item: any, monitor) {
       if (!ref.current) {
         return;
       }
@@ -49,7 +54,7 @@ function BurgerConstructorCard({ ingridient, index }) {
        // Получаем положение курсора
 		  const clientOffset = monitor.getClientOffset();
       // Получаем положение курсора относительно текущего элемента
-		  const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+		  const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
       // Выходим, если перемещаемый элемент ниже, чем 50% от высоты текущего
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
@@ -89,8 +94,3 @@ function BurgerConstructorCard({ ingridient, index }) {
 }
 
 export default memo(BurgerConstructorCard);
-
-BurgerConstructorCard.propTypes = {
-  ingridient: burgerIngredientType.isRequired,
-  index: indexType,
-}
