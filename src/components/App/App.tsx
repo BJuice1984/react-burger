@@ -55,7 +55,8 @@ function App() {
           <Route path={SIGN_UP} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Registration />}/>} />
           <Route path={FORGOT_PASSWORD} element={<ProtectedRouteElement onlyUnAuth = {true} component={<ForgotPassword />}/>} />
           <Route path='/' element={<Main />} />
-          <Route path={PROFILE} element={<ProtectedRouteElement component={<Profile />}/>}>
+          <Route path={PROFILE} >
+            <Route index element={<ProtectedRouteElement component={<Profile />}/>} />
             <Route path={ORDERS} element={<Orders />} />
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<ModalCard/>} />

@@ -52,9 +52,9 @@ function BurgerConstructorCard({ ingridient, index }: BurgerConstructorCardType)
       // Получаем центр текущего элемента по вертикали
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
        // Получаем положение курсора
-		  const clientOffset = monitor.getClientOffset();
+		  const clientOffset = monitor.getClientOffset() || { y: 0 };
       // Получаем положение курсора относительно текущего элемента
-		  const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
+		  const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       // Выходим, если перемещаемый элемент ниже, чем 50% от высоты текущего
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
