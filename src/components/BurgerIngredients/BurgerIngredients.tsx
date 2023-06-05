@@ -3,7 +3,6 @@ import { Fragment, useMemo } from "react";
 import { useSelector } from 'react-redux';
 import BurgerIngredientsCard from '../BurgerIngredientsCard/BurgerIngredientsCard';
 import BurgerTab from '../BurgerTab/BurgerTab';
-import { burgerIngredientArrayType, groupedIngridientsType } from '../../utils/prop-types';
 import { BUNS, SAUCES, MAINS } from '../../constants/constants';
 import useBounding from '../../hooks/useBounding';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
@@ -89,9 +88,4 @@ export default function BurgerIngredients() {
       }
     </section>
   )
-}
-
-BurgerIngredients.propTypes = {
-  userIngridients: burgerIngredientArrayType,
-  groupedIngridients: groupedIngridientsType,
 }

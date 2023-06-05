@@ -20,6 +20,7 @@ export const FORGOT_PASSWORD = '/forgot-password';
 export const PROFILE = '/profile';
 export const ORDERS = 'orders';
 export const INGREDIENTS = '/ingridients';
+export const FEED = '/feed';
 
 export const USER_IS_NOT_EXIST = 'Извините, но такойго пользователя нет в нашей базе. Попробуйте ввести свой email ещё раз'
 

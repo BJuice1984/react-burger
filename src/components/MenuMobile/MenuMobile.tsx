@@ -7,9 +7,10 @@ import styles from './menuMobile.module.css';
 type MenuMobileType = {
   isProfile: boolean,
   isBurgerConstructor: boolean,
+  isFeed: boolean,
 };
 
-export default function MenuMobile({ isProfile, isBurgerConstructor }: MenuMobileType) {
+export default function MenuMobile({ isProfile, isBurgerConstructor, isFeed }: MenuMobileType) {
 
   return (
     <div className={`${styles.burgerMenu} ${styles.burgerMenu_type__visible}`}>
@@ -28,7 +29,7 @@ export default function MenuMobile({ isProfile, isBurgerConstructor }: MenuMobil
             <ProfileNavigation />
           </details>
           <li className={ styles.listItem }><BurgerIconLink isBurgerConstructor={isBurgerConstructor}/></li>
-          <li className={ styles.listItem }><ListIconLink /></li>
+          <li className={ styles.listItem }><ListIconLink isFeed={isFeed} /></li>
         </ul>
       </div>
     </div>

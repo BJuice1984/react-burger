@@ -1,0 +1,27 @@
+.element {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  flex-direction: column;
+  position: relative;
+  cursor: grab;
+  opacity: 1;
+  transition: 0.1s ease-in-out;
+  text-decoration: none;
+  color: var(--text-primary-color);
+}
+
+@media screen and (max-width: 768px) {
+  .element {
+    justify-self: stretch;
+  }
+
+  .element > p {
+    font-size: 22px;
+  }
+}
+
+.element:hover {
+  opacity: 0.5;
+  transition: 0.2s ease-in-out;
+}
