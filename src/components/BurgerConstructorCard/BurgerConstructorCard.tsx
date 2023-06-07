@@ -4,7 +4,7 @@ import { useRef, memo } from 'react';
 import styles from './BurgerConstructorCard.module.css';
 
 import { useDispatch } from 'react-redux';
-import { MOVE_USER_ITEM, DELETE_USER_ITEM } from '../../services/actions/userIngridients';
+import { MOVE_USER_ITEM, DELETE_USER_ITEM } from '../../services/actions/userIngredients';
 import { IngredientType } from '../../utils/types';
 
 type BurgerConstructorCardType = {

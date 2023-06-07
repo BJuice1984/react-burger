@@ -7,7 +7,7 @@ import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
 import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
-import { addIngridientId } from "../../services/actions/userIngridients";
+import { addIngridientId } from "../../services/actions/userIngredients";
 import { CLEAR_ORDER_NUMBER, postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
 import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";

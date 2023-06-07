@@ -1,11 +1,26 @@
 import { getIngridients } from '../../utils/IngridientsApi';
+import { AppDisatch } from '../types';
 
 export const GET_ITEM_REQUEST = 'GET_ITEM_REQUEST';
 export const GET_ITEM_SUCCESS = 'GET_ITEM_SUCCESS';
 export const GET_ITEM_FAILED = 'GET_ITEM_FAILED';
 
+interface IGetItemRequest {
+  readonly type: typeof GET_ITEM_REQUEST;
+};
+interface IGetItemSuccess {
+  readonly type: typeof GET_ITEM_SUCCESS;
+};
+interface IGetItemFailed {
+  readonly type: typeof GET_ITEM_FAILED;
+};
+
+export type InitialItemsActionTypes = IGetItemRequest
+  | IGetItemSuccess
+  | IGetItemFailed;
+
 export const getItems = () => {
-  return function(dispatch) {
+  return function(dispatch: AppDisatch) {
     dispatch({ type: GET_ITEM_REQUEST })
     getIngridients().then(res => {
       if (res && res.success) {

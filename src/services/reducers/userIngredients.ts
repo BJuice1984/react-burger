@@ -1,4 +1,4 @@
-import { ADD_USER_ITEM, MOVE_USER_ITEM, DELETE_USER_ITEM } from "../actions/userIngridients";
+import { ADD_USER_ITEM, MOVE_USER_ITEM, DELETE_USER_ITEM, UserItemsActionTypes } from "../actions/userIngredients";
 import { UserIngridientsType } from "../../utils/types";
 
 const userIngridients: UserIngridientsType = {
@@ -6,18 +6,18 @@ const userIngridients: UserIngridientsType = {
   bun: null,
 }
 
-export const userIngridientsReducer = (state = userIngridients, action: any) => {
+export const userIngridientsReducer = (state = userIngridients, action: UserItemsActionTypes): UserIngridientsType => {
   switch (action.type) {
     case ADD_USER_ITEM: {
-      if (action.ingridient.type === 'bun') {
+      if (action.ingredient.type === 'bun') {
         return {
           ...state,
-          bun: action.ingridient
+          bun: action.ingredient
         }
       }
       return {
         ...state,
-        userItems: [...state.userItems, action.ingridient]
+        userItems: [...state.userItems, action.ingredient]
       }
     }
     case MOVE_USER_ITEM: {
@@ -31,7 +31,7 @@ export const userIngridientsReducer = (state = userIngridients, action: any) => 
     case DELETE_USER_ITEM: {
       return {
         ...state,
-        userItems: [...state.userItems.filter((item) => item.id !== action.ingridient.id)]
+        userItems: [...state.userItems.filter((item) => item.id !== action.ingredient.id)]
       }
     } 
     default: {

@@ -2,6 +2,7 @@ const baseUrl = 'https://norma.nomoreparties.space/api';
 export const INGRIDIENTS_API = `${baseUrl}/ingredients`;
 export const ORDER_API = `${baseUrl}/orders`;
 export const RESET_PASSWORD_API = `${baseUrl}/password-reset`;
+export const FEED_API_WS = 'wss://norma.nomoreparties.space/orders/all';
 //------/auth
 export const REGISTER_API = `${baseUrl}/auth/register`;
 export const LOGIN_API = `${baseUrl}/auth/login`;

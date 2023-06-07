@@ -15,7 +15,7 @@ import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElemen
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkAuth } from '../../services/actions/checkAuth';
-import { getItems } from '../../services/actions/initialIngridients';
+import { getItems } from '../../services/actions/initialIngredients';
 
 type LocationType = {
   hash: string;
