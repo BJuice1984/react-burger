@@ -5,7 +5,6 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import { SIGN_IN } from "../../constants/constants";
 import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
-import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngredients";
 import { CLEAR_ORDER_NUMBER, postItems } from "../../services/actions/orderDetails";
@@ -15,6 +14,7 @@ import { postProfileEmail, postProfileName } from "../../services/selectors/prof
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { UserIngridientsType } from "../../utils/types";
+import { IngredientType } from "../../utils/types";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export default function BurgerConstructor() {
       dropItem: monitor.getItem(),
       isHover: monitor.isOver(),
     }),
-    drop: (ingridient) => dispatch(addIngridientId(ingridient)),
+    drop: (ingredient: IngredientType) => dispatch(addIngridientId(ingredient)),
   });
 
   const hover = isHover ? styles.onHover : '';

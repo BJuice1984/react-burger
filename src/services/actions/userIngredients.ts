@@ -26,6 +26,6 @@ export type UserItemsActionTypes = IAddUserItem
 export const addIngridientId = (ingredient: IngredientType) => {
   return {
     type: ADD_USER_ITEM,
-    ingridient: {...ingredient, id: uuid()}
+    ingredient: {...ingredient, id: uuid()}
   }
 }

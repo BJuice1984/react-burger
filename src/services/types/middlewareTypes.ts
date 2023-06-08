@@ -4,4 +4,4 @@ import { rootReducer } from "../reducers/rootReducer";
 export type AppDisatch = ThunkDispatch<RootState, unknown, AppActions>;
 export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppActions = 
+export type AppActions = any
