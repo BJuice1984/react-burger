@@ -1,16 +1,22 @@
-import { POST_FETCH_REQUEST, POST_FETCH_SUCCESS, POST_FETCH_FAILED, POST_PROFILE_LOGOUT, POST_PROFILE_FETCH_SUCCESS } from "../actions/profile";
+import { ProfileDetailsType } from "../../utils/types";
+import { POST_FETCH_REQUEST, POST_FETCH_SUCCESS, POST_FETCH_FAILED, POST_PROFILE_LOGOUT, POST_PROFILE_FETCH_SUCCESS, ProfileActionTypes } from "../actions/profile";
 
-const profileDetails = {
+function getToken() {
+  let token = sessionStorage.getItem('refreshToken');
+  if (token) return token;
+}
+
+const profileDetails: ProfileDetailsType = {
   profileEmail: null,
   profileName: null,
-  profileRefreshToken: JSON.parse(sessionStorage.getItem('refreshToken')) || null,
+  profileRefreshToken: getToken() || null,
   profileLogout: false,
   fetchSuccess: false,
   fetchRequest: false,
   fetchFailed: false,
 };
 
-export const profileReducer = (state = profileDetails, action) => {
+export const profileReducer = (state = profileDetails, action: ProfileActionTypes): ProfileDetailsType => {
   switch(action.type) {
     case POST_FETCH_REQUEST: {
       return {

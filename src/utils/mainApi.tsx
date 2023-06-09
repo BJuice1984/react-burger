@@ -1,27 +1,7 @@
 import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, REFRESH_TOKEN_API, USER_API } from "../constants/constants";
 import { request } from "./utilsApi";
 
-type EmailType = {
-  email: string,
-};
-
-type PasswordType = {
-  password: string,
-};
-
-type NameType = {
-  name: string,
-};
-
-type CookieType = {
-  cookie: string,
-};
-
-type TokenType = {
-  token: string,
-};
-
-export const register = (email: EmailType, password: PasswordType, name: NameType) => {
+export const register = (email: string, password: string, name: string) => {
   return request(REGISTER_API, {
     method: 'POST',
     headers: {
@@ -32,7 +12,7 @@ export const register = (email: EmailType, password: PasswordType, name: NameTyp
   })
 };
 
-export const login = (email: EmailType, password: PasswordType) => {
+export const login = (email: string, password: string) => {
   return request(LOGIN_API, {
     method: 'POST',
     headers: {
@@ -43,7 +23,7 @@ export const login = (email: EmailType, password: PasswordType) => {
   })
 };
 
-export const logout = (token: TokenType, cookie: CookieType) => {
+export const logout = (token: string | null, cookie: string | null) => {
   return request(LOGOUT_API, {
     method: 'POST',
     headers: {
@@ -66,7 +46,7 @@ export const refreshToken = (token: string) => {
   })
 };
 
-export const forgotPassword = (email: EmailType) => {
+export const forgotPassword = (email: string) => {
   return request(RESET_PASSWORD_API, {
     method: 'POST',
     headers: {
@@ -77,7 +57,7 @@ export const forgotPassword = (email: EmailType) => {
   })
 };
 
-export const resetPassword = (password: PasswordType, token: TokenType) => {
+export const resetPassword = (password: string, token: string) => {
   return request(`${RESET_PASSWORD_API}/reset`, {
     method: 'POST',
     headers: {
@@ -88,7 +68,7 @@ export const resetPassword = (password: PasswordType, token: TokenType) => {
   })
 };
 
-export const getUser = (cookie: CookieType) => {
+export const getUser = (cookie: string | null) => {
   return request(USER_API, {
     headers: {
       Authorization: 'Bearer ' + cookie

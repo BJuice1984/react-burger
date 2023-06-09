@@ -22,4 +22,14 @@ export type IngredientsGroupedType = {
 export type UserIngridientsType = {
   userItems: Array<IngredientType & { id: string }>,
   bun: IngredientType & { id: string } | null
-}
+};
+
+export type ProfileDetailsType = {
+  fetchSuccess: boolean,
+  profileEmail: string | null,
+  profileName: string | null,
+  profileRefreshToken: string | null,
+  profileLogout: boolean,
+  fetchRequest: boolean,
+  fetchFailed: boolean,
+};

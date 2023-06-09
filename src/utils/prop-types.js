@@ -22,14 +22,14 @@ export const groupedIngridientsType = objectOf({
   sauce: arrayOf(burgerIngredientType)
 });
 
-export const countType = number;
-export const indexType = number;
-export const nearestListType = string;
-export const postIngridientsType = arrayOf(number);
+// export const countType = number;
+// export const indexType = number;
+// export const nearestListType = string;
+// export const postIngridientsType = arrayOf(number);
 
-export const emailType = string;
-export const passwordType = string;
-export const nameType = string;
-export const tokenType = number;
-export const cookieType = string;
+// export const emailType = string;
+// export const passwordType = string;
+// export const nameType = string;
+// export const tokenType = number;
+// export const cookieType = string;
 
