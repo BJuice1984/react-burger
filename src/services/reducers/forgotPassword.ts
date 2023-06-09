@@ -1,13 +1,14 @@
-import { POST_FORGOT_PASSWORD_REQUEST, POST_FORGOT_PASSWORD_SUCCESS, POST_FORGOT_PASSWORD_FAILED } from "../actions/forgotPassword";
+import { ForgotPasswordType } from "../../utils/types";
+import { POST_FORGOT_PASSWORD_REQUEST, POST_FORGOT_PASSWORD_SUCCESS, POST_FORGOT_PASSWORD_FAILED, ForgotPasswordActionTypes } from "../actions/forgotPassword";
 
-const forgotPasswordDetails = {
+const forgotPasswordDetails: ForgotPasswordType = {
   isUserExist: false,
   forgotPasswordSuccess: false,
   forgotPasswordRequest: false,
   forgotPasswordFailed: false,
 }
 
-export const forgotPasswordReducer = (state = forgotPasswordDetails, action) => {
+export const forgotPasswordReducer = (state = forgotPasswordDetails, action: ForgotPasswordActionTypes): ForgotPasswordType => {
   switch (action.type) {
     case POST_FORGOT_PASSWORD_REQUEST: {
       return {

@@ -38,3 +38,10 @@ export type CheckAuthType = {
     authChecked: boolean,
     authFetchRequest: boolean,
 };
+
+export type ForgotPasswordType = {
+  isUserExist: boolean,
+  forgotPasswordSuccess: boolean,
+  forgotPasswordRequest: boolean,
+  forgotPasswordFailed: boolean,
+};
