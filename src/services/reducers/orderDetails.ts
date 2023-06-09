@@ -1,14 +1,15 @@
-import { POST_ITEM_REQUEST, POST_ITEM_SUCCESS, POST_ITEM_FAILED, CLEAR_ORDER_NUMBER } from "../actions/orderDetails";
+import { OrderDetailsType } from "../../utils/types";
+import { POST_ITEM_REQUEST, POST_ITEM_SUCCESS, POST_ITEM_FAILED, CLEAR_ORDER_NUMBER, OrderDetailsActionTypes } from "../actions/orderDetails";
 
-const orderDetails = {
+const orderDetails: OrderDetailsType = {
   orderName: '',
   orderNumber: null,
   orderSuccess: false,
   orderRequest: false,
   orderFailed: false,
-}
+};
 
-export const orderDetailsReducer = (state = orderDetails, action) => {
+export const orderDetailsReducer = (state = orderDetails, action: OrderDetailsActionTypes): OrderDetailsType => {
   switch (action.type) {
     case POST_ITEM_REQUEST: {
       return {
@@ -31,7 +32,7 @@ export const orderDetailsReducer = (state = orderDetails, action) => {
         ...state,
         orderName: '',
         orderNumber: null,
-        orderSuccess: action.orderDetails.success ? action.orderDetails.success : action.orderDetails,
+        orderSuccess: action.orderDetails.success,
         orderRequest: false,
         orderFailed: true,
       }

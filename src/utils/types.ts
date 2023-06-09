@@ -45,3 +45,11 @@ export type ForgotPasswordType = {
   forgotPasswordRequest: boolean,
   forgotPasswordFailed: boolean,
 };
+
+export type OrderDetailsType = {
+  orderName: string,
+  orderNumber: number | null,
+  orderSuccess: boolean,
+  orderRequest: boolean,
+  orderFailed: boolean,
+};
