@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,7 +9,7 @@ import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngredients";
 import { CLEAR_ORDER_NUMBER, postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
-import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
+import { getOrderNumber } from "../../services/selectors/orderDetails";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
@@ -22,8 +22,6 @@ export default function BurgerConstructor() {
   
   const userIngridients: UserIngridientsType = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
-  // const orderSuccess = useSelector(getOrderSuccess);
-  // const orderFailed = useSelector(getOrderFailed);
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
 
@@ -56,20 +54,6 @@ export default function BurgerConstructor() {
   const closeModalOrder = () => {
     dispatch({type: CLEAR_ORDER_NUMBER})
   }
-
-  // useEffect(() => {
-  //   if (orderSuccess && typeof(orderSuccess) !== "string") {
-  //     dispatch({
-  //       type: SHOW_ITEM_DETAILS,
-  //       item: orderNumber
-  //       })
-  //   } else if (orderFailed) {
-  //     dispatch({
-  //       type: SHOW_ITEM_DETAILS,
-  //       item: !orderFailed
-  //       })
-  //   }
-  // }, [dispatch, orderFailed, orderNumber, orderSuccess])
 
   const orderPrice = useMemo(() => {
     return (
