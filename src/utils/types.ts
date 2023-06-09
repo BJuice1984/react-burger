@@ -33,3 +33,8 @@ export type ProfileDetailsType = {
   fetchRequest: boolean,
   fetchFailed: boolean,
 };
+
+export type CheckAuthType = {
+    authChecked: boolean,
+    authFetchRequest: boolean,
+};
