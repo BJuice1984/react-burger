@@ -7,7 +7,7 @@ import { BUNS, SAUCES, MAINS } from '../../constants/constants';
 import useBounding from '../../hooks/useBounding';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
 import { getUserIngridients } from "../../services/selectors/userIngridients";
-import { UserIngridientsType, IngredientsGroupedType, IngredientType } from '../../utils/types';
+import { UserIngredientsType, IngredientsGroupedType, IngredientType } from '../../utils/types';
 
 type CounterType = {
   [key: string]: number
@@ -25,7 +25,7 @@ export default function BurgerIngredients() {
     }, {});
   };
 
-  const userIngridients: UserIngridientsType = useSelector(getUserIngridients);
+  const userIngridients: UserIngredientsType = useSelector(getUserIngridients);
 
   const userIngridientsCount = useMemo(() => {
     const counter: CounterType = {};
@@ -56,31 +56,31 @@ export default function BurgerIngredients() {
             <li ref={itemsRef} id={BUNS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
               {BUNS}
               <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
-                {groupedIngridients.bun.map(ingridient => 
+                {groupedIngridients.bun.map(ingredient => 
                   <BurgerIngredientsCard
-                    ingridient={ingridient}
-                    key={ingridient._id}
-                    count={userIngridientsCount[ingridient._id]} />)}
+                    ingredient={ingredient}
+                    key={ingredient._id}
+                    count={userIngridientsCount[ingredient._id]} />)}
               </ul>
             </li>
             <li ref={itemsRef} id={SAUCES} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
               {SAUCES}
               <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
-                {groupedIngridients.sauce.map(ingridient => 
+                {groupedIngridients.sauce.map(ingredient => 
                   <BurgerIngredientsCard
-                    ingridient={ingridient}
-                    key={ingridient._id}
-                    count={userIngridientsCount[ingridient._id]} />)}
+                    ingredient={ingredient}
+                    key={ingredient._id}
+                    count={userIngridientsCount[ingredient._id]} />)}
               </ul>
             </li>
             <li ref={itemsRef} id={MAINS} className={`${ styles.ingridientsListHeader } text text_type_main-medium`}>
               {MAINS}
               <ul className={`${ styles.ingridientsList } pt-6 pb-10`}>
-                {groupedIngridients.main.map(ingridient => 
+                {groupedIngridients.main.map(ingredient => 
                   <BurgerIngredientsCard
-                    ingridient={ingridient}
-                    key={ingridient._id}
-                    count={userIngridientsCount[ingridient._id]} />)}
+                    ingredient={ingredient}
+                    key={ingredient._id}
+                    count={userIngridientsCount[ingredient._id]} />)}
               </ul>
             </li>
           </ul>

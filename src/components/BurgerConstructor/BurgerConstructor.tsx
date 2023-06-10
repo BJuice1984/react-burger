@@ -47,7 +47,7 @@ export default function BurgerConstructor() {
     if (userIngredients.bun) {
       ingredientsId.push(userIngredients.bun._id);
 
-      dispatch(postItems({"ingredients": ingredientsId}));
+      dispatch(postItems(ingredientsId));
     }
   }
 
