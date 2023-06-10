@@ -1,5 +1,5 @@
 import * as Auth from '../../utils/mainApi';
-import { AppDisatch } from '../types';
+import { AppDispatch } from '../types';
 
 export const POST_FORGOT_PASSWORD_REQUEST = 'POST_FORGOT_PASSWORD_REQUEST';
 export const POST_FORGOT_PASSWORD_SUCCESS = 'POST_FORGOT_PASSWORD_SUCCESS';
@@ -25,7 +25,7 @@ export type ForgotPasswordActionTypes = IPostForgotPasswordRequest
   | IPostForgotPasswordFailed;
 
 export const postForgotPassword = (email: string) => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     dispatch({ type: POST_FORGOT_PASSWORD_REQUEST})
     Auth.forgotPassword(email).then(res => {
       if (res && res.success) {
@@ -50,7 +50,7 @@ export const postForgotPassword = (email: string) => {
 };
 
 export const resetForgotPassword = (newPassword: string, code: string) => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     dispatch({ type: POST_FORGOT_PASSWORD_REQUEST})
     Auth.resetPassword(newPassword, code).then(res => {
       if (res && res.success) {

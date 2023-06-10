@@ -1,5 +1,5 @@
 import { postIngridients } from "../../utils/IngridientsApi";
-import { AppDisatch } from "../types";
+import { AppDispatch } from "../types";
 
 export const POST_ITEM_REQUEST = 'POST_ITEM_REQUEST';
 export const POST_ITEM_SUCCESS = 'POST_ITEM_SUCCESS';
@@ -38,7 +38,7 @@ export type OrderDetailsActionTypes = IPostItemRequest
   | IClearOrderNumber;
 
 export const postItems = (ingredientsId: Array<string>) => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     dispatch({ type: POST_ITEM_REQUEST})
     postIngridients(ingredientsId).then(res => {
       if (res && res.success) {

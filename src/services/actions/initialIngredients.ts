@@ -1,5 +1,5 @@
 import { getIngridients } from '../../utils/IngridientsApi';
-import { AppDisatch } from '../types';
+import { AppDispatch } from '../types';
 
 export const GET_ITEM_REQUEST = 'GET_ITEM_REQUEST';
 export const GET_ITEM_SUCCESS = 'GET_ITEM_SUCCESS';
@@ -20,7 +20,7 @@ export type InitialItemsActionTypes = IGetItemRequest
   | IGetItemFailed;
 
 export const getItems = () => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     dispatch({ type: GET_ITEM_REQUEST })
     getIngridients().then(res => {
       if (res && res.success) {

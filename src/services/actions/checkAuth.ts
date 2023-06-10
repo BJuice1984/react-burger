@@ -1,5 +1,5 @@
 import useCookies from "../../hooks/useCookies";
-import { AppDisatch } from "../types";
+import { AppDispatch } from "../types";
 // import { getUser } from "./profile";
 
 export const AUTH_CHECKED = 'AUTH_CHECKED';
@@ -11,7 +11,7 @@ interface IAuthChecked {
 export type AuthCheckedTypes = IAuthChecked;
 
 export const checkAuth = () => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     const { getCookie } = useCookies();
     let cookie = getCookie('token');
 

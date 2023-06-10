@@ -2,7 +2,7 @@ import * as Auth from '../../utils/mainApi';
 import useSessionStorage from '../../hooks/useSessionStorage';
 import useCookies from '../../hooks/useCookies';
 import useRefreshToken from '../../hooks/useRefreshToken';
-import { AppDisatch } from '../types';
+import { AppDispatch } from '../types';
 
 export const POST_FETCH_REQUEST = 'POST_FETCH_REQUEST';
 export const POST_FETCH_SUCCESS = 'POST_FETCH_SUCCESS';
@@ -52,7 +52,7 @@ export type ProfileActionTypes = IPostFetchRequest
   | IPostProfileLogout
 
 export const postRegister = (email: string, password: string, name: string) => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     const { setToken, clearToken } = useSessionStorage();
     const { setCookie } = useCookies();
 
@@ -84,7 +84,7 @@ export const postRegister = (email: string, password: string, name: string) => {
 };
 
 export const postLogin = (email: string, password: string) => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     const { setToken, clearToken } = useSessionStorage();
     const { setCookie } = useCookies();
 
@@ -116,7 +116,7 @@ export const postLogin = (email: string, password: string) => {
 };
 
 export const postLogout = () => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     const { deleteCookie, getCookie } = useCookies();
     const { clearToken, getToken } = useSessionStorage();
     let cookie = getCookie('token');
@@ -141,7 +141,7 @@ export const postLogout = () => {
 };
 
 export const getUser = () => {
-  return function(dispatch: AppDisatch) {
+  return function(dispatch: AppDispatch) {
     const { deleteCookie, getCookie } = useCookies();
     let cookie = getCookie('token');
     const { postRefreshToken } = useRefreshToken();

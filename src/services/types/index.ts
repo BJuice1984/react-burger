@@ -7,7 +7,7 @@ import { OrderDetailsActionTypes } from "../actions/orderDetails";
 import { rootReducer } from "../reducers/rootReducer";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
-type AppActionsAllTypes = InitialItemsActionTypes
+export type AppActionsAllTypes = InitialItemsActionTypes
   | UserItemsActionTypes
   | ProfileActionTypes
   | AuthCheckedTypes
