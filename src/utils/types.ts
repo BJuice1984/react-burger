@@ -19,7 +19,7 @@ export type IngredientsGroupedType = {
   sauce?: IngredientType[]
 };
 
-export type UserIngridientsType = {
+export type UserIngredientsType = {
   userItems: Array<IngredientType & { id: string }>,
   bun: IngredientType & { id: string } | null
 };

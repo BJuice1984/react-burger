@@ -13,7 +13,7 @@ import Feed from '../../pages/Feed';
 import styles from './app.module.css';
 import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "../../hooks/hooks";
 import { checkAuth } from '../../services/actions/checkAuth';
 import { getItems } from '../../services/actions/initialIngredients';
 
@@ -37,9 +37,7 @@ function App() {
   const background = location.state && location.state.background;
 
   useEffect(() => {
-    //@ts-ignore
     dispatch(checkAuth());
-    //@ts-ignore
     dispatch(getItems());
   }, [dispatch]);
 

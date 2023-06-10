@@ -3,7 +3,7 @@ import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-de
 import styles from "../components/Login/login.module.css";
 import { useForm } from "../hooks/useForm";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../hooks/hooks";
 import { postForgotPassword, resetForgotPassword, POST_FORGOT_PASSWORD_FAILED } from "../services/actions/forgotPassword";
 import { postForgotPasswordIsUserExist } from "../services/selectors/forgotPassword";
 
@@ -22,10 +22,10 @@ export default function ForgotPassword() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!emailCode) {
-      //@ts-ignore
+
       dispatch(postForgotPassword(values.email))
     } else if (isUserExist) {
-      //@ts-ignore
+
       dispatch(resetForgotPassword(values.password, values.code))
     } else {
       setEmailcode(false);

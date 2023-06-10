@@ -6,7 +6,7 @@ import { orderDetailsReducer } from './orderDetails';
 import { forgotPasswordReducer } from './forgotPassword';
 import { profileReducer } from './profile';
 import { checkAuthReducer } from './checkAuth';
-import { socketFeedMiddleware } from '../middlewares/socketFeedMiddleware';
+import { socketFeedMiddleware } from '../middlewares/socketMiddleware';
 import { wsActions } from '../actions/wsActions';
 
 export const rootReducer = combineReducers({

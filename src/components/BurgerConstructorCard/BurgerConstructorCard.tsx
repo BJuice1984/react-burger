@@ -3,16 +3,16 @@ import { useDrag, useDrop } from 'react-dnd';
 import { useRef, memo } from 'react';
 import styles from './BurgerConstructorCard.module.css';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "../../hooks/hooks";
 import { MOVE_USER_ITEM, DELETE_USER_ITEM } from '../../services/actions/userIngredients';
 import { IngredientType } from '../../utils/types';
 
 type BurgerConstructorCardType = {
-  ingridient: IngredientType,
-  index: number
+  ingredient: IngredientType & { id: string },
+  index: number,
 };
 
-function BurgerConstructorCard({ ingridient, index }: BurgerConstructorCardType) {
+function BurgerConstructorCard({ ingredient, index }: BurgerConstructorCardType) {
   const dispatch = useDispatch();
   const ref = useRef<HTMLLIElement>(null);
 
@@ -82,12 +82,12 @@ function BurgerConstructorCard({ ingridient, index }: BurgerConstructorCardType)
       <DragIcon type="primary"/>
       <ConstructorElement
         extraClass="ml-2"
-        text={`${ingridient.name}`}
-        price={ingridient.price}
-        thumbnail={ingridient.image}
+        text={`${ingredient.name}`}
+        price={ingredient.price}
+        thumbnail={ingredient.image}
         handleClose={() => dispatch({
           type: DELETE_USER_ITEM,
-          ingridient: ingridient
+          ingredient: ingredient
         })} />
     </article>
   )

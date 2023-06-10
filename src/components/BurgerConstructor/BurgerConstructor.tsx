@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "../../hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { SIGN_IN } from "../../constants/constants";
@@ -13,22 +13,22 @@ import { getOrderNumber } from "../../services/selectors/orderDetails";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
-import { UserIngridientsType } from "../../utils/types";
+import { UserIngredientsType } from "../../utils/types";
 import { IngredientType } from "../../utils/types";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const userIngridients: UserIngridientsType = useSelector(getUserIngridients);
+  const userIngredients: UserIngredientsType = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
 
-  const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0;
+  const checkTrue = userIngredients.bun && userIngredients.userItems.length !== 0;
 
   const [{isHover}, dropTarget] = useDrop({
-    accept: "ingridient",
+    accept: "ingredient",
     collect: monitor => ({
       dropItem: monitor.getItem(),
       isHover: monitor.isOver(),
@@ -43,11 +43,11 @@ export default function BurgerConstructor() {
       return navigate(SIGN_IN);
     }
 
-    const ingridientsId = userIngridients.userItems.map(item => item._id);
-    if (userIngridients.bun) {
-      ingridientsId.push(userIngridients.bun._id);
-      //@ts-ignore
-      dispatch(postItems({"ingredients": ingridientsId}));
+    const ingredientsId = userIngredients.userItems.map(item => item._id);
+    if (userIngredients.bun) {
+      ingredientsId.push(userIngredients.bun._id);
+
+      dispatch(postItems({"ingredients": ingredientsId}));
     }
   }
 
@@ -57,38 +57,38 @@ export default function BurgerConstructor() {
 
   const orderPrice = useMemo(() => {
     return (
-      userIngridients.userItems.reduce(
+      userIngredients.userItems.reduce(
         (acc, current) => acc + current.price, 0
-      ) + (userIngridients.bun ? userIngridients.bun.price * 2 : 0)
+      ) + (userIngredients.bun ? userIngredients.bun.price * 2 : 0)
     )
-  }, [userIngridients]);
+  }, [userIngredients]);
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
       <div className={`${ styles.burgerConstructorContainer } ${hover}`}>
-        {userIngridients.bun ? (<ConstructorElement
+        {userIngredients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="top"
           isLocked={true}
-          text={`${userIngridients.bun.name}(верх)`}
-          price={userIngridients.bun.price}
-          thumbnail={userIngridients.bun.image} />
+          text={`${userIngredients.bun.name}(верх)`}
+          price={userIngredients.bun.price}
+          thumbnail={userIngredients.bun.image} />
           ) : (<div className={`${styles.emptyElement} ${styles.emptyElementTop} text text_type_main-medium`}>Добавьте булки</div>)}
           
-        {userIngridients.userItems.length !== 0 ? (userIngridients.userItems.map((ingridient, index) => 
+        {userIngredients.userItems.length !== 0 ? (userIngredients.userItems.map((ingredient, index) => 
           <BurgerConstructorCard
-            ingridient={ingridient}
+            ingredient={ingredient}
             index={index}
-            key={ingridient.id} />)
+            key={ingredient.id} />)
           ) : (<div className={`${styles.emptyElement} text text_type_main-medium`}>Добавьте соусы и начинки</div>)}
           
-        {userIngridients.bun ? (<ConstructorElement
+        {userIngredients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="bottom"
           isLocked={true}
-          text={`${userIngridients.bun.name}(низ)`}
-          price={userIngridients.bun.price}
-          thumbnail={userIngridients.bun.image}/>
+          text={`${userIngredients.bun.name}(низ)`}
+          price={userIngredients.bun.price}
+          thumbnail={userIngredients.bun.image}/>
           ) : (<div className={`${styles.emptyElement} ${styles.emptyElementBottom} text text_type_main-medium`}>Добавьте булки</div>)}
  
       </div>

@@ -6,16 +6,16 @@ import { INGREDIENTS } from '../../constants/constants';
 import { IngredientType } from '../../utils/types';
 
 type BurgerIngredientsCardType = {
-  ingridient: IngredientType,
+  ingredient: IngredientType,
   count: number
 };
 
-export default function BurgerIngredientsCard({ ingridient, count }: BurgerIngredientsCardType) {
+export default function BurgerIngredientsCard({ ingredient, count }: BurgerIngredientsCardType) {
   const location = useLocation();
 
   const [{isDrag}, dragRef] = useDrag({
-    type: "ingridient",
-    item: ingridient,
+    type: "ingredient",
+    item: ingredient,
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })
@@ -24,18 +24,18 @@ export default function BurgerIngredientsCard({ ingridient, count }: BurgerIngre
   const hover = isDrag ? styles.onHover : '';
 
   return(
-    <Link to={`${INGREDIENTS}/${ingridient._id}`} state={{ background: location }}
+    <Link to={`${INGREDIENTS}/${ingredient._id}`} state={{ background: location }}
       ref={dragRef} className={ `${ styles.element } ${hover}` }>
       {count && <Counter count={count} size="default" extraClass="m-1" />}
       <img className={ styles.pic }
-        src={ingridient.image}
+        src={ingredient.image}
         alt="Картинка. Вид ингридиента">
       </img>
       <p className={`${ styles.price } pt-1 pb-1 text text_type_digits-default`}>
-        {ingridient.price}<CurrencyIcon type="primary"/>
+        {ingredient.price}<CurrencyIcon type="primary"/>
       </p>
       <span className={`${ styles.name } text`}>
-        {ingridient.name}
+        {ingredient.name}
       </span>
       <button className={`${ styles.addBtn } text`}>Добавить</button>
     </Link>
