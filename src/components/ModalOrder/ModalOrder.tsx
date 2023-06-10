@@ -1,5 +1,5 @@
 import styles from './modalOrder.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks/hooks';
 import { getOrderNumber } from '../../services/selectors/orderDetails';
 
 export default function ModalOrder() {

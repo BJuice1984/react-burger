@@ -3,7 +3,7 @@ import styles from "./order.module.css";
 
 export default function Order() {
 
-  const today = new Date()
+  const today = new Date();
 
   return(
     <section className={styles.order}>

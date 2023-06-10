@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styles from './profileNavigation.module.css';
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../hooks/hooks";
 import { postLogout } from "../../services/actions/profile";
 import { SIGN_IN, PROFILE, ORDERS } from "../../constants/constants";
 
@@ -12,7 +12,6 @@ export default function ProfileNavigation() {
   const navigate = useNavigate();
 
   const handleLogut = () => {
-    //@ts-ignore
     dispatch(postLogout());
     navigate(SIGN_IN);
   }

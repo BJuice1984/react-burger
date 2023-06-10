@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import styles from './feesCard.module.css';
+import styles from './feedCard.module.css';
 import { FEED } from '../../constants/constants';
 
 export default function FeedCard() {
