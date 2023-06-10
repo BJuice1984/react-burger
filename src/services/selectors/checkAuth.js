@@ -1,1 +1,0 @@
-export const authChecked = (state) => state.checkAuth.authChecked;
