@@ -53,3 +53,25 @@ export type OrderDetailsType = {
   orderRequest: boolean,
   orderFailed: boolean,
 };
+
+type OrderType = {
+  ingredients: Array<string>,
+  _id: string,
+  status: string,
+  number: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type OrderHistoryType = {
+    success: boolean,
+    orders: Array<OrderType>,
+    total: null,
+    totalToday: null,
+}
+
+export type OrderHistoryDetailsType = {
+  connect: boolean,
+  error: false,
+  orderHistoryDetails: OrderHistoryType,
+};

@@ -8,6 +8,7 @@ import { profileReducer } from './profile';
 import { checkAuthReducer } from './checkAuth';
 import { socketFeedMiddleware } from '../middlewares/socketMiddleware';
 import { wsActions } from '../actions/wsActions';
+import { orderHistoryReducer } from './orderHistory';
 
 export const rootReducer = combineReducers({
   initialIngridients: initialIngridientsReducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   profile: profileReducer,
   checkAuth: checkAuthReducer,
+  orderHistory: orderHistoryReducer
 })
 
 export const store = configureStore({

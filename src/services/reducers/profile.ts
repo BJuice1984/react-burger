@@ -4,7 +4,7 @@ import { POST_FETCH_REQUEST, POST_FETCH_SUCCESS, POST_FETCH_FAILED, POST_PROFILE
 function getToken() {
   let token = sessionStorage.getItem('refreshToken');
   if (token) return token;
-}
+};
 
 const profileDetails: ProfileDetailsType = {
   profileEmail: null,

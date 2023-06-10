@@ -6,13 +6,15 @@ import { ForgotPasswordActionTypes } from "../actions/forgotPassword";
 import { OrderDetailsActionTypes } from "../actions/orderDetails";
 import { rootReducer } from "../reducers/rootReducer";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { WebSocketActionTypes } from "../actions/wsActions";
 
 export type AppActionsAllTypes = InitialItemsActionTypes
   | UserItemsActionTypes
   | ProfileActionTypes
   | AuthCheckedTypes
   | ForgotPasswordActionTypes
-  | OrderDetailsActionTypes;
+  | OrderDetailsActionTypes
+  | WebSocketActionTypes;
 
 export type AppDispatch = ThunkDispatch<RootState, never, AppActionsAllTypes>;
 

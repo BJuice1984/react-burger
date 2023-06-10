@@ -1,14 +1,14 @@
 import type { Middleware } from "redux";
-import { WebSocketActionTypes } from "../actions/wsActions";
-import { AppActionsAllTypes, RootState } from "../types";
+import { WebSocketActionTypes, WebSocketActionsType } from "../actions/wsActions";
+import { RootState } from "../types";
 
-export const socketFeedMiddleware = (wsActions: WebSocketActionTypes): Middleware<{}, RootState> => {
+export const socketFeedMiddleware = (wsActions: WebSocketActionsType): Middleware<{}, RootState> => {
   return (store) => {
     let socket: WebSocket | null = null;
 
-    return next => (action: AppActionsAllTypes) => {
+    return next => (action: WebSocketActionTypes) => {
       const { dispatch } = store;
-      const { wsConnect, wsDisconnect, onOpen, onClose, onError } = wsActions;
+      const { wsConnect, wsDisconnect, onOpen, onClose, onError, onMessage } = wsActions;
 
       if (action.type === wsConnect) {
         socket = new WebSocket(action.payload);
@@ -27,10 +27,14 @@ export const socketFeedMiddleware = (wsActions: WebSocketActionTypes): Middlewar
           }
           dispatch({ type: onClose })
         }
+        socket.onmessage = (e) => {
+          const { data } = e;
+          dispatch({ type: onMessage, payload: JSON.parse(data) })
+        }
       };
 
       if (socket && action.type === wsDisconnect) {
-        socket.close();
+        socket?.close();
       };
 
       next(action)
