@@ -3,7 +3,7 @@ import styles from "../components/Login/login.module.css";
 import { Link } from "react-router-dom";
 import { SIGN_UP, FORGOT_PASSWORD } from "../constants/constants";
 import { useForm } from "../hooks/useForm";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../hooks/hooks";
 import { postLogin } from "../services/actions/profile";
 import { FormEvent } from "react";
 
@@ -14,7 +14,6 @@ export default function Login() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    //@ts-ignore
     dispatch(postLogin(values.email, values.password))
   };
 

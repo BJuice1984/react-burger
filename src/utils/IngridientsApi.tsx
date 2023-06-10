@@ -5,13 +5,13 @@ export const getIngridients = () => {
   return request(INGRIDIENTS_API, {})
 }
 
-export const postIngridients = (ingridients: Array<string>) => {
+export const postIngridients = (ingridientsId: Array<string>) => {
   return request(ORDER_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(ingridients)
+    body: JSON.stringify(ingridientsId)
   })
 }

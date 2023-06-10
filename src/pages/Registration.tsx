@@ -4,7 +4,7 @@ import styles from "../components/Login/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { SIGN_IN } from "../constants/constants";
 import { useForm } from "../hooks/useForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../hooks/hooks";
 import { postRegister } from "../services/actions/profile";
 import { postProfileRefreshToken } from "../services/selectors/profile";
 
@@ -24,7 +24,6 @@ export default function Registration() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    //@ts-ignore
     dispatch(postRegister(values.email, values.password, values.name))
   };
 
