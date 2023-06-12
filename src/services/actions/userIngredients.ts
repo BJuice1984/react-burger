@@ -23,7 +23,7 @@ export type UserItemsActionTypes = IAddUserItem
   | IMoveUserItem
   | IDeleteUserItem;
 
-export const addIngridientId = (ingredient: IngredientType) => {
+export const addIngridientId = (ingredient: IngredientType): IAddUserItem => {
   return {
     type: ADD_USER_ITEM,
     ingredient: {...ingredient, id: uuid()}
