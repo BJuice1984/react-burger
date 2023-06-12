@@ -1,4 +1,4 @@
-import { GET_ITEM_FAILED, GET_ITEM_SUCCESS, GET_ITEM_REQUEST } from "../actions/initialIngredients";
+import { GET_ITEM_FAILED, GET_ITEM_SUCCESS, GET_ITEM_REQUEST, InitialItemsActionTypes } from "../actions/initialIngredients";
 import { IngredientType } from "../../utils/types";
 
 type InitialIngridientsType = {
@@ -13,7 +13,7 @@ const initialIngridients: InitialIngridientsType = {
   itemsFailed: false,
 };
 
-export const initialIngridientsReducer = (state = initialIngridients, action: any): InitialIngridientsType => {
+export const initialIngridientsReducer = (state = initialIngridients, action: InitialItemsActionTypes): InitialIngridientsType => {
   switch (action.type) {
     case GET_ITEM_REQUEST: {
       return {

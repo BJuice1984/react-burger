@@ -1,4 +1,5 @@
 import { getIngridients } from '../../utils/IngridientsApi';
+import { IngredientType } from '../../utils/types';
 import { AppDispatch } from '../types';
 
 export const GET_ITEM_REQUEST = 'GET_ITEM_REQUEST';
@@ -10,6 +11,7 @@ interface IGetItemRequest {
 };
 interface IGetItemSuccess {
   readonly type: typeof GET_ITEM_SUCCESS;
+  items: Array<IngredientType>
 };
 interface IGetItemFailed {
   readonly type: typeof GET_ITEM_FAILED;

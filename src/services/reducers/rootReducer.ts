@@ -17,7 +17,7 @@ export const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   profile: profileReducer,
   checkAuth: checkAuthReducer,
-  orderHistory: orderHistoryReducer
+  orderHistory: orderHistoryReducer 
 })
 
 export const store = configureStore({
