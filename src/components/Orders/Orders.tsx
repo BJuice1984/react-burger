@@ -3,7 +3,7 @@ import Order from "../Order/Order";
 import styles from "./orders.module.css";
 import useCockies from "../../hooks/useCookies";
 import { Outlet } from "react-router-dom";
-import { useEffect } from "react"
+import { useEffect } from "react";
 import { useDispatch } from "../../hooks/hooks";
 import { WS_CONNECT, WS_DISCONNECT } from "../../services/actions/wsActions";
 import { HISTORY_FEED_API_WS } from "../../constants/constants";
@@ -22,7 +22,7 @@ export default function Orders() {
     return () => {
       dispatch({ type: WS_DISCONNECT });
     }
-  });
+  }, [dispatch, getCookie]);
 
   return(
     <section className={styles.orders}>
