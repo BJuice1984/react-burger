@@ -12,6 +12,6 @@ export const postIngridients = (ingridientsId: Array<string>) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(ingridientsId)
+    body: JSON.stringify({"ingredients": ingridientsId})
   })
 }

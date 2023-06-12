@@ -6,6 +6,7 @@ import { ForgotPasswordActionTypes } from "../actions/forgotPassword";
 import { OrderDetailsActionTypes } from "../actions/orderDetails";
 import { rootReducer } from "../reducers/rootReducer";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { ActionCreator } from "redux";
 import { WebSocketActionTypes } from "../actions/wsActions";
 
 export type AppActionsAllTypes = InitialItemsActionTypes
@@ -16,13 +17,13 @@ export type AppActionsAllTypes = InitialItemsActionTypes
   | OrderDetailsActionTypes
   | WebSocketActionTypes;
 
-export type AppDispatch = ThunkDispatch<RootState, never, AppActionsAllTypes>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionsAllTypes>;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppThunk<ReturnType = void> = ThunkAction<
+export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<
   ReturnType,
   RootState,
-  never,
-  AppActionsAllTypes
+  unknown,
+  AppActionsAllTypes>
 >;
