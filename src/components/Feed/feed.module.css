@@ -39,29 +39,18 @@
   }
 }
 
-.feedListContainer {
+.feedList {
   margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
-@media screen and (max-width: 768px) {
-  .feedListContainer {
-    margin: 0 20px;
-  }
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 14px;
+  row-gap: 35px;
 }
 
 @media screen and (max-width: 490px) {
-  .feedListContainer {
-    margin: 0 8px;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  .feedListContainer {
-    margin: 0 auto;
+  .feedList {
+    column-gap: 16px;
+    row-gap: 35px;
   }
 }

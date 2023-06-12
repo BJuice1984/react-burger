@@ -18,7 +18,6 @@ export default function Orders() {
     if (token) {
       dispatch({ type: WS_CONNECT, payload: `${HISTORY_FEED_API_WS}?token=${token}` });
     }
-
     return () => {
       dispatch({ type: WS_DISCONNECT });
     }

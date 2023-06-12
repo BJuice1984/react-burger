@@ -9,7 +9,7 @@ import Registration from '../../pages/Registration';
 import ForgotPassword from '../../pages/ForgotPassword';
 import Profile from '../../pages/Profile';
 import Orders from '../Orders/Orders';
-import Feed from '../../pages/Feed';
+import Feeds from '../../pages/Feeds';
 import styles from './app.module.css';
 import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
 import { useEffect } from 'react';
@@ -54,7 +54,7 @@ function App() {
           <Route path={SIGN_UP} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Registration />}/>} />
           <Route path={FORGOT_PASSWORD} element={<ProtectedRouteElement onlyUnAuth = {true} component={<ForgotPassword />}/>} />
           <Route path='/' element={<Main />} />
-          <Route path={FEED} element={<Feed />} />
+          <Route path={FEED} element={<Feeds />} />
           <Route path={PROFILE} >
             <Route index element={<ProtectedRouteElement component={<Profile />}/>} />
             <Route path={ORDERS} element={<ProtectedRouteElement component={<Orders />}/>} />
