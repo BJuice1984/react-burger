@@ -4,15 +4,24 @@ import { WS_CLOSE, WS_ERROR, WS_MESSAGE, WS_OPEN, WebSocketActionTypes } from ".
 const orderHistoryDetails: OrderHistoryDetailsType = {
   connect: false,
   error: false,
-  orderHistoryDetails: {
+  orderDetails: {
     success: false,
-    orders: [],
+    orders: [
+      {
+        ingredients: [],
+        _id: '',
+        status: '',
+        number: NaN,
+        createdAt: '',
+        updatedAt: '',
+      }
+    ],
     total: null,
     totalToday: null,
   }
 };
 
-export const orderHistoryReducer = (state = orderHistoryDetails, action: WebSocketActionTypes) => {
+export const orderHistoryReducer = (state = orderHistoryDetails, action: WebSocketActionTypes): OrderHistoryDetailsType => {
   switch (action.type) {
     case WS_OPEN: {
       return {
@@ -25,7 +34,7 @@ export const orderHistoryReducer = (state = orderHistoryDetails, action: WebSock
         ...state,
         connect: false,
         error: false,
-        orderHistoryDetails: {
+        orderDetails: {
           success: false,
           orders: [],
           total: null,
@@ -38,7 +47,7 @@ export const orderHistoryReducer = (state = orderHistoryDetails, action: WebSock
         ...state,
         connect: false,
         error: true,
-        orderHistoryDetails: {
+        orderDetails: {
           success: false,
           orders: [],
           total: null,
@@ -49,7 +58,7 @@ export const orderHistoryReducer = (state = orderHistoryDetails, action: WebSock
     case WS_MESSAGE: {
       return {
         ...state,
-        orderHistoryDetails: {
+        orderDetails: {
           success: action.payload.success,
           orders: action.payload.orders,
           total: action.payload.total,

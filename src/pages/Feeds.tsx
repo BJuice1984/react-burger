@@ -3,24 +3,33 @@ import Feed from '../components/Feed/Feed';
 import { useDispatch, useSelector } from "../hooks/hooks";
 import { useEffect } from "react";
 import { WS_CONNECT, WS_DISCONNECT } from "../services/actions/wsActions";
-import { FEED_API_WS } from "../constants/constants";
+import { FEED, FEED_API_WS } from "../constants/constants";
+import { useMatch } from 'react-router';
+import { OrderHistoryType } from '../utils/types';
 import { wsFeeds } from '../services/selectors/orderHistory';
 
 export default function Feeds() {
+  const isFeed = !!useMatch({ path: FEED });
   const dispatch = useDispatch();
-  const orderDetails = useSelector(wsFeeds);
+
+  const orderDetails: OrderHistoryType = useSelector(wsFeeds);
+  const { success, orders, total, totalToday } = orderDetails;
 
   useEffect(() => {
-    dispatch({ type: WS_CONNECT, payload: FEED_API_WS });
+    if (isFeed) {
+      dispatch({ type: WS_CONNECT, payload: FEED_API_WS });
+    } else {
+      dispatch({ type: WS_DISCONNECT });
+    }
     return () => {
       dispatch({ type: WS_DISCONNECT });
     }
-  }, [dispatch]);
+  }, [dispatch, isFeed]);
 
   return (
     <main className={ styles.main }>
         <div className={ styles.container }>
-          <Feed feedItems={orderDetails.orders} />
+          <Feed orders={orders}/>
         </div>
     </main>
   )

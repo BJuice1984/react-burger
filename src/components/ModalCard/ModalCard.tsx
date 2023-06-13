@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import styles from './modalCard.module.css';
 import { useSelector } from "../../hooks/hooks";
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
@@ -12,7 +12,7 @@ export default function ModalCard() {
   const ingredient = ingredients.find((item: IngredientType) => item._id === id);
 
   return(
-    <React.Fragment>
+    <Fragment>
       {ingredient && (
       <div className={ styles.container }>
         <h2 className={`${ styles.header } text text_type_main-medium pt-10`}>Детали ингредиента</h2>
@@ -42,6 +42,6 @@ export default function ModalCard() {
         </div>
       </div>
       )}
-    </React.Fragment>
+    </Fragment>
   )
 }

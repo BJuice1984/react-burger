@@ -28,4 +28,4 @@ export const addIngridientId = (ingredient: IngredientType): IAddUserItem => {
     type: ADD_USER_ITEM,
     ingredient: {...ingredient, id: uuid()}
   }
-}
+};

@@ -54,12 +54,12 @@ export type OrderDetailsType = {
   orderFailed: boolean,
 };
 
-type OrderType = {
+export type OrderType = {
   ingredients: Array<string>,
-  _id: string,
+  _id?: string,
   status: string,
   number: number,
-  createdAt: string,
+  createdAt?: string,
   updatedAt: string,
 };
 
@@ -72,6 +72,6 @@ export type OrderHistoryType = {
 
 export type OrderHistoryDetailsType = {
   connect: boolean,
-  error: false,
-  orderHistoryDetails: OrderHistoryType,
+  error: boolean,
+  orderDetails: OrderHistoryType,
 };
