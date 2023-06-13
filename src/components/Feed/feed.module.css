@@ -41,16 +41,32 @@
 
 .feedList {
   margin: 0;
-  padding-left: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 14px;
-  row-gap: 35px;
+  padding: 0;
+  padding-top: 20px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .feedList {
+    margin: 0 20px;
+  }
 }
 
 @media screen and (max-width: 490px) {
   .feedList {
-    column-gap: 16px;
-    row-gap: 35px;
+    margin: 0 8px;
   }
+}
+
+@media screen and (max-width: 350px) {
+  .feedList {
+    margin: 0 auto;
+  }
+}
+
+.feedList {
+  margin: 0;
 }

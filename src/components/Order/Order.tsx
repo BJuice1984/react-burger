@@ -3,15 +3,15 @@ import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burge
 import styles from "./order.module.css";
 import { OrderType } from "../../utils/types";
 
-function Order({ status, number, ingredients, updatedAt }: OrderType) {
+function Order({ status, name, number, ingredients, updatedAt }: OrderType) {
 
   return(
-    <section className={styles.order}>
+    <article className={styles.order}>
       <div className={styles.order_details}>
         <h2 className={`${styles.number} text text_type_main-small`}>{`#${number}`}</h2>
           <FormattedDate date={new Date(updatedAt)}/>
       </div>
-      <p className={`${styles.name} text text_type_main-medium`}>dddddd</p>
+      <p className={`${styles.name} text text_type_main-medium`}>{name}</p>
       <span className={`${styles.status} text text_type_main-small`}>{status}</span>
       <div className={styles.container}>
         <ul>
@@ -21,7 +21,7 @@ function Order({ status, number, ingredients, updatedAt }: OrderType) {
           400<CurrencyIcon type="primary"/>
         </span>
       </div>
-    </section>
+    </article>
   )
 };
 

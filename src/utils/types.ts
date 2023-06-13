@@ -58,6 +58,7 @@ export type OrderType = {
   ingredients: Array<string>,
   _id?: string,
   status: string,
+  name: string,
   number: number,
   createdAt?: string,
   updatedAt: string,
@@ -66,8 +67,8 @@ export type OrderType = {
 export type OrderHistoryType = {
     success: boolean,
     orders: Array<OrderType>,
-    total: null,
-    totalToday: null,
+    total: number,
+    totalToday: number,
 }
 
 export type OrderHistoryDetailsType = {

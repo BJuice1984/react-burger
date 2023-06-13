@@ -28,6 +28,7 @@ export default function Orders() {
       <div className={styles.orders_container}>
         <ProfileNavigation />
         <div className={ styles.container }>
+          {/* <Order />
           <Order />
           <Order />
           <Order />
@@ -35,8 +36,7 @@ export default function Orders() {
           <Order />
           <Order />
           <Order />
-          <Order />
-          <Order />
+          <Order /> */}
 
         </div>
         <p className={`${styles.description} text text_type_main-small pt-4`}>В этом разделе вы можете просмотреть свою историю заказов</p>

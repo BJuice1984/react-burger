@@ -1,10 +1,10 @@
-.main {
+.feed {
   max-width: 1280px;
   justify-self: center;
 }
 
 @media screen and (max-width: 1280px) {
-  .main {
+  .feed {
     margin: 0 15px;
   }
 }
@@ -49,23 +49,5 @@
   
   ::-webkit-scrollbar-thumb {
     display: none;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .feedListContainer {
-    margin: 0 20px;
-  }
-}
-
-@media screen and (max-width: 490px) {
-  .feedListContainer {
-    margin: 0 8px;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  .feedListContainer {
-    margin: 0 auto;
   }
 }

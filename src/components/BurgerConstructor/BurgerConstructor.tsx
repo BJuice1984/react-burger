@@ -15,6 +15,7 @@ import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { UserIngredientsType } from "../../utils/types";
 import { IngredientType } from "../../utils/types";
+import { burgerPrice } from "../../utils/helper";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -49,18 +50,14 @@ export default function BurgerConstructor() {
 
       dispatch(postItems(ingredientsId));
     }
-  }
+  };
 
   const closeModalOrder = () => {
     dispatch({type: CLEAR_ORDER_NUMBER})
-  }
+  };
 
   const orderPrice = useMemo(() => {
-    return (
-      userIngredients.userItems.reduce(
-        (acc, current) => acc + current.price, 0
-      ) + (userIngredients.bun ? userIngredients.bun.price * 2 : 0)
-    )
+    return burgerPrice(userIngredients)
   }, [userIngredients]);
 
   return(

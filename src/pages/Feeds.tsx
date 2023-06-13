@@ -1,4 +1,4 @@
-import styles from '../components/Main/main.module.css';
+import styles from '../components/Feeds/feeds.module.css';
 import Feed from '../components/Feed/Feed';
 import { useDispatch, useSelector } from "../hooks/hooks";
 import { useEffect } from "react";
@@ -27,10 +27,10 @@ export default function Feeds() {
   }, [dispatch, isFeed]);
 
   return (
-    <main className={ styles.main }>
+    <section className={ styles.feed }>
         <div className={ styles.container }>
           <Feed orders={orders}/>
         </div>
-    </main>
+    </section>
   )
 }
