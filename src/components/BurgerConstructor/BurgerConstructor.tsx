@@ -16,8 +16,11 @@ import ModalOrder from "../ModalOrder/ModalOrder";
 import { UserIngredientsType } from "../../utils/types";
 import { IngredientType } from "../../utils/types";
 import { burgerPrice } from "../../utils/helper";
+import useCookies from "../../hooks/useCookies";
 
 export default function BurgerConstructor() {
+  const { getCookie } = useCookies();
+  let cookie = getCookie('token');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -45,10 +48,10 @@ export default function BurgerConstructor() {
     }
 
     const ingredientsId = userIngredients.userItems.map(item => item._id);
-    if (userIngredients.bun) {
+    if (userIngredients.bun && cookie) {
       ingredientsId.push(userIngredients.bun._id);
 
-      dispatch(postItems(ingredientsId));
+      dispatch(postItems(ingredientsId, cookie));
     }
   };
 

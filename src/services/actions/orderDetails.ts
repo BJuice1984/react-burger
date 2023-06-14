@@ -37,10 +37,10 @@ export type OrderDetailsActionTypes = IPostItemRequest
   | IPostItemFailed
   | IClearOrderNumber;
 
-export const postItems = (ingredientsId: Array<string>) => {
+export const postItems = (ingredientsId: Array<string>, cookie: string | null) => {
   return function(dispatch: AppDispatch) {
     dispatch({ type: POST_ITEM_REQUEST})
-    postIngridients(ingredientsId).then(res => {
+    postIngridients(ingredientsId, cookie).then(res => {
       if (res && res.success) {
         dispatch({
           type: POST_ITEM_SUCCESS,
