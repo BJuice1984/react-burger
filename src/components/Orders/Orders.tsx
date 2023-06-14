@@ -15,8 +15,6 @@ export default function Orders() {
   const { getCookie} = useCockies();
   const dispatch = useDispatch();
 
-  console.log(isOrders)
-
   const orderDetails: OrderHistoryType = useSelector(wsFeeds);
   const { success, orders, total, totalToday } = orderDetails;
 
@@ -24,7 +22,6 @@ export default function Orders() {
 
   useEffect(() => {
     if (token && isOrders) {
-      console.log('isOrders', isOrders)
       dispatch({ type: WS_CONNECT, payload: `${HISTORY_FEED_API_WS}?token=${token}` });
     } else {
       dispatch({ type: WS_DISCONNECT });
@@ -36,9 +33,9 @@ export default function Orders() {
 
   return(
     <section className={styles.orders}>
-      <div className={styles.orders_container}>
+      <div className={styles.ordersContainer}>
         <ProfileNavigation />
-        <div className={ styles.container }>
+        <ul className={ styles.ordersList }>
           {orders.map(feed => 
             <Order
               status={feed.status}
@@ -47,7 +44,7 @@ export default function Orders() {
               number={feed.number}
               ingredients={feed.ingredients}
               updatedAt={feed.updatedAt} />)}
-        </div>
+        </ul>
         <p className={`${styles.description} text text_type_main-small pt-4`}>В этом разделе вы можете просмотреть свою историю заказов</p>
       </div>
       <Outlet />

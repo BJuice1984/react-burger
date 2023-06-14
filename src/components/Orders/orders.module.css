@@ -3,21 +3,27 @@
   justify-self: center;
 }
 
-.orders_container {
-  max-width: 1280px;
+.ordersContainer {
+  width: 1280px;
   justify-self: center;
   padding-top: 120px;
   display: grid;
   align-items: flex-start;
   grid-template-columns: auto 1fr;
   grid-template-rows: min-content;
+  height: 80%;
+  position: relative;
 }
 
-.container {
+.ordersList {
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+  list-style: none;
   display: flex;
-  justify-self: start;
   flex-direction: column;
-  align-items: center;
+  overflow-y: auto;
+  height: 70vh;
 }
 
 .description {
@@ -25,6 +31,8 @@
   width: 320px;
   color: #8585AD;
   opacity: 0.4;
+  position: absolute;
+  top: 360px;
 }
 
 ::-webkit-scrollbar {
