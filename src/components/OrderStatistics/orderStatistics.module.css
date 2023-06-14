@@ -1,0 +1,24 @@
+.orderStatistics {
+  display: grid;
+
+}
+
+.doneFeeds {
+  margin: 0;
+}
+
+.pendingFeeds {
+  margin: 0;
+}
+
+.feedsContainer {
+  margin: 0;
+}
+
+.ordersTotal {
+  margin: 0;
+}
+
+.ordersSum {
+  margin: 0;
+}

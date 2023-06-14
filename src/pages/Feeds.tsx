@@ -7,13 +7,14 @@ import { FEED, FEED_API_WS } from "../constants/constants";
 import { useMatch } from 'react-router';
 import { OrderHistoryType } from '../utils/types';
 import { wsFeeds } from '../services/selectors/orderHistory';
+import OrderStatistics from '../components/OrderStatistics/OrderStatistics';
 
 export default function Feeds() {
   const isFeed = !!useMatch({ path: FEED });
   const dispatch = useDispatch();
 
   const orderDetails: OrderHistoryType = useSelector(wsFeeds);
-  const { success, orders, total, totalToday } = orderDetails;
+  const { orders, total, totalToday } = orderDetails;
 
   useEffect(() => {
     if (isFeed) {
@@ -30,6 +31,7 @@ export default function Feeds() {
     <section className={ styles.feed }>
         <div className={ styles.container }>
           <Feed orders={orders}/>
+          <OrderStatistics total={total} totalToday={totalToday} />
         </div>
     </section>
   )
