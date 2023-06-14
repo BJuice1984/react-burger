@@ -10,6 +10,8 @@ type ListIconLinkType = {
 export default function ListIconLink({ isFeed }: ListIconLinkType) {
 
   return(
-    <Link to={FEED} className={`${ styles.link } pt-2 pb-2`}>{<ListIcon type={isFeed ? "primary" : "secondary"} />}<p className={`${ styles.description }`}>Лента заказов</p></Link>
+    <Link to={FEED} className={`${ styles.link } pt-2 pb-2`}>
+      {<ListIcon type={isFeed ? "primary" : "secondary"} />}
+      <p className={`${isFeed ? '' : styles.disactive} ${ styles.description }`}>Лента заказов</p></Link>
   )
 }

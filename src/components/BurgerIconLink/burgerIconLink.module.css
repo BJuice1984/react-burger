@@ -3,7 +3,7 @@
   flex-direction: row;
   color: #fff;
   text-decoration: none;
-  transition: all 0.5s;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -30,15 +30,21 @@
   }
 }
 
-.link:hover {
-  opacity: 0.5;
-  transition: 0.2s ease-in-out;
-}
-
 .description {
   margin: 0;
   margin-left: 8px;
   align-self: self-end;
+}
+
+.disactive {
+  color: #8585AD;
+  pointer-events: all;
+  transition: 0.2s ease-in-out;
+}
+
+.disactive:hover {
+  color: #fff;
+  transition: 0.2s ease-in-out;
 }
 
 @media screen and (max-width: 768px) {

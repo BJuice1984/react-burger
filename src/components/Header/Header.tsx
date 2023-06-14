@@ -6,7 +6,7 @@ import ListIconLink from '../ListIconLink/ListIconLink';
 import ProfileIconLink from '../ProfileIconLink/ProfileIconLink';
 import styles from './header.module.css'
 import { useMatch, useNavigate } from 'react-router-dom';
-import { FEED, PROFILE } from '../../constants/constants';
+import { FEED, ORDERS, PROFILE } from '../../constants/constants';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ export default function Header() {
   const isBurgerConstructor = !!useMatch({ path: '/'});
   const isProfile = !!useMatch({ path: PROFILE});
   const isFeed = !!useMatch({ path: FEED});
+  const isOrders = !!useMatch({ path: `${PROFILE}/${ORDERS}`});
   
   return(
     <header className={ styles.header }>
@@ -22,7 +23,8 @@ export default function Header() {
         <MenuMobile 
           isProfile={isProfile}
           isBurgerConstructor={isBurgerConstructor}
-          isFeed={isFeed}/>
+          isFeed={isFeed}
+          isOrders={isOrders}/>
         <nav className={ styles.links }>
           <BurgerIconLink isBurgerConstructor={isBurgerConstructor}/>
           <ListIconLink isFeed={isFeed}/>
@@ -31,7 +33,7 @@ export default function Header() {
           <Logo />
         </div>
         <button type='button' className={ styles.btn } onClick={() => navigate(PROFILE)}>
-          <ProfileIconLink isProfile={isProfile}/>
+          <ProfileIconLink isProfile={isProfile} isOrders={isOrders}/>
         </button>
       </div>
     </header>
