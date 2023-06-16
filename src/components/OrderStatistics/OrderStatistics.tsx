@@ -12,9 +12,9 @@ const OrderStatistics: FC<OrderStatisticsType> = ({ orders, total, totalToday })
 
   const groupedOrders: OrdersGroupedType = groupBy(orders, "status")
 
-  function groupBy(objectArray: Array<OrderType>, property: string) {
+  function groupBy(objectArray: Array<OrderType>, property: "status") {
     return objectArray.reduce((acc, obj) => {
-      const key = obj[property as keyof typeof obj];
+      const key = obj[property];
       const curGroup = acc[key as keyof typeof acc] ?? [];
   
       return { ...acc, [key]: [...curGroup, obj] };
@@ -31,7 +31,6 @@ const OrderStatistics: FC<OrderStatisticsType> = ({ orders, total, totalToday })
               <li className={`${styles.orderNumber} ${styles.orderNumberTypeDone} text text_type_digits-default pb-2`}>
                 {feed.number}
               </li>)}
-
           </ul>
         </div>
         <div className={styles.pendingFeeds}>
