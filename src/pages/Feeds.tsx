@@ -31,7 +31,7 @@ export default function Feeds() {
     <section className={ styles.feed }>
         <div className={ styles.container }>
           <Feed orders={orders}/>
-          <OrderStatistics total={total} totalToday={totalToday} />
+          <OrderStatistics orders={orders} total={total} totalToday={totalToday} />
         </div>
     </section>
   )

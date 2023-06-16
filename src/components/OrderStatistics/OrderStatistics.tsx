@@ -1,33 +1,53 @@
 import { FC, Fragment } from 'react';
 import styles from './orderStatistics.module.css'
+import { OrderType, OrdersGroupedType } from '../../utils/types';
 
 type OrderStatisticsType = {
   total: number,
   totalToday: number,
+  orders: Array<OrderType>
 };
 
-const OrderStatistics: FC<OrderStatisticsType> = ({ total, totalToday }) => {
+const OrderStatistics: FC<OrderStatisticsType> = ({ orders, total, totalToday }) => {
+
+  const groupedOrders: OrdersGroupedType = groupBy(orders, "status")
+
+  function groupBy(objectArray: Array<OrderType>, property: string) {
+    return objectArray.reduce((acc, obj) => {
+      const key = obj[property as keyof typeof obj];
+      const curGroup = acc[key as keyof typeof acc] ?? [];
+  
+      return { ...acc, [key]: [...curGroup, obj] };
+    }, {});
+  };
 
   return (
     <Fragment>
       <div className={styles.orderStatistics}>
         <div className={styles.doneFeeds}>
-          <p className={styles.header}>Готовы:</p>
+          <p className={`${styles.header} text text_type_main-medium pb-6`}>Готовы:</p>
           <ul className={styles.feedsContainer}>
+            {groupedOrders.done && groupedOrders.done.map(feed =>
+              <li className={`${styles.orderNumber} ${styles.orderNumberTypeDone} text text_type_digits-default pb-2`}>
+                {feed.number}
+              </li>)}
 
           </ul>
         </div>
         <div className={styles.pendingFeeds}>
-          <p className={styles.header}>В работе:</p>
+          <p className={`${styles.header} text text_type_main-medium pb-6`}>В&nbsp;работе:</p>
           <ul className={styles.feedsContainer}>
-
+            {groupedOrders.pending && groupedOrders.pending.map(feed =>
+              <li className={`${styles.orderNumber} text text_type_digits-default pb-2`}>
+                {feed.number}
+              </li>)}
           </ul>
         </div>
-        <p className={styles.ordersTotal}>Выполнено за все время:
-          <span className={styles.ordersSum}>{total}</span>
+        <p className={`${styles.ordersTotal} text text_type_main-medium`}>Выполнено за все время:
+          <span className={`${styles.ordersSum} text text_type_digits-large`}>{total}</span>
         </p>
-        <p className={styles.ordersTotal}>Выполнено за сегодня:
-          <span className={styles.ordersSum}>{totalToday}</span>
+        <p className={`${styles.ordersTotal} ${styles.ordersToday} text text_type_main-medium`}>Выполнено за сегодня:
+          <span className={`${styles.ordersSum} text text_type_digits-large`}>{totalToday}</span>
         </p>
 
       </div>

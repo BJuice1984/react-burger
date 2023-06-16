@@ -76,3 +76,8 @@ export type OrderHistoryDetailsType = {
   error: boolean,
   orderDetails: OrderHistoryType,
 };
+
+export type OrdersGroupedType = {
+  done?: OrderType[],
+  pending?: OrderType[],
+};
