@@ -28,7 +28,7 @@ const OrderStatistics: FC<OrderStatisticsType> = ({ orders, total, totalToday })
           <p className={`${styles.header} text text_type_main-medium pb-6`}>Готовы:</p>
           <ul className={styles.feedsContainer}>
             {groupedOrders.done && groupedOrders.done.map(feed =>
-              <li className={`${styles.orderNumber} ${styles.orderNumberTypeDone} text text_type_digits-default pb-2`}>
+              <li key={feed._id} className={`${styles.orderNumber} ${styles.orderNumberTypeDone} text text_type_digits-default pb-2`}>
                 {feed.number}
               </li>)}
           </ul>
@@ -37,16 +37,16 @@ const OrderStatistics: FC<OrderStatisticsType> = ({ orders, total, totalToday })
           <p className={`${styles.header} text text_type_main-medium pb-6`}>В&nbsp;работе:</p>
           <ul className={styles.feedsContainer}>
             {groupedOrders.pending && groupedOrders.pending.map(feed =>
-              <li className={`${styles.orderNumber} text text_type_digits-default pb-2`}>
+              <li key={feed._id} className={`${styles.orderNumber} text text_type_digits-default pb-2`}>
                 {feed.number}
               </li>)}
           </ul>
         </div>
         <p className={`${styles.ordersTotal} text text_type_main-medium`}>Выполнено за все время:
-          <span className={`${styles.ordersSum} text text_type_digits-large`}>{total}</span>
+          {total && <span className={`${styles.ordersSum} text text_type_digits-large`}>{total}</span>}
         </p>
         <p className={`${styles.ordersTotal} ${styles.ordersToday} text text_type_main-medium`}>Выполнено за сегодня:
-          <span className={`${styles.ordersSum} text text_type_digits-large`}>{totalToday}</span>
+          {totalToday && <span className={`${styles.ordersSum} text text_type_digits-large`}>{totalToday}</span>}
         </p>
 
       </div>
