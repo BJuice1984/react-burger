@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./order.module.css";
 import { IngredientType, OrderType } from "../../utils/types";
@@ -7,18 +7,22 @@ import { getInitialIngridientsItems } from '../../services/selectors/initialIngr
 // import { burgerPrice } from '../../utils/helper';
 
 function Order({ status, name, number, ingredients, updatedAt }: OrderType) {
- const orderIngredients: Array<IngredientType> = createOrderInfredients(ingredients, useSelector(getInitialIngridientsItems))
+ const orderIngredients: Array<IngredientType> = createOrderIngredients(ingredients, useSelector(getInitialIngridientsItems))
 
- function createOrderInfredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
+ function createOrderIngredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
   return orderIngr.reduce((acc: Array<IngredientType>, item) => {
     const orderIngredient = initIngr.find(ingredient => ingredient._id === item);
     orderIngredient && acc.push(orderIngredient)
   
-    return acc
+    return acc;
   }, [])
  };
 
- console.log(orderIngredients)
+ const orderPrice = useMemo(() => {
+  return orderIngredients.reduce((price, ingr) => {
+    return price + ingr.price
+  }, 0)
+}, [orderIngredients]);
 
   return(
     <article className={styles.order}>
@@ -30,10 +34,13 @@ function Order({ status, name, number, ingredients, updatedAt }: OrderType) {
       <span className={`${styles.status} text text_type_main-small`}>{status}</span>
       <div className={styles.container}>
         <ul>
-          <li>{ingredients}</li>
+          {orderIngredients && orderIngredients.map(item =>
+            <li key={item._id}>
+              {item.image}
+            </li>)}
         </ul>
         <span className={`${ styles.burgerElementPrice } text text_type_digits-medium pr-10`}>
-          400<CurrencyIcon type="primary"/>
+          {orderPrice}<CurrencyIcon type="primary"/>
         </span>
       </div>
     </article>
