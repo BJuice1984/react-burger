@@ -1,9 +1,24 @@
 import { memo } from 'react';
 import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./order.module.css";
-import { OrderType } from "../../utils/types";
+import { IngredientType, OrderType } from "../../utils/types";
+import { useSelector } from '../../hooks/hooks';
+import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
+// import { burgerPrice } from '../../utils/helper';
 
 function Order({ status, name, number, ingredients, updatedAt }: OrderType) {
+ const orderIngredients: Array<IngredientType> = createOrderInfredients(ingredients, useSelector(getInitialIngridientsItems))
+
+ function createOrderInfredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
+  return orderIngr.reduce((acc: Array<IngredientType>, item) => {
+    const orderIngredient = initIngr.find(ingredient => ingredient._id === item);
+    orderIngredient && acc.push(orderIngredient)
+  
+    return acc
+  }, [])
+ };
+
+ console.log(orderIngredients)
 
   return(
     <article className={styles.order}>

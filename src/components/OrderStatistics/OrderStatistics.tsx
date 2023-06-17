@@ -48,9 +48,7 @@ const OrderStatistics: FC<OrderStatisticsType> = ({ orders, total, totalToday })
         <p className={`${styles.ordersTotal} ${styles.ordersToday} text text_type_main-medium`}>Выполнено за сегодня:
           {totalToday && <span className={`${styles.ordersSum} text text_type_digits-large`}>{totalToday}</span>}
         </p>
-
       </div>
-
     </Fragment>
 
   )
