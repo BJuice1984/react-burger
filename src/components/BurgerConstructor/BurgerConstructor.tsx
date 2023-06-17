@@ -15,7 +15,7 @@ import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { UserIngredientsType } from "../../utils/types";
 import { IngredientType } from "../../utils/types";
-import { burgerPrice } from "../../utils/helper";
+// import { burgerPrice } from "../../utils/helper";
 import useCookies from "../../hooks/useCookies";
 
 export default function BurgerConstructor() {
@@ -60,7 +60,9 @@ export default function BurgerConstructor() {
   };
 
   const orderPrice = useMemo(() => {
-    return burgerPrice(userIngredients)
+    return userIngredients.userItems.reduce(
+      (acc, current) => acc + current.price, 0
+    ) + (userIngredients.bun ? userIngredients.bun.price * 2 : 0)
   }, [userIngredients]);
 
   return(
