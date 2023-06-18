@@ -15,7 +15,6 @@ import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { UserIngredientsType } from "../../utils/types";
 import { IngredientType } from "../../utils/types";
-// import { burgerPrice } from "../../utils/helper";
 import useCookies from "../../hooks/useCookies";
 
 export default function BurgerConstructor() {
