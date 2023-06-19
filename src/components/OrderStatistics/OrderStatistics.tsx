@@ -25,7 +25,7 @@ const OrderStatistics: FC<OrderStatisticsType> = ({ orders, total, totalToday })
     <Fragment>
       <div className={styles.orderStatistics}>
         <div className={styles.doneFeeds}>
-          <p className={`${styles.header} text text_type_main-medium pb-6`}>Готовы:</p>
+          <p className={`${styles.header} text text_type_main-medium pb-6 pl-2`}>Готовы:</p>
           <ul className={styles.feedsContainer}>
             {groupedOrders.done && groupedOrders.done.map(feed =>
               <li key={feed._id} className={`${styles.orderNumber} ${styles.orderNumberTypeDone} text text_type_digits-default pb-2`}>

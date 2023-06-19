@@ -1,5 +1,4 @@
 import { memo, useMemo } from 'react';
-import uuid from 'react-uuid';
 import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./order.module.css";
 import { IngredientType, OrderType } from "../../utils/types";
@@ -7,12 +6,14 @@ import { useSelector } from '../../hooks/hooks';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
 import { useMatch } from 'react-router';
 import { FEED } from '../../constants/constants';
-// import { burgerPrice } from '../../utils/helper';
 
 function Order({ status, name, number, ingredients, updatedAt }: OrderType) {
   const isFeed = !!useMatch({ path: FEED });
 
-  const orderIngredients: Array<IngredientType> = createOrderIngredients(ingredients, useSelector(getInitialIngridientsItems))
+  const orderIngredients: Array<IngredientType> = createOrderIngredients(ingredients, useSelector(getInitialIngridientsItems));
+
+  const orderIngredientsLength = 
+    orderIngredients.length > 6 ? orderIngredients.length - 6 : null;
 
   function createOrderIngredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
    return orderIngr.reduce((acc: Array<IngredientType>, item) => {
@@ -23,15 +24,11 @@ function Order({ status, name, number, ingredients, updatedAt }: OrderType) {
    }, [])
   };
 
-//  orderIngredients.pop();
-
   const orderPrice = useMemo(() => {
     return orderIngredients.reduce((price, ingr) => {
       return price + ingr.price
     }, 0)
   }, [orderIngredients]);
-
-// console.log(orderIngredients)
 
   return(
     <article className={ styles.order }>
@@ -40,23 +37,27 @@ function Order({ status, name, number, ingredients, updatedAt }: OrderType) {
           <h2 className={`${ styles.number } text text_type_digits-default`}>{`#${number}`}</h2>
             <FormattedDate className={ styles.date } date={new Date(updatedAt)}/>
         </div>
-        <p className={`${ styles.name } text text_type_main-small pb-6`}>{name}</p>
-        {!isFeed && <span className={`${ styles.status } text text_type_main-small`}>{status}</span>}
+        <p className={`${ styles.name } ${isFeed ? 'pb-2' :' pb-6'} text text_type_main-small`}>{name}</p>
+        {isFeed && 
+          <span className={`${ styles.status } ${status === 'done' ? styles.statusDone : ''} text text_type_main-small`}>
+            {status === 'done' ? 'Выполнен' : 'Готовится'}
+          </span>}
         <div className={ styles.container }>
           <ul className={ styles.picContainer }>
-            {orderIngredients && orderIngredients.map(item =>
-              <li key={uuid()} className={ styles.picBorder } >
-                <img className={ styles.pic }
+            {orderIngredients && orderIngredients.splice(0, 6).map((item, index: number) =>
+              <li key={index} className={ styles.picBorder }>
+                <img className={`${ styles.pic } ${orderIngredientsLength && index === 0 ? styles.picLast : ''}`}
                   src={item.image}
                   alt="Картинка. Вид ингридиента">
                 </img>
               </li>)}
+            {(orderIngredientsLength) && <span className={ styles.picLength }>{`+${orderIngredientsLength}`}</span>}
           </ul>
           <span className={`${ styles.burgerElementPrice } text text_type_digits-default`}>
             {orderPrice}<CurrencyIcon type="primary"/>
           </span>
         </div>
-        </div>
+      </div>
     </article>
   )
 };

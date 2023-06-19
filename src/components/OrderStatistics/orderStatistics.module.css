@@ -23,7 +23,7 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  max-height: 440px;
+  max-height: 195px;
   overflow: hidden;
 }
 
