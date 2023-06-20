@@ -3,6 +3,7 @@ import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS, FEED }
 import Main from '../../pages/Main';
 import Modal from '../Modal/Modal';
 import ModalCard from '../ModalCard/ModalCard';
+import ModalOrderInfo from '../ModalOrderInfo/ModalOrderInfo';
 import Header from '../Header/Header';
 import Login from '../../pages/Login';
 import Registration from '../../pages/Registration';
@@ -60,10 +61,12 @@ function App() {
             <Route path={ORDERS} element={<ProtectedRouteElement component={<Orders />}/>} />
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<ModalCard/>} />
+          <Route path={`${FEED}/:id`} element={<ModalOrderInfo/>} />
         </Routes>
         {background &&
         <Routes>
           <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard/>} handleClose={closeModalCard}/>} />
+          <Route path={`${FEED}/:id`} element={<Modal component={<ModalOrderInfo/>} handleClose={closeModalCard}/>} />
         </Routes>}
 
       </div>

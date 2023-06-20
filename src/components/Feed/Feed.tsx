@@ -21,7 +21,8 @@ const Feed: FC<FeedType> = ({ orders }: FeedType) => {
               key={feed._id}
               number={feed.number}
               ingredients={feed.ingredients}
-              updatedAt={feed.updatedAt} />)}
+              updatedAt={feed.updatedAt}
+              _id={feed._id} />)}
         </ul>
       </div>}
     </Fragment>
