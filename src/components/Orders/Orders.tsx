@@ -16,7 +16,7 @@ export default function Orders() {
   const dispatch = useDispatch();
 
   const orderDetails: OrderHistoryType = useSelector(wsFeeds);
-  const { success, orders, total, totalToday } = orderDetails;
+  const { orders } = orderDetails;
 
   let token = getCookie('token');
 

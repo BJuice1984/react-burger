@@ -22,8 +22,6 @@ function ModalOrderInfo() {
   const ingr = JSON.parse(decodeURI(queryDict.ingr));
   const paramName = decodeURI(queryDict.name);
 
-  // const { background } = location.state;
-
   const orderIngredients: Array<IngredientType> = createOrderIngredients(ingr.ingredients, useSelector(getInitialIngridientsItems));
 
   function createOrderIngredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
@@ -64,10 +62,6 @@ function ModalOrderInfo() {
           <span className={`${ styles.burgerElementPrice } text text_type_digits-default`}>
             {queryDict.orderPrice}<CurrencyIcon type="primary"/>
           </span>
-          
-        </div>
-
-        <div className={ styles.container }>
         </div>
       </div>
     </article>
