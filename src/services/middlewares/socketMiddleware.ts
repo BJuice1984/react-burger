@@ -34,6 +34,7 @@ export const socketFeedMiddleware = (wsActions: WebSocketActionsType): Middlewar
       };
 
       if (socket && action.type === wsDisconnect) {
+        console.log('fffff')
         socket?.close();
       };
 
