@@ -7,18 +7,22 @@ import { getInitialIngridientsItems } from '../../services/selectors/initialIngr
 import { useLocation, useMatch } from 'react-router';
 import { FEED } from '../../constants/constants';
 
+type QueryDictType = {
+  [key: string]: string
+};
+
 function ModalOrderInfo() {
   const isFeed = !!useMatch({ path: FEED });
   const location = useLocation();
 
-  let queryDict = {};
+  let queryDict: QueryDictType = {};
   location.search.substring(1).split('&').forEach((item) => {
     let param = item.split('=')
     queryDict[param[0]] = param[1]
-  })
+  });
 
-  const ingr = JSON.parse(decodeURI(queryDict.ingr))
-  const paramName = decodeURI(queryDict.name)
+  const ingr = JSON.parse(decodeURI(queryDict.ingr));
+  const paramName = decodeURI(queryDict.name);
 
   // const { background } = location.state;
 
@@ -37,7 +41,7 @@ function ModalOrderInfo() {
   };
 
   return(
-    <article className={ styles.order }>
+    <article className={ styles.modalOrder }>
       <div className={ styles.orderContainer }>
         <div className={`${ styles.orderDetails } pb-6`}>
           <h2 className={`${ styles.number } text text_type_digits-default`}>{`#${queryDict.number}`}</h2>

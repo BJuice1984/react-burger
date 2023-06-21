@@ -6,16 +6,17 @@ import { useSelector } from '../../hooks/hooks';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
 import { useLocation, useMatch } from 'react-router';
 import { FEED } from '../../constants/constants';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Order({ status, name, number, ingredients, updatedAt, _id }: OrderType) {
+  const maxQuantity = 6;
   const isFeed = !!useMatch({ path: FEED });
   const location = useLocation();
 
   const orderIngredients: Array<IngredientType> = createOrderIngredients(ingredients, useSelector(getInitialIngridientsItems));
 
   const orderIngredientsLength = 
-    orderIngredients.length > 6 ? orderIngredients.length - 6 : null;
+    orderIngredients.length > maxQuantity ? orderIngredients.length - maxQuantity : null;
 
   function createOrderIngredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
    return orderIngr.reduce((acc: Array<IngredientType>, item) => {
