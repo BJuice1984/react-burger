@@ -4,15 +4,13 @@ import styles from "./modalOrderInfo.module.css";
 import { IngredientType } from "../../utils/types";
 import { useSelector } from '../../hooks/hooks';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
-import { useLocation, useMatch } from 'react-router';
-import { FEED } from '../../constants/constants';
+import { useLocation } from 'react-router';
 
 type QueryDictType = {
   [key: string]: string
 };
 
 function ModalOrderInfo() {
-  const isFeed = !!useMatch({ path: FEED });
   const location = useLocation();
 
   let queryDict: QueryDictType = {};
@@ -28,9 +26,6 @@ function ModalOrderInfo() {
 
   const orderIngredients: Array<IngredientType> = createOrderIngredients(ingr.ingredients, useSelector(getInitialIngridientsItems));
 
-  const orderIngredientsLength = 
-    orderIngredients.length > 6 ? orderIngredients.length - 6 : null;
-
   function createOrderIngredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
    return orderIngr.reduce((acc: Array<IngredientType>, item) => {
      const orderIngredient = initIngr.find(ingredient => ingredient._id === item);
@@ -42,30 +37,37 @@ function ModalOrderInfo() {
 
   return(
     <article className={ styles.modalOrder }>
-      <div className={ styles.orderContainer }>
-        <div className={`${ styles.orderDetails } pb-6`}>
-          <h2 className={`${ styles.number } text text_type_digits-default`}>{`#${queryDict.number}`}</h2>
-            <FormattedDate className={ styles.date } date={new Date(queryDict.updatedAt)}/>
-        </div>
-        <p className={`${ styles.name } ${isFeed ? 'pb-2' :' pb-6'} text text_type_main-small`}>{paramName}</p>
-        {isFeed && 
-          <span className={`${ styles.status } ${queryDict.status === 'done' ? styles.statusDone : ''} text text_type_main-small`}>
-            {queryDict.status === 'done' ? 'Выполнен' : 'Готовится'}
-          </span>}
-        <div className={ styles.container }>
-          <ul className={ styles.picContainer }>
-            {orderIngredients && orderIngredients.splice(0, 6).map((item, index: number) =>
-              <li key={index} className={ styles.picBorder }>
-                <img className={`${ styles.pic } ${orderIngredientsLength && index === 0 ? styles.picLast : ''}`}
+      <div className={ styles.modalOrderContainer }>
+        <h2 className={`${ styles.number } text text_type_digits-default`}>{`#${queryDict.number}`}</h2>
+        <p className={`${ styles.name } text_type_main-medium pb-3 pt-10`}>{paramName}</p>
+        <span className={`${ styles.status } ${queryDict.status === 'done' ? styles.statusDone : ''} text text_type_main-small mb-15`}>
+          {queryDict.status === 'done' ? 'Выполнен' : 'Готовится'}
+        </span>
+        <p className={`${ styles.name } text_type_main-medium pb-6`}>Состав:</p>
+        <ul className={ styles.ingredientsContainer }>
+          {orderIngredients && orderIngredients.map((item, index: number) =>
+            <li key={index} className={ styles.orderDetails }>
+              <div className={ styles.picBorder }>
+                <img className={`${ styles.pic }`}
                   src={item.image}
                   alt="Картинка. Вид ингридиента">
                 </img>
-              </li>)}
-            {(orderIngredientsLength) && <span className={ styles.picLength }>{`+${orderIngredientsLength}`}</span>}
-          </ul>
+              </div>
+              <p className={`${ styles.ingrName } text text_type_main-small`}>{item.name}</p>
+              <span className={`${ styles.burgerElementPrice } text text_type_digits-default`}>
+                {item.price}<CurrencyIcon type="primary"/>
+              </span>
+            </li>)}
+        </ul>
+        <div className={`${ styles.modalFuterContainer }`}>
+          <FormattedDate className={`${ styles.date } text text_type_main-small`} date={new Date(queryDict.updatedAt)}/>
           <span className={`${ styles.burgerElementPrice } text text_type_digits-default`}>
             {queryDict.orderPrice}<CurrencyIcon type="primary"/>
           </span>
+          
+        </div>
+
+        <div className={ styles.container }>
         </div>
       </div>
     </article>

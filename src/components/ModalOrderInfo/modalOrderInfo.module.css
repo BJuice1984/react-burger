@@ -1,20 +1,28 @@
 .modalOrder {
   margin: 0 auto;
   width: 584px;
-  height: 246px;
+  height: 720px;
   border-radius: 40px;
   background-color: #1C1C21;
 }
 
-.orderContainer {
-  padding: 24px;
+.modalOrderContainer {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 70vh;
 }
 
 .orderDetails {
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  column-gap: 16px;
+  padding-right: 24px;
+}
+
+.orderDetails:not(:first-child) {
+  padding-top: 15px;
 }
 
 .number {
@@ -27,11 +35,17 @@
 
 .name {
   margin: 0;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.ingrName {
+  line-height: 4.5;
 }
 
 .status {
   display: block;
-  padding-bottom: 24px;
+  align-self: flex-start;
 }
 
 .statusDone {
@@ -43,13 +57,13 @@
   justify-content: space-between;
 }
 
-.picContainer {
+.ingredientsContainer {
   list-style: none;
   padding: 0;
   display: flex;
-  flex-direction: row-reverse;
-  list-style: none;
-  position: relative;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
 }
 
 .picBorder {
@@ -62,7 +76,6 @@
   z-index: 0;
   background-color: #1C1C21;
   border-radius: 100px;
-  margin-left: -12px;
 }
 
 .picBorder::before {
@@ -91,16 +104,6 @@
   box-sizing: border-box;
 }
 
-.picLast {
-  opacity: 0.5;
-}
-
-.picLength {
-  position: absolute;
-  top: 23px;
-  right: 23px;
-}
-
 .burgerElementPrice {
   margin: 0;
   display: flex;
@@ -117,17 +120,9 @@
   }
 }
 
-.orderLink {
-  transition: 0.1s ease-in-out;
-  text-decoration: none;
-  color: var(--text-primary-color);
-}
-
-.orderLink:hover {
-  opacity: .8;
-  transition: 0.1s ease-in-out;
-}
-
-.orderLink:not(:first-child) {
-  margin-top: 16px;
+.modalFuterContainer {
+  width: 100%;
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
 }
