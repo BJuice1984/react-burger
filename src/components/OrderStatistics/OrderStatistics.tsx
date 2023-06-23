@@ -3,8 +3,8 @@ import styles from './orderStatistics.module.css'
 import { OrderType, OrdersGroupedType } from '../../utils/types';
 
 type OrderStatisticsType = {
-  total: number,
-  totalToday: number,
+  total: number | null,
+  totalToday: number | null,
   orders: Array<OrderType>
 };
 

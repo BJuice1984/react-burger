@@ -28,7 +28,7 @@ export default function Feeds() {
   }, [dispatch, isFeed]);
 
   return (
-    <section className={ styles.feed }>
+    <section className={ styles.feeds }>
         <div className={ styles.container }>
           <Feed orders={orders}/>
           <OrderStatistics orders={orders} total={total} totalToday={totalToday} />

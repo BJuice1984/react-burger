@@ -12,13 +12,13 @@ const orderHistoryDetails: OrderHistoryDetailsType = {
         _id: '',
         status: '',
         name: '',
-        number: NaN,
+        number: null,
         createdAt: '',
         updatedAt: '',
       }
     ],
-    total: NaN,
-    totalToday: NaN,
+    total: null,
+    totalToday: null,
   }
 };
 
@@ -38,8 +38,8 @@ export const orderHistoryReducer = (state = orderHistoryDetails, action: WebSock
         orderDetails: {
           success: false,
           orders: [],
-          total: NaN,
-          totalToday: NaN,
+          total: null,
+          totalToday: null,
         }
       }
     }
@@ -51,8 +51,8 @@ export const orderHistoryReducer = (state = orderHistoryDetails, action: WebSock
         orderDetails: {
           success: false,
           orders: [],
-          total: NaN,
-          totalToday: NaN,
+          total: null,
+          totalToday: null,
         }
       }
     }

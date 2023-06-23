@@ -95,6 +95,7 @@
   opacity: .9;
   transition: 0.1s ease-in-out;
   cursor: pointer;
+  border: none;
 }
 
 .addBtn:hover {

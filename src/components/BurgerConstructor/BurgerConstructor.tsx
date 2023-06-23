@@ -13,7 +13,6 @@ import { getOrderNumber } from "../../services/selectors/orderDetails";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
-import { UserIngredientsType } from "../../utils/types";
 import { IngredientType } from "../../utils/types";
 import useCookies from "../../hooks/useCookies";
 
@@ -23,7 +22,7 @@ export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const userIngredients: UserIngredientsType = useSelector(getUserIngridients);
+  const userIngredients = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);

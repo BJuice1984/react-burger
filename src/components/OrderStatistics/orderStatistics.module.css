@@ -7,6 +7,34 @@
   padding-top: 100px;
 }
 
+@media screen and (max-width: 1280px) {
+  .orderStatistics {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .orderStatistics {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .orderStatistics {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .orderStatistics {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+  }
+}
+
 .doneFeeds {
   margin: 0;
   grid-area: done;
@@ -23,8 +51,32 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  max-height: 195px;
+  max-height: 215px;
   overflow: hidden;
+}
+
+@media screen and (max-width: 1280px) {
+  .feedsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .feedsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .feedsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .feedsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .orderNumber {

@@ -43,7 +43,8 @@ export default function Orders() {
               key={feed._id}
               number={feed.number}
               ingredients={feed.ingredients}
-              updatedAt={feed.updatedAt} />)}
+              updatedAt={feed.updatedAt}
+              _id={feed._id} />)}
         </ul>
         <p className={`${styles.description} text text_type_main-small pt-4`}>В этом разделе вы можете просмотреть свою историю заказов</p>
       </div>
