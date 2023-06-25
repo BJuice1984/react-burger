@@ -2,16 +2,15 @@ import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
 import Order from "../Order/Order";
 import styles from "./orders.module.css";
 import useCockies from "../../hooks/useCookies";
-import { Outlet, useMatch } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "../../hooks/hooks";
 import { WS_CONNECT, WS_DISCONNECT } from "../../services/actions/wsActions";
-import { HISTORY_FEED_API_WS, ORDERS, PROFILE } from "../../constants/constants";
+import { HISTORY_FEED_API_WS } from "../../constants/constants";
 import { OrderHistoryType } from "../../utils/types";
 import { wsFeeds } from "../../services/selectors/orderHistory";
 
 export default function Orders() {
-  const isOrders: boolean = !!useMatch({ path: `${PROFILE}/${ORDERS}`})
   const { getCookie} = useCockies();
   const dispatch = useDispatch();
 
@@ -21,7 +20,7 @@ export default function Orders() {
   let token = getCookie('token');
 
   useEffect(() => {
-    if (token && isOrders) {
+    if (token) {
       dispatch({ type: WS_CONNECT, payload: `${HISTORY_FEED_API_WS}?token=${token}` });
     } else {
       dispatch({ type: WS_DISCONNECT });
@@ -29,7 +28,7 @@ export default function Orders() {
     return () => {
       dispatch({ type: WS_DISCONNECT });
     }
-  }, [dispatch, isOrders, token]);
+  }, [dispatch, token]);
 
   return(
     <section className={styles.orders}>
