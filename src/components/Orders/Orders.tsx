@@ -1,7 +1,7 @@
 import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
 import Order from "../Order/Order";
 import styles from "./orders.module.css";
-import useCockies from "../../hooks/useCookies";
+import { getCookie } from "../../utils/helper";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "../../hooks/hooks";
@@ -11,24 +11,22 @@ import { OrderHistoryType } from "../../utils/types";
 import { wsFeeds } from "../../services/selectors/orderHistory";
 
 export default function Orders() {
-  const { getCookie} = useCockies();
   const dispatch = useDispatch();
 
   const orderDetails: OrderHistoryType = useSelector(wsFeeds);
   const { orders } = orderDetails;
 
-  let token = getCookie('token');
-
+  
   useEffect(() => {
+    let token = getCookie('token');
+    
     if (token) {
       dispatch({ type: WS_CONNECT, payload: `${HISTORY_FEED_API_WS}?token=${token}` });
-    } else {
-      dispatch({ type: WS_DISCONNECT });
     }
     return () => {
       dispatch({ type: WS_DISCONNECT });
     }
-  }, [dispatch, token]);
+  }, [dispatch]);
 
   return(
     <section className={styles.orders}>

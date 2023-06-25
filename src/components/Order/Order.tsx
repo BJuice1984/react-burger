@@ -5,7 +5,7 @@ import { IngredientType, OrderType } from "../../utils/types";
 import { useSelector } from '../../hooks/hooks';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
 import { useLocation, useMatch } from 'react-router';
-import { FEED } from '../../constants/constants';
+import { FEED, ORDERS, PROFILE } from '../../constants/constants';
 import { Link } from 'react-router-dom';
 
 function Order({ status, name, number, ingredients, updatedAt, _id }: OrderType) {
@@ -33,10 +33,8 @@ function Order({ status, name, number, ingredients, updatedAt, _id }: OrderType)
     }, 0)
   }, [orderIngredients]);
 
-  const ingr = JSON.stringify({ ingredients: ingredients })
-
   return(
-    <Link to={`${FEED}/${_id}?status=${status}&name=${name}&number=${number}&ingr=${ingr}&updatedAt=${updatedAt}&_id=${_id}&orderPrice=${orderPrice}`} state={{ background: location }} className={ styles.orderLink }>
+    <Link to={`${isFeed ? FEED : PROFILE + '/' + ORDERS}/${_id}`} state={{ background: location }} className={ styles.orderLink }>
       <article className={ styles.order }>
         <div className={ styles.orderContainer }>
           <div className={`${ styles.orderDetails } pb-6`}>

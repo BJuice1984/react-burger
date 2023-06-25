@@ -59,6 +59,7 @@ function App() {
           <Route path={PROFILE} >
             <Route index element={<ProtectedRouteElement component={<Profile />}/>} />
             <Route path={ORDERS} element={<ProtectedRouteElement component={<Orders />}/>} />
+            <Route path={`${ORDERS}/:id`} element={<ProtectedRouteElement component={<ModalOrderInfo/>}/>} />
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<ModalCard/>} />
           <Route path={`${FEED}/:id`} element={<ModalOrderInfo/>} />
