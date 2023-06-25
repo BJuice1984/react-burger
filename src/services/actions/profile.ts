@@ -1,8 +1,6 @@
 import * as Auth from '../../utils/mainApi';
-import useSessionStorage from '../../hooks/useSessionStorage';
-import useCookies from '../../hooks/useCookies';
-import useRefreshToken from '../../hooks/useRefreshToken';
 import { AppDispatch } from '../types';
+import { setToken, clearToken, setCookie, deleteCookie } from '../../utils/helper';
 
 export const POST_FETCH_REQUEST = 'POST_FETCH_REQUEST';
 export const POST_FETCH_SUCCESS = 'POST_FETCH_SUCCESS';
@@ -53,9 +51,6 @@ export type ProfileActionTypes = IPostFetchRequest
 
 export const postRegister = (email: string, password: string, name: string) => {
   return function(dispatch: AppDispatch) {
-    const { setToken, clearToken } = useSessionStorage();
-    const { setCookie } = useCookies();
-
     dispatch({ type: POST_FETCH_REQUEST})
     Auth.register(email, password, name).then(res => {
       if (res && res.success) {
@@ -85,9 +80,6 @@ export const postRegister = (email: string, password: string, name: string) => {
 
 export const postLogin = (email: string, password: string) => {
   return function(dispatch: AppDispatch) {
-    const { setToken, clearToken } = useSessionStorage();
-    const { setCookie } = useCookies();
-
     dispatch({ type: POST_FETCH_REQUEST})
     Auth.login(email, password).then(res => {
       if (res && res.success) {
@@ -117,13 +109,8 @@ export const postLogin = (email: string, password: string) => {
 
 export const postLogout = () => {
   return function(dispatch: AppDispatch) {
-    const { deleteCookie, getCookie } = useCookies();
-    const { clearToken, getToken } = useSessionStorage();
-    let cookie = getCookie('token');
-    let token = getToken('refreshToken');
-
     dispatch({ type: POST_PROFILE_LOGOUT})
-    Auth.logout(token, cookie).then(res => {
+    Auth.logout().then(res => {
       if (res && res.success) {
         clearToken('refreshToken');
         deleteCookie('token');
@@ -142,22 +129,13 @@ export const postLogout = () => {
 
 export const getUser = () => {
   return function(dispatch: AppDispatch) {
-    const { deleteCookie, getCookie } = useCookies();
-    let cookie = getCookie('token');
-    const { postRefreshToken } = useRefreshToken();
-
     dispatch({ type: POST_FETCH_REQUEST})
-    Auth.getUser(cookie).then(res => {
+    Auth.getUser().then(res => {
       if (res && res.success) {
         dispatch({
           type: POST_PROFILE_FETCH_SUCCESS,
           profile: res
         })
-      } else if (res.message === 'jwt malformed') {
-        postRefreshToken();
-      } else if (res.message === 'invalid signature') {
-        deleteCookie('token');
-        postRefreshToken();
       } else {
         dispatch({
           type: POST_FETCH_FAILED,

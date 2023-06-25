@@ -52,7 +52,7 @@ export const postForgotPassword = (email: string) => {
 export const resetForgotPassword = (newPassword: string, code: string) => {
   return function(dispatch: AppDispatch) {
     dispatch({ type: POST_FORGOT_PASSWORD_REQUEST})
-    Auth.resetPassword(newPassword, code).then(res => {
+    Auth.resetPassword(newPassword).then(res => {
       if (res && res.success) {
         dispatch({
           type: POST_FORGOT_PASSWORD_SUCCESS,

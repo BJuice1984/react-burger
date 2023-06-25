@@ -6,13 +6,10 @@ import styles from "../components/Profile/profile.module.css";
 import { useDispatch, useSelector } from "../hooks/hooks";
 import { postProfileEmail, postProfileName } from "../services/selectors/profile";
 import { getUser } from "../services/actions/profile";
-import useCookies from "../hooks/useCookies";
 
 export default function Profile() {
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
-  const { getCookie } = useCookies();
-  let cookie = getCookie('token');
 
   const dispatch = useDispatch();
 
@@ -20,7 +17,7 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(getUser());
-  }, [dispatch, cookie]);
+  }, [dispatch]);
 
   useEffect(() => {
     setValues({

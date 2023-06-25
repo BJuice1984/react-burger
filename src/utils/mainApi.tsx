@@ -1,5 +1,9 @@
-import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, REFRESH_TOKEN_API, USER_API } from "../constants/constants";
-import { request } from "./utilsApi";
+import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, USER_API } from "../constants/constants";
+import { getCookie, getToken } from "./helper";
+import { request, requestWithRefresh } from "./utilsApi";
+
+const token = getToken('refreshToken');
+const cookie = getCookie('token');
 
 export const register = (email: string, password: string, name: string) => {
   return request(REGISTER_API, {
@@ -23,24 +27,13 @@ export const login = (email: string, password: string) => {
   })
 };
 
-export const logout = (token: string | null, cookie: string | null) => {
-  return request(LOGOUT_API, {
+export const logout = () => {
+  return requestWithRefresh(LOGOUT_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + cookie
-    },
-    body: JSON.stringify({ token })
-  })
-};
-
-export const refreshToken = (token: string) => {
-  return request(REFRESH_TOKEN_API, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
     },
     body: JSON.stringify({ token })
   })
@@ -57,8 +50,8 @@ export const forgotPassword = (email: string) => {
   })
 };
 
-export const resetPassword = (password: string, token: string) => {
-  return request(`${RESET_PASSWORD_API}/reset`, {
+export const resetPassword = (password: string) => {
+  return requestWithRefresh(`${RESET_PASSWORD_API}/reset`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -68,8 +61,8 @@ export const resetPassword = (password: string, token: string) => {
   })
 };
 
-export const getUser = (cookie: string | null) => {
-  return request(USER_API, {
+export const getUser = () => {
+  return requestWithRefresh (USER_API, {
     headers: {
       Authorization: 'Bearer ' + cookie
     },
