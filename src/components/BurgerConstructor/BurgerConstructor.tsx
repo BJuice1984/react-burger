@@ -14,11 +14,9 @@ import { postProfileEmail, postProfileName } from "../../services/selectors/prof
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { IngredientType } from "../../utils/types";
-import useCookies from "../../hooks/useCookies";
 
 export default function BurgerConstructor() {
-  const { getCookie } = useCookies();
-  let cookie = getCookie('token');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -46,10 +44,11 @@ export default function BurgerConstructor() {
     }
 
     const ingredientsId = userIngredients.userItems.map(item => item._id);
-    if (userIngredients.bun && cookie) {
+    if (userIngredients.bun) {
       ingredientsId.push(userIngredients.bun._id);
+      ingredientsId.unshift(userIngredients.bun._id);
 
-      dispatch(postItems(ingredientsId, cookie));
+      dispatch(postItems(ingredientsId));
     }
   };
 
