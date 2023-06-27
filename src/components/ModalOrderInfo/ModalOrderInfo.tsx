@@ -1,28 +1,29 @@
-import { memo } from 'react';
+import { memo, useEffect, useState, useMemo } from 'react';
 import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./modalOrderInfo.module.css";
-import { IngredientType } from "../../utils/types";
+import { IngredientType, OrderType } from "../../utils/types";
 import { useSelector } from '../../hooks/hooks';
 import { getInitialIngridientsItems } from '../../services/selectors/initialIngridients';
-import { useLocation } from 'react-router';
-
-type QueryDictType = {
-  [key: string]: string
-};
+import { useParams } from 'react-router';
+import { getOrder } from '../../utils/mainApi';
 
 function ModalOrderInfo() {
-  const location = useLocation();
+  const { number } = useParams();
+  const [order, setOrder] = useState<OrderType | null>(null);
+  const [orderIngredients, setOrderIngredients] = useState<Array<IngredientType> | null>(null);
+  const initialIngridients = useSelector(getInitialIngridientsItems)
 
-  let queryDict: QueryDictType = {};
-  location.search.substring(1).split('&').forEach((item) => {
-    let param = item.split('=')
-    queryDict[param[0]] = param[1]
-  });
-
-  const ingr = JSON.parse(decodeURI(queryDict.ingr));
-  const paramName = decodeURI(queryDict.name);
-
-  const orderIngredients: Array<IngredientType> = createOrderIngredients(ingr.ingredients, useSelector(getInitialIngridientsItems));
+  useEffect(() => {
+    if (number) {
+      const fetchData = async () => {
+        const data = await getOrder(number);
+        setOrderIngredients(createOrderIngredients(data.orders[0].ingredients, initialIngridients));
+        setOrder(data.orders[0])
+     }
+   
+     fetchData().catch(console.error);
+    }
+  }, [initialIngridients, number]);
 
   function createOrderIngredients(orderIngr: Array<string>, initIngr: Array<IngredientType>) {
    return orderIngr.reduce((acc: Array<IngredientType>, item) => {
@@ -33,13 +34,23 @@ function ModalOrderInfo() {
    }, [])
   };
 
+  const orderPrice = useMemo(() => {
+    if (!orderIngredients) {
+      return
+    } else {
+      return orderIngredients.reduce((price, ingr) => {
+        return price + ingr.price
+      }, 0)
+    }
+  }, [orderIngredients]);
+
   return(
     <article className={ styles.modalOrder }>
-      <div className={ styles.modalOrderContainer }>
-        <h2 className={`${ styles.number } text text_type_digits-default`}>{`#${queryDict.number}`}</h2>
-        <p className={`${ styles.name } text_type_main-medium pb-3 pt-10`}>{paramName}</p>
-        <span className={`${ styles.status } ${queryDict.status === 'done' ? styles.statusDone : ''} text text_type_main-small mb-15`}>
-          {queryDict.status === 'done' ? 'Выполнен' : 'Готовится'}
+      {order && <div className={ styles.modalOrderContainer }>
+        <h2 className={`${ styles.number } text text_type_digits-default`}>{`#${order.number}`}</h2>
+        <p className={`${ styles.name } text_type_main-medium pb-3 pt-10`}>{order.name}</p>
+        <span className={`${ styles.status } ${order.status === 'done' ? styles.statusDone : ''} text text_type_main-small mb-15`}>
+          {order.status === 'done' ? 'Выполнен' : 'Готовится'}
         </span>
         <p className={`${ styles.name } text_type_main-medium pb-6`}>Состав:</p>
         <ul className={ styles.ingredientsContainer }>
@@ -58,12 +69,12 @@ function ModalOrderInfo() {
             </li>)}
         </ul>
         <div className={`${ styles.modalFuterContainer }`}>
-          <FormattedDate className={`${ styles.date } text text_type_main-small`} date={new Date(queryDict.updatedAt)}/>
-          <span className={`${ styles.burgerElementPrice } text text_type_digits-default`}>
-            {queryDict.orderPrice}<CurrencyIcon type="primary"/>
-          </span>
+          <FormattedDate className={`${ styles.date } text text_type_main-small`} date={new Date(order.updatedAt)}/>
+          {orderPrice && <span className={`${ styles.burgerElementPrice } text text_type_digits-default`}>
+            {orderPrice}<CurrencyIcon type="primary"/>
+          </span>}
         </div>
-      </div>
+      </div>}
     </article>
   )
 };

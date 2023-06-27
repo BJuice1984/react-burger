@@ -59,15 +59,16 @@ function App() {
           <Route path={PROFILE} >
             <Route index element={<ProtectedRouteElement component={<Profile />}/>} />
             <Route path={ORDERS} element={<ProtectedRouteElement component={<Orders />}/>} />
-            <Route path={`${ORDERS}/:id`} element={<ProtectedRouteElement component={<ModalOrderInfo/>}/>} />
+            <Route path={`${ORDERS}/:number`} element={<ProtectedRouteElement component={<ModalOrderInfo/>}/>} />
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<ModalCard/>} />
-          <Route path={`${FEED}/:id`} element={<ModalOrderInfo/>} />
+          <Route path={`${FEED}/:number`} element={<ModalOrderInfo/>} />
         </Routes>
         {background &&
         <Routes>
           <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard/>} handleClose={closeModalCard}/>} />
-          <Route path={`${FEED}/:id`} element={<Modal component={<ModalOrderInfo/>} handleClose={closeModalCard}/>} />
+          <Route path={`${FEED}/:number`} element={<Modal component={<ModalOrderInfo/>} handleClose={closeModalCard}/>} />
+          <Route path={`${PROFILE}/${ORDERS}/:number`} element={<Modal component={<ModalOrderInfo/>} handleClose={closeModalCard}/>} />
         </Routes>}
 
       </div>

@@ -12,11 +12,9 @@ import { wsFeeds } from "../../services/selectors/orderHistory";
 
 export default function Orders() {
   const dispatch = useDispatch();
-
   const orderDetails: OrderHistoryType = useSelector(wsFeeds);
   const { orders } = orderDetails;
 
-  
   useEffect(() => {
     let token = getCookie('token');
     

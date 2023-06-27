@@ -1,4 +1,4 @@
-import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, USER_API } from "../constants/constants";
+import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, USER_API, ORDER_API } from "../constants/constants";
 import { getCookie, getToken } from "./helper";
 import { request, requestWithRefresh } from "./utilsApi";
 
@@ -66,5 +66,15 @@ export const getUser = () => {
     headers: {
       Authorization: 'Bearer ' + cookie
     },
+  })
+};
+
+export const getOrder = (number: string) => {
+  return request(`${ORDER_API}/${number}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
   })
 };

@@ -34,14 +34,14 @@ function Order({ status, name, number, ingredients, updatedAt, _id }: OrderType)
   }, [orderIngredients]);
 
   return(
-    <Link to={`${isFeed ? FEED : PROFILE + '/' + ORDERS}/${_id}`} state={{ background: location }} className={ styles.orderLink }>
+    <Link to={`${isFeed ? FEED : PROFILE + '/' + ORDERS}/${number}`} state={{ background: location }} className={ styles.orderLink }>
       <article className={ styles.order }>
         <div className={ styles.orderContainer }>
           <div className={`${ styles.orderDetails } pb-6`}>
             <h2 className={`${ styles.number } text text_type_digits-default`}>{`#${number}`}</h2>
               <FormattedDate className={ styles.date } date={new Date(updatedAt)}/>
           </div>
-          <p className={`${ styles.name } ${isFeed ? 'pb-2' :' pb-6'} text text_type_main-small`}>{name}</p>
+          <p className={`${ styles.name } text text_type_main-small pb-2`}>{name}</p>
           {isFeed && 
             <span className={`${ styles.status } ${status === 'done' ? styles.statusDone : ''} text text_type_main-small`}>
               {status === 'done' ? 'Выполнен' : 'Готовится'}
