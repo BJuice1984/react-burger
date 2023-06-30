@@ -20,6 +20,5 @@ export const checkAuth = () => {
     else {
       dispatch({ type: AUTH_CHECKED });
     }
-
   }
 }

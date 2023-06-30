@@ -9,11 +9,11 @@ function checkResponse<T>(res: IResponse<T>): Promise<T> {
   if (res.ok) {
     return res.json();
   }
-  return res.json().then((err) => Promise.reject(`Ошибка даных: ${err} Статус отвта: ${res.status}`));
+  return res.json().then((err) => Promise.reject(err));
 };
 
 function refreshToken() {
-  let token = getToken('refreshToken');
+  const token = getToken('refreshToken');
   return request(REFRESH_TOKEN_API, {
     method: 'POST',
     headers: {
@@ -31,6 +31,7 @@ export const request = (url: RequestInfo | URL, options: RequestInit | undefined
 export const requestWithRefresh = (url: RequestInfo | URL, options: RequestInit | undefined) => {
   return fetch(url, options).then(checkResponse).catch(async (err) => {
     if (err.message === 'jwt expired') {
+      console.log(err.message === 'jwt expired')
       const refreshData = await refreshToken();
       if (refreshData.success) {
         setToken('refreshToken', refreshData.refreshToken);
@@ -40,7 +41,7 @@ export const requestWithRefresh = (url: RequestInfo | URL, options: RequestInit 
       } else {
         return Promise.reject(`Ошибка даных: ${err}`)
       }
-    } else if (err.message === 'invalid signature') {
+    } else if (err.message === 'Token is invalid') {
       deleteCookie('token');
     }
   })

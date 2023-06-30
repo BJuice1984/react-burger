@@ -9,11 +9,12 @@ import { useDrop } from "react-dnd/dist/hooks";
 import { addIngridientId } from "../../services/actions/userIngredients";
 import { CLEAR_ORDER_NUMBER, postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
-import { getOrderNumber } from "../../services/selectors/orderDetails";
+import { fetchOrderRequest, getOrderNumber } from "../../services/selectors/orderDetails";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
 import { IngredientType } from "../../utils/types";
+import Preloader from "../Preloader/Preloader";
 
 export default function BurgerConstructor() {
 
@@ -24,6 +25,7 @@ export default function BurgerConstructor() {
   const orderNumber = useSelector(getOrderNumber);
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
+  const isFetchLoginRequest = useSelector(fetchOrderRequest);
 
   const checkTrue = userIngredients.bun && userIngredients.userItems.length !== 0;
 
@@ -64,6 +66,7 @@ export default function BurgerConstructor() {
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
+      {isFetchLoginRequest ? <Preloader/> : ""}
       <div className={`${ styles.burgerConstructorContainer } ${hover}`}>
         {userIngredients.bun ? (<ConstructorElement
           extraClass="ml-8"

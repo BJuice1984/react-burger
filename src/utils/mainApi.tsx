@@ -62,7 +62,6 @@ export const resetPassword = (password: string) => {
 };
 
 export const getUser = () => {
-  console.log('getUser')
   return requestWithRefresh (USER_API, {
     headers: {
       Authorization: 'Bearer ' + cookie

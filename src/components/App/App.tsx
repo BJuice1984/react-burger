@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from "../../hooks/hooks";
 import { checkAuth } from '../../services/actions/checkAuth';
 import { getItems } from '../../services/actions/initialIngredients';
-import { fetchRequest } from '../../services/selectors/profile';
+import { fetchLoginRequest } from '../../services/selectors/profile';
 import Preloader from '../Preloader/Preloader';
 
 type LocationType = {
@@ -39,7 +39,7 @@ function App() {
   const location: LocationType | LocationWithStateType = useLocation();
   const background = location.state && location.state.background;
 
-  const isFetchRequest = useSelector(fetchRequest);
+  const isFetchLoginRequest = useSelector(fetchLoginRequest);
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -54,7 +54,7 @@ function App() {
     <div className={ styles.page }>
       <div className={ styles.container }>
         <Header />
-        {isFetchRequest ? <Preloader/> : ""}
+        {isFetchLoginRequest ? <Preloader/> : ""}
         <Routes location={background || location}>
           <Route path={SIGN_IN} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Login />}/>} />
           <Route path={SIGN_UP} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Registration />}/>} />

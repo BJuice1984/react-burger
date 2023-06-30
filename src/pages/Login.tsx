@@ -6,12 +6,12 @@ import { useForm } from "../hooks/useForm";
 import { useDispatch, useSelector } from "../hooks/hooks";
 import { postLogin } from "../services/actions/profile";
 import { FormEvent } from "react";
-import { fetchRequest } from "../services/selectors/profile";
+import { fetchLoginRequest } from "../services/selectors/profile";
 import Preloader from "../components/Preloader/Preloader";
 
 export default function Login() {
   const {values, handleChange } = useForm({});
-  const isFetchRequest = useSelector(fetchRequest);
+  const isFetchLoginRequest = useSelector(fetchLoginRequest);
 
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ export default function Login() {
   };
 
   return (
-    isFetchRequest ? <Preloader /> : 
+    isFetchLoginRequest ? <Preloader /> : 
     (<section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Вход</h2>
       <form
