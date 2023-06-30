@@ -3,12 +3,15 @@ import styles from "../components/Login/login.module.css";
 import { Link } from "react-router-dom";
 import { SIGN_UP, FORGOT_PASSWORD } from "../constants/constants";
 import { useForm } from "../hooks/useForm";
-import { useDispatch } from "../hooks/hooks";
+import { useDispatch, useSelector } from "../hooks/hooks";
 import { postLogin } from "../services/actions/profile";
 import { FormEvent } from "react";
+import { fetchRequest } from "../services/selectors/profile";
+import Preloader from "../components/Preloader/Preloader";
 
 export default function Login() {
   const {values, handleChange } = useForm({});
+  const isFetchRequest = useSelector(fetchRequest);
 
   const dispatch = useDispatch();
 
@@ -18,7 +21,8 @@ export default function Login() {
   };
 
   return (
-    <section className={ styles.login }>
+    isFetchRequest ? <Preloader /> : 
+    (<section className={ styles.login }>
       <h2 className={`${styles.header} text text_type_main-medium pb-6`}>Вход</h2>
       <form
       className={ styles.form }
@@ -47,6 +51,6 @@ export default function Login() {
       </form>
       <p className={`${styles.login_text} text text_type_main-small pb-4`}>Вы — новый пользователь? <Link className={`${styles.login_link} text text_type_main-small`} to={SIGN_UP}>Зарегистрироваться</Link></p>
       <p className={`${styles.login_text} text text_type_main-small`}>Забыли пароль? <Link className={`${styles.login_link} text text_type_main-small`} to={FORGOT_PASSWORD}>Восстановить пароль</Link></p>
-    </section>
+    </section>)
   )
 }
