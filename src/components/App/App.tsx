@@ -14,9 +14,11 @@ import Feeds from '../../pages/Feeds';
 import styles from './app.module.css';
 import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
 import { useEffect } from 'react';
-import { useDispatch } from "../../hooks/hooks";
+import { useDispatch, useSelector } from "../../hooks/hooks";
 import { checkAuth } from '../../services/actions/checkAuth';
 import { getItems } from '../../services/actions/initialIngredients';
+import { fetchRequest } from '../../services/selectors/profile';
+import Preloader from '../Preloader/Preloader';
 
 type LocationType = {
   hash: string;
@@ -37,6 +39,8 @@ function App() {
   const location: LocationType | LocationWithStateType = useLocation();
   const background = location.state && location.state.background;
 
+  const isFetchRequest = useSelector(fetchRequest);
+
   useEffect(() => {
     dispatch(checkAuth());
     dispatch(getItems());
@@ -50,6 +54,7 @@ function App() {
     <div className={ styles.page }>
       <div className={ styles.container }>
         <Header />
+        {isFetchRequest ? <Preloader/> : ""}
         <Routes location={background || location}>
           <Route path={SIGN_IN} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Login />}/>} />
           <Route path={SIGN_UP} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Registration />}/>} />
