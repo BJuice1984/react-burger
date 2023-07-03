@@ -6,9 +6,12 @@ type BurgerIconLinkType = {
   isBurgerConstructor: boolean
 };
 
-export default function BurgerIconLink(isBurgerConstructor: BurgerIconLinkType) {
+export default function BurgerIconLink({ isBurgerConstructor }: BurgerIconLinkType) {
 
   return(
-    <Link to='/' className={`${ styles.link } pt-2 pb-2 pr-6`}>{<BurgerIcon type={isBurgerConstructor ? "primary" : "secondary"} />}<p className={`${ styles.description }`}>Конструктор</p></Link>
+    <Link to='/' 
+      className={`${ styles.link } pt-2 pb-2 pr-6`}>
+        {<BurgerIcon type={isBurgerConstructor ? "primary" : "secondary"} />}
+        <p className={`${isBurgerConstructor ? '' : styles.disactive} ${ styles.description }`}>Конструктор</p></Link>
   )
 }

@@ -3,25 +3,21 @@ import { EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-
 import { useForm } from "../hooks/useForm";
 import { useEffect } from "react";
 import styles from "../components/Profile/profile.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../hooks/hooks";
 import { postProfileEmail, postProfileName } from "../services/selectors/profile";
 import { getUser } from "../services/actions/profile";
-import useCookies from "../hooks/useCookies";
 
 export default function Profile() {
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
-  const { getCookie } = useCookies();
-  let cookie = getCookie('token');
 
   const dispatch = useDispatch();
 
   const {values, handleChange, setValues} = useForm({});
 
   useEffect(() => {
-    //@ts-ignore
     dispatch(getUser());
-  }, [dispatch, cookie]);
+  }, [dispatch]);
 
   useEffect(() => {
     setValues({

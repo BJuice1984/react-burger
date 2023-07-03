@@ -1,20 +1,24 @@
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS } from '../../constants/constants';
+import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD, PROFILE, ORDERS, INGREDIENTS, FEED } from '../../constants/constants';
 import Main from '../../pages/Main';
 import Modal from '../Modal/Modal';
 import ModalCard from '../ModalCard/ModalCard';
+import ModalOrderInfo from '../ModalOrderInfo/ModalOrderInfo';
 import Header from '../Header/Header';
 import Login from '../../pages/Login';
 import Registration from '../../pages/Registration';
 import ForgotPassword from '../../pages/ForgotPassword';
 import Profile from '../../pages/Profile';
 import Orders from '../Orders/Orders';
+import Feeds from '../../pages/Feeds';
 import styles from './app.module.css';
 import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "../../hooks/hooks";
 import { checkAuth } from '../../services/actions/checkAuth';
-import { getItems } from '../../services/actions/initialIngridients';
+import { getItems } from '../../services/actions/initialIngredients';
+import { fetchLoginRequest } from '../../services/selectors/profile';
+import Preloader from '../Preloader/Preloader';
 
 type LocationType = {
   hash: string;
@@ -35,10 +39,10 @@ function App() {
   const location: LocationType | LocationWithStateType = useLocation();
   const background = location.state && location.state.background;
 
+  const isFetchLoginRequest = useSelector(fetchLoginRequest);
+
   useEffect(() => {
-    //@ts-ignore
     dispatch(checkAuth());
-    //@ts-ignore
     dispatch(getItems());
   }, [dispatch]);
 
@@ -50,19 +54,26 @@ function App() {
     <div className={ styles.page }>
       <div className={ styles.container }>
         <Header />
+        {isFetchLoginRequest ? <Preloader/> : ""}
         <Routes location={background || location}>
           <Route path={SIGN_IN} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Login />}/>} />
           <Route path={SIGN_UP} element={<ProtectedRouteElement onlyUnAuth = {true} component={<Registration />}/>} />
           <Route path={FORGOT_PASSWORD} element={<ProtectedRouteElement onlyUnAuth = {true} component={<ForgotPassword />}/>} />
           <Route path='/' element={<Main />} />
-          <Route path={PROFILE} element={<ProtectedRouteElement component={<Profile />}/>}>
-            <Route path={ORDERS} element={<Orders />} />
+          <Route path={FEED} element={<Feeds />} />
+          <Route path={PROFILE} >
+            <Route index element={<ProtectedRouteElement component={<Profile />}/>} />
+            <Route path={ORDERS} element={<ProtectedRouteElement component={<Orders />}/>} />
+            <Route path={`${ORDERS}/:number`} element={<ProtectedRouteElement component={<ModalOrderInfo/>}/>} />
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<ModalCard/>} />
+          <Route path={`${FEED}/:number`} element={<ModalOrderInfo/>} />
         </Routes>
         {background &&
         <Routes>
           <Route path={`${INGREDIENTS}/:id`} element={<Modal component={<ModalCard/>} handleClose={closeModalCard}/>} />
+          <Route path={`${FEED}/:number`} element={<Modal component={<ModalOrderInfo/>} handleClose={closeModalCard}/>} />
+          <Route path={`${PROFILE}/${ORDERS}/:number`} element={<Modal component={<ModalOrderInfo/>} handleClose={closeModalCard}/>} />
         </Routes>}
 
       </div>

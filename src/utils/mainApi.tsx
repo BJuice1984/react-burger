@@ -1,27 +1,11 @@
-import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, REFRESH_TOKEN_API, USER_API } from "../constants/constants";
-import { request } from "./utilsApi";
+import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, USER_API, ORDER_API } from "../constants/constants";
+import { getCookie, getToken } from "./helper";
+import { request, requestWithRefresh } from "./utilsApi";
 
-type EmailType = {
-  email: string,
-};
+const token = getToken('refreshToken');
+const cookie = getCookie('token');
 
-type PasswordType = {
-  password: string,
-};
-
-type NameType = {
-  name: string,
-};
-
-type CookieType = {
-  cookie: string,
-};
-
-type TokenType = {
-  token: string,
-};
-
-export const register = (email: EmailType, password: PasswordType, name: NameType) => {
+export const register = (email: string, password: string, name: string) => {
   return request(REGISTER_API, {
     method: 'POST',
     headers: {
@@ -32,7 +16,7 @@ export const register = (email: EmailType, password: PasswordType, name: NameTyp
   })
 };
 
-export const login = (email: EmailType, password: PasswordType) => {
+export const login = (email: string, password: string) => {
   return request(LOGIN_API, {
     method: 'POST',
     headers: {
@@ -43,8 +27,8 @@ export const login = (email: EmailType, password: PasswordType) => {
   })
 };
 
-export const logout = (token: TokenType, cookie: CookieType) => {
-  return request(LOGOUT_API, {
+export const logout = () => {
+  return requestWithRefresh(LOGOUT_API, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -55,18 +39,7 @@ export const logout = (token: TokenType, cookie: CookieType) => {
   })
 };
 
-export const refreshToken = (token: string) => {
-  return request(REFRESH_TOKEN_API, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ token })
-  })
-};
-
-export const forgotPassword = (email: EmailType) => {
+export const forgotPassword = (email: string) => {
   return request(RESET_PASSWORD_API, {
     method: 'POST',
     headers: {
@@ -77,8 +50,8 @@ export const forgotPassword = (email: EmailType) => {
   })
 };
 
-export const resetPassword = (password: PasswordType, token: TokenType) => {
-  return request(`${RESET_PASSWORD_API}/reset`, {
+export const resetPassword = (password: string) => {
+  return requestWithRefresh(`${RESET_PASSWORD_API}/reset`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -88,10 +61,20 @@ export const resetPassword = (password: PasswordType, token: TokenType) => {
   })
 };
 
-export const getUser = (cookie: CookieType) => {
-  return request(USER_API, {
+export const getUser = () => {
+  return requestWithRefresh (USER_API, {
     headers: {
       Authorization: 'Bearer ' + cookie
     },
+  })
+};
+
+export const getOrder = (number: string) => {
+  return request(`${ORDER_API}/${number}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
   })
 };

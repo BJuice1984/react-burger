@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks/hooks";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import { SIGN_IN } from "../../constants/constants";
 import { Navigate, useLocation } from "react-router-dom";

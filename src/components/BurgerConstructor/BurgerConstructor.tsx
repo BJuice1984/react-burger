@@ -1,41 +1,41 @@
-import { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "../../hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { SIGN_IN } from "../../constants/constants";
 import styles from './burgerConstructor.module.css';
 import BurgerConstructorCard from "../BurgerConstructorCard/BurgerConstructorCard";
-import { burgerIngredientArrayType } from '../../utils/prop-types';
 import { useDrop } from "react-dnd/dist/hooks";
-import { addIngridientId } from "../../services/actions/userIngridients";
+import { addIngridientId } from "../../services/actions/userIngredients";
 import { CLEAR_ORDER_NUMBER, postItems } from "../../services/actions/orderDetails";
 import { getUserIngridients } from "../../services/selectors/userIngridients";
-import { getOrderFailed, getOrderNumber, getOrderSuccess } from "../../services/selectors/orderDetails";
+import { fetchOrderRequest, getOrderNumber } from "../../services/selectors/orderDetails";
 import { postProfileEmail, postProfileName } from "../../services/selectors/profile";
 import Modal from "../Modal/Modal";
 import ModalOrder from "../ModalOrder/ModalOrder";
-import { UserIngridientsType } from "../../utils/types";
+import { IngredientType } from "../../utils/types";
+import Preloader from "../Preloader/Preloader";
 
 export default function BurgerConstructor() {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const userIngridients: UserIngridientsType = useSelector(getUserIngridients);
+  const userIngredients = useSelector(getUserIngridients);
   const orderNumber = useSelector(getOrderNumber);
-  // const orderSuccess = useSelector(getOrderSuccess);
-  // const orderFailed = useSelector(getOrderFailed);
   const profileEmail = useSelector(postProfileEmail);
   const profileName = useSelector(postProfileName);
+  const isFetchLoginRequest = useSelector(fetchOrderRequest);
 
-  const checkTrue = userIngridients.bun && userIngridients.userItems.length !== 0;
+  const checkTrue = userIngredients.bun && userIngredients.userItems.length !== 0;
 
   const [{isHover}, dropTarget] = useDrop({
-    accept: "ingridient",
+    accept: "ingredient",
     collect: monitor => ({
       dropItem: monitor.getItem(),
       isHover: monitor.isOver(),
     }),
-    drop: (ingridient) => dispatch(addIngridientId(ingridient)),
+    drop: (ingredient: IngredientType) => dispatch(addIngridientId(ingredient)),
   });
 
   const hover = isHover ? styles.onHover : '';
@@ -45,66 +45,52 @@ export default function BurgerConstructor() {
       return navigate(SIGN_IN);
     }
 
-    const ingridientsId = userIngridients.userItems.map(item => item._id);
-    if (userIngridients.bun) {
-      ingridientsId.push(userIngridients.bun._id);
-      //@ts-ignore
-      dispatch(postItems({"ingredients": ingridientsId}));
+    const ingredientsId = userIngredients.userItems.map(item => item._id);
+    if (userIngredients.bun) {
+      ingredientsId.push(userIngredients.bun._id);
+      ingredientsId.unshift(userIngredients.bun._id);
+
+      dispatch(postItems(ingredientsId));
     }
-  }
+  };
 
   const closeModalOrder = () => {
     dispatch({type: CLEAR_ORDER_NUMBER})
-  }
-
-  // useEffect(() => {
-  //   if (orderSuccess && typeof(orderSuccess) !== "string") {
-  //     dispatch({
-  //       type: SHOW_ITEM_DETAILS,
-  //       item: orderNumber
-  //       })
-  //   } else if (orderFailed) {
-  //     dispatch({
-  //       type: SHOW_ITEM_DETAILS,
-  //       item: !orderFailed
-  //       })
-  //   }
-  // }, [dispatch, orderFailed, orderNumber, orderSuccess])
+  };
 
   const orderPrice = useMemo(() => {
-    return (
-      userIngridients.userItems.reduce(
-        (acc, current) => acc + current.price, 0
-      ) + (userIngridients.bun ? userIngridients.bun.price * 2 : 0)
-    )
-  }, [userIngridients]);
+    return userIngredients.userItems.reduce(
+      (acc, current) => acc + current.price, 0
+    ) + (userIngredients.bun ? userIngredients.bun.price * 2 : 0)
+  }, [userIngredients]);
 
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
+      {isFetchLoginRequest ? <Preloader/> : ""}
       <div className={`${ styles.burgerConstructorContainer } ${hover}`}>
-        {userIngridients.bun ? (<ConstructorElement
+        {userIngredients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="top"
           isLocked={true}
-          text={`${userIngridients.bun.name}(верх)`}
-          price={userIngridients.bun.price}
-          thumbnail={userIngridients.bun.image} />
+          text={`${userIngredients.bun.name}(верх)`}
+          price={userIngredients.bun.price}
+          thumbnail={userIngredients.bun.image} />
           ) : (<div className={`${styles.emptyElement} ${styles.emptyElementTop} text text_type_main-medium`}>Добавьте булки</div>)}
           
-        {userIngridients.userItems.length !== 0 ? (userIngridients.userItems.map((ingridient, index) => 
+        {userIngredients.userItems.length !== 0 ? (userIngredients.userItems.map((ingredient, index) => 
           <BurgerConstructorCard
-            ingridient={ingridient}
+            ingredient={ingredient}
             index={index}
-            key={ingridient.id} />)
+            key={ingredient.id} />)
           ) : (<div className={`${styles.emptyElement} text text_type_main-medium`}>Добавьте соусы и начинки</div>)}
           
-        {userIngridients.bun ? (<ConstructorElement
+        {userIngredients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="bottom"
           isLocked={true}
-          text={`${userIngridients.bun.name}(низ)`}
-          price={userIngridients.bun.price}
-          thumbnail={userIngridients.bun.image}/>
+          text={`${userIngredients.bun.name}(низ)`}
+          price={userIngredients.bun.price}
+          thumbnail={userIngredients.bun.image}/>
           ) : (<div className={`${styles.emptyElement} ${styles.emptyElementBottom} text text_type_main-medium`}>Добавьте булки</div>)}
  
       </div>

@@ -1,0 +1,72 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  min-width: 320px;
+}
+
+.header {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.1;
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 1280px) {
+  .header {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding-left: 20px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .header {
+    font-size: 28px;
+    text-align: center;
+    padding-top: 16px;
+  }
+}
+
+.feedList {
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .feedList {
+    margin: 0 20px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .feedList {
+    margin: 0 8px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .feedList {
+    margin: 0 auto;
+  }
+}
+
+.feedList {
+  margin: 0;
+}

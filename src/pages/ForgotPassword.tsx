@@ -3,11 +3,9 @@ import { EmailInput, PasswordInput, Input, Button } from "@ya.praktikum/react-de
 import styles from "../components/Login/login.module.css";
 import { useForm } from "../hooks/useForm";
 import { Link } from "react-router-dom";
-// import { FORGOT_PASSWORD, USER_IS_NOT_EXIST } from "../../constants/constants";
-import { SHOW_ITEM_DETAILS } from "../services/actions/modalDetails";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../hooks/hooks";
 import { postForgotPassword, resetForgotPassword, POST_FORGOT_PASSWORD_FAILED } from "../services/actions/forgotPassword";
-import { postForgotPasswordIsUserExist, postForgotPasswordFailed } from "../services/selectors/forgotPassword";
+import { postForgotPasswordIsUserExist } from "../services/selectors/forgotPassword";
 
 export default function ForgotPassword() {
   const [emailCode, setEmailcode] = useState<boolean>(false);
@@ -15,29 +13,19 @@ export default function ForgotPassword() {
 
   const dispatch = useDispatch();
   const isUserExist = useSelector(postForgotPasswordIsUserExist);
-  const forgotPasswordFailed = useSelector(postForgotPasswordFailed)
 
   useEffect(() => {
     if (isUserExist) return setEmailcode(true)
     return setEmailcode(false)
   }, [emailCode, isUserExist]);
 
-  useEffect(() => {
-    if (forgotPasswordFailed) {
-      dispatch({
-        type: SHOW_ITEM_DETAILS,
-        items: false
-      })
-    }
-  }, [dispatch, forgotPasswordFailed])
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!emailCode) {
-      //@ts-ignore
+
       dispatch(postForgotPassword(values.email))
     } else if (isUserExist) {
-      //@ts-ignore
+
       dispatch(resetForgotPassword(values.password, values.code))
     } else {
       setEmailcode(false);

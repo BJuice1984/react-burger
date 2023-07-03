@@ -1,1 +1,0 @@
-export const getInitialIngridientsItems = (state) => state.initialIngridients.items

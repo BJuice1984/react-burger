@@ -31,6 +31,7 @@
   text-decoration: none;
   font-weight: 400;
   transition: all 0.5s;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -47,6 +48,7 @@
 
 .link_disactive {
   color: #8585AD;
+  pointer-events: all;
 }
 
 .link:hover {
