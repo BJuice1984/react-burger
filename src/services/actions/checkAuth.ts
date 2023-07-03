@@ -10,9 +10,9 @@ interface IAuthChecked {
 
 export type AuthCheckedTypes = IAuthChecked;
 
-let cookie = getCookie('token');
-
 export const checkAuth = () => {
+  const cookie = getCookie('token');
+  
   return function(dispatch: AppDispatch) {
     if (cookie) {
       dispatch(getUser());

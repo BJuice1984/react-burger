@@ -2,9 +2,6 @@ import { RESET_PASSWORD_API, REGISTER_API, LOGIN_API, LOGOUT_API, USER_API, ORDE
 import { getCookie, getToken } from "./helper";
 import { request, requestWithRefresh } from "./utilsApi";
 
-const token = getToken('refreshToken');
-const cookie = getCookie('token');
-
 export const register = (email: string, password: string, name: string) => {
   return request(REGISTER_API, {
     method: 'POST',
@@ -28,6 +25,8 @@ export const login = (email: string, password: string) => {
 };
 
 export const logout = () => {
+  const token = getToken('refreshToken');
+  const cookie = getCookie('token'); 
   return requestWithRefresh(LOGOUT_API, {
     method: 'POST',
     headers: {
@@ -51,6 +50,7 @@ export const forgotPassword = (email: string) => {
 };
 
 export const resetPassword = (password: string) => {
+  const token = getToken('refreshToken');
   return requestWithRefresh(`${RESET_PASSWORD_API}/reset`, {
     method: 'POST',
     headers: {
@@ -62,6 +62,7 @@ export const resetPassword = (password: string) => {
 };
 
 export const getUser = () => {
+  const cookie = getCookie('token');
   return requestWithRefresh (USER_API, {
     headers: {
       Authorization: 'Bearer ' + cookie
