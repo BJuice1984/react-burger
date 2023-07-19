@@ -31,7 +31,6 @@ export const request = (url: RequestInfo | URL, options: RequestInit | undefined
 export const requestWithRefresh = (url: RequestInfo | URL, options: RequestInit | undefined) => {
   return fetch(url, options).then(checkResponse).catch(async (err) => {
     if (err.message === 'jwt expired') {
-      console.log(err.message === 'jwt expired')
       const refreshData = await refreshToken();
       if (refreshData.success) {
         setToken('refreshToken', refreshData.refreshToken);

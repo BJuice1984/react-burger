@@ -20,7 +20,9 @@ describe("DnD is available", () => {
     cy.contains("button", "Оформить заказ").click();
     cy.location("pathname").then(($pathname) => {
       if ($pathname == "/sign-in") {
-        cy.get("input[name=email]").click().type("ilyas@mail.ru");
+        cy.get("input[name=email]")
+          .click()
+          .type("ilyas@mail.ru", { delay: 100 });
         cy.get("input[name=password]").click().type("123456");
         cy.contains("button", "Войти").click();
       }

@@ -16,7 +16,7 @@ describe("first ingridient is available", () => {
 describe("auth user is available", () => {
   it("should user have been authorized", () => {
     cy.visit("http://localhost:3000/sign-in");
-    cy.get("input[name=email]").click().type("ilyas@mail.ru");
+    cy.get("input[name=email]").click().type("ilyas@mail.ru", { delay: 100 });
     cy.get("input[name=password]").click().type("123456");
     cy.contains("button", "Войти").click();
     cy.location("pathname", { timeout: 5000 }).should("eq", "/");
