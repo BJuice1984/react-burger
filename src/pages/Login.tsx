@@ -30,7 +30,7 @@ export default function Login() {
         <EmailInput
           onChange={handleChange}
           value={values.email || ''}
-          name={'email'}
+          name="email"
           placeholder="E-mail"
           isIcon={false}
           extraClass="mb-6"
@@ -38,7 +38,7 @@ export default function Login() {
         <PasswordInput
           onChange={handleChange}
           value={values.password || ''}
-          name={'password'}
+          name="password"
           extraClass="mb-6"
         />
         <Button

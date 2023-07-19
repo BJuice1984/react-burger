@@ -67,7 +67,7 @@ export default function BurgerConstructor() {
   return(
     <section className={`${ styles.burgerConstructor } pt-25`} ref={dropTarget}>
       {isFetchLoginRequest ? <Preloader/> : ""}
-      <div className={`${ styles.burgerConstructorContainer } ${hover}`}>
+      <div className={`${ styles.burgerConstructorContainer } ${hover}`} test-cy="burger-constructor">
         {userIngredients.bun ? (<ConstructorElement
           extraClass="ml-8"
           type="top"

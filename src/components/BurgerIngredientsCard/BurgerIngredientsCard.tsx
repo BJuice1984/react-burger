@@ -25,7 +25,7 @@ export default function BurgerIngredientsCard({ ingredient, count }: BurgerIngre
 
   return(
     <Link to={`${INGREDIENTS}/${ingredient._id}`} state={{ background: location }}
-      ref={dragRef} className={ `${ styles.element } ${hover}` }>
+      ref={dragRef} className={ `${ styles.element } ${hover}` } test-cy="ingredient">
       {count && <Counter count={count} size="default" extraClass="m-1" />}
       <img className={ styles.pic }
         src={ingredient.image}
