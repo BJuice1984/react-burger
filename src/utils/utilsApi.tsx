@@ -5,7 +5,7 @@ interface IResponse<T> extends Response {
   json(): Promise<T>
 }
 
-function checkResponse<T>(res: IResponse<T>): Promise<T> {
+export function checkResponse<T>(res: IResponse<T>): Promise<T> {
   if (res.ok) {
     return res.json();
   }
