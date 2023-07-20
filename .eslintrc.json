@@ -1,9 +1,8 @@
 {
   "extends": [
-    "plugin:cypress/recommended",
-    "plugin:chai-friendly/recommended"
+    "plugin:cypress/recommended"
   ],
   "rules": {
-    "cypress/unsafe-to-chain-command": "error"
+    "no-unused-expressions": 0
   }
 }

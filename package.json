@@ -28,8 +28,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "cypress:open": "./node_modules/.bin/cypress open",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BJuice1984/react-burger"
+  },
+  "homepage": "https://bjuice1984.github.io/react-burger#readme",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -54,6 +61,7 @@
     "cypress": "^12.17.1",
     "eslint-plugin-cypress": "^2.13.3",
     "fetch-mock": "^9.11.0",
+    "gh-pages": "^5.0.0",
     "jest": "^27.5.1",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4"
