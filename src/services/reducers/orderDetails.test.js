@@ -45,6 +45,7 @@ describe("orderDetailsReducer", () => {
       orderFailed: false,
     });
   });
+
   it("should handle POST_ITEM_FAILED", () => {
     const orderDetails = {
       success: false,
@@ -57,6 +58,18 @@ describe("orderDetailsReducer", () => {
       orderSuccess: false,
       orderRequest: false,
       orderFailed: true,
+    });
+  });
+  it("should handle CLEAR_ORDER_NUMBER", () => {
+    const orderDetails = {
+      name: "",
+      order: { number: null },
+    };
+    const action = { type: CLEAR_ORDER_NUMBER, orderDetails };
+    expect(orderDetailsReducer(orderDetails, action)).toEqual({
+      ...orderDetails,
+      orderName: "",
+      orderNumber: null,
     });
   });
 });
