@@ -36,7 +36,7 @@
     "type": "git",
     "url": "git+https://github.com/BJuice1984/react-burger"
   },
-  "homepage": "https://bjuice1984.github.io/react-burger#readme",
+  "homepage": "https://bjuice1984.github.io/react-burger",
   "eslintConfig": {
     "extends": [
       "react-app",
