@@ -37,7 +37,8 @@ useEffect(() => {
             className={ styles.closeButton }
             type="button" 
             aria-label="Закрыть"
-            onClick={handleClose}>
+            onClick={handleClose}
+            test-cy="modal-close">
           </button>
           {component}
         </div>
